@@ -1,0 +1,7 @@
+no_browser: true
+path: '/tmp/rubycritic'
+formats:
+  - console
+minimum_score: 90
+paths:
+  - 'app/'
