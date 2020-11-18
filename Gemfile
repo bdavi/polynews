@@ -15,6 +15,8 @@ gem 'webpacker', '~> 4.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
   gem 'rubocop-rails', require: false
@@ -22,13 +24,20 @@ group :development, :test do
   gem 'rubocop-rspec', require: false
   gem 'rubocop-thread_safety', require: false
   gem 'rubycritic', require: false
-  gem 'stackprof', '>= 0.2.9', require: false
   gem 'test-prof', require: false
+  gem 'webmock', require: false
+end
+
+group :test do
+  gem 'capybara'
+  gem 'shoulda-matchers'
+  gem 'simplecov', require: false
 end
 
 group :development do
   gem 'listen', '~> 3.2'
   gem 'spring'
+  gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
 end
