@@ -11,6 +11,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.4'
 gem 'sass-rails', '>= 6'
+gem 'simple_form'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: %i[jruby mingw mswin x64_mingw]
 gem 'webpacker', '~> 4.0'
@@ -35,6 +36,7 @@ group :test do
   gem 'capybara'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
+  gem 'timecop'
 end
 
 group :development do

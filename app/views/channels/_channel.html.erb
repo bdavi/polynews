@@ -10,7 +10,12 @@
 
     <p class="font-italic">
       Last Update: 
-      <%= local_time_ago(channel.last_build_date) %>
+
+      <% if channel.last_build_date %>
+        <%= local_time_ago(channel.last_build_date) %>
+      <% else %>
+        <span class="font-italic">Never</span>
+      <% end %>
     </p>
 
     <h5 class="card-title">
