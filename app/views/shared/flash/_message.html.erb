@@ -1,0 +1,14 @@
+<%# Expects type and message in the locals %>
+<%# See FlashHelper for valid type value %>
+
+<div class="alert alert-<%= flash_alert_class(type) %> alert-dismissible fade show" role="alert">
+  <strong>
+    <i class="mr-1 <%= flash_icon_class(type) %>"></i>
+  </strong>
+
+  <%= message %>
+
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

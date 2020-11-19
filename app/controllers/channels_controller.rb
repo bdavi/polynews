@@ -19,7 +19,7 @@ class ChannelsController < ApplicationController
     @channel = Channel.new(channel_params)
 
     if @channel.save
-      redirect_to @channel, notice: 'Channel was successfully created.'
+      redirect_to @channel, success: 'Channel was successfully created.'
     else
       render :new
     end
@@ -27,7 +27,7 @@ class ChannelsController < ApplicationController
 
   def update
     if @channel.update(channel_params)
-      redirect_to @channel, notice: 'Channel was successfully updated.'
+      redirect_to @channel, success: 'Channel was successfully updated.'
     else
       render :edit
     end
@@ -35,7 +35,7 @@ class ChannelsController < ApplicationController
 
   def destroy
     @channel.destroy
-    redirect_to channels_url, notice: 'Channel was successfully destroyed.'
+    redirect_to channels_url, success: 'Channel was successfully destroyed.'
   end
 
   private
