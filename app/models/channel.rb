@@ -12,10 +12,14 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #
+# Indexes
+#
+#  index_channels_on_url  (url) UNIQUE
+#
 class Channel < ApplicationRecord
   validates :title, presence: true
 
-  validates :url, presence: true, url: true
+  validates :url, presence: true, url: true, uniqueness: true
 
   paginates_per 5
 end
