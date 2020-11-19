@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>NewsAggregator</title>
+    <title>News Aggregator</title>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,7 +11,13 @@
   </head>
 
   <body>
-    <%= render 'shared/flash/group' %>
-    <%= yield %>
+    <header>
+      <%= render 'shared/flash/group' %>
+      <%= render 'shared/navbar' %>
+    </header>
+
+    <main class="container mt-4" role="main">
+      <%= yield %>
+    </main>
   </body>
 </html>
