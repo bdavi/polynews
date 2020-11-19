@@ -1,22 +1,11 @@
-<p>
-  <strong>Title:</strong>
-  <%= @channel.title %>
-</p>
+<div class="row mb-4">
+  <div class="col-12">
+    <%= render partial: 'channels/breadcrumbs', locals: { last_title: 'Detail' } %>
+  </div>
+</div>
 
-<p>
-  <strong>Url:</strong>
-  <%= @channel.url %>
-</p>
-
-<p>
-  <strong>Last build date:</strong>
-  <%= @channel.last_build_date %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @channel.description %>
-</p>
-
-<%= link_to 'Edit', edit_channel_path(@channel) %> |
-<%= link_to 'Back', channels_path %>
+<div class="row">
+  <div class="col-12">
+    <%= render @channel %>
+  </div>
+</div>

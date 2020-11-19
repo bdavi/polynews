@@ -1,23 +1,23 @@
-<div class="row">
-  <div class="col">
-    <h1>
-      Channels
-      <%= link_to new_channel_path, class: "btn btn-outline-success btn-sm ml-1",
-          'aria-label': 'New Channel'  do %>
-        <i class="fas fa-plus"></i>
-      <% end %>
-    </h1>
+<div class="row mb-4">
+  <div class="col-12 col-md-6">
+    <%= render partial: 'channels/breadcrumbs', locals: { last_title: 'All' } %>
+  </div>
+
+  <div class="col-12 col-md-6 mt-2 mt-md-0">
+    <%= link_to new_channel_path, class: "btn btn-outline-success btn-sm float-md-right" do %>
+      <i class="fas fa-plus"></i> New Channel
+    <% end %>
   </div>
 </div>
 
 <div class="row">
-  <div class="col pt-3">
+  <div class="col-12">
     <%= render @channels %>
   </div>
 </div>
 
 <div class="row">
-  <div class="col pt-3">
+  <div class="col-12">
     <%= paginate @channels %>
   </div>
 </div>

@@ -1,5 +1,9 @@
 <div class="card mb-3">
-  <h5 class="card-header"><%= channel.title %></h5>
+  <h5 class="card-header">
+    <%= link_to channel_path(channel), class: 'text-dark' do %>
+      <%= channel.title %>
+    <% end %>
+  </h5>
 
   <div class="card-body">
     <p class="card-text"><%= channel.description %></p>
