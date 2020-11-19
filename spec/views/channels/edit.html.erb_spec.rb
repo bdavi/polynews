@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'channels/edit', type: :view do
   it 'renders the edit channel form' do
-    @channel = create(:channel)
+    @channel = build_stubbed(:channel)
 
     render
 

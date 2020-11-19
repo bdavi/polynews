@@ -16,4 +16,6 @@ class Channel < ApplicationRecord
   validates :title, presence: true
 
   validates :url, presence: true
+
+  paginates_per 5
 end

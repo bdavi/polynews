@@ -4,7 +4,7 @@ class ChannelsController < ApplicationController
   before_action :set_channel, only: %i[show edit update destroy]
 
   def index
-    @channels = Channel.all
+    @channels = Channel.all.order(:title).page(params[:page])
   end
 
   def show; end

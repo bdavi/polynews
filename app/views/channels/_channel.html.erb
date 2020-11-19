@@ -1,0 +1,31 @@
+<div class="card mb-3">
+  <h5 class="card-header"><%= channel.title %></h5>
+
+  <div class="card-body">
+    <p class="card-text"><%= channel.description %></p>
+
+    <p class="font-italic">
+      Last Update: 
+      <%= local_time_ago(channel.last_build_date) %>
+    </p>
+
+    <h5 class="card-title">
+      <%= link_to channel.url do %>
+        <i class="fas fa-link"></i>
+        <%= channel.url %>
+      <% end %>
+    </h5>
+
+    <%= link_to edit_channel_path(channel), class: 'btn btn-info btn-sm' do %>
+      <i class="fas fa-pen mr-1"></i>
+      Edit
+    <% end %>
+
+    <%= link_to channel, method: :delete, data: { confirm: 'Are you sure?' },
+        class: 'btn btn-danger btn-sm' do %>
+
+      <i class="fas fa-trash mr-1"></i>
+      Delete
+    <% end %>
+  </div>
+</div>

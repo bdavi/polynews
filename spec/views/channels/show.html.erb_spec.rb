@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'channels/show', type: :view do
   it 'renders attributes in <p>' do
-    @channel = create(:channel)
+    @channel = build_stubbed(:channel)
 
     render
 

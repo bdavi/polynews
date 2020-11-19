@@ -10,6 +10,9 @@ require("channels")
 require("bootstrap")
 require("@fortawesome/fontawesome-free/js/all.js");
 
+import LocalTime from 'local-time';
+LocalTime.start();
+
 // stylesheet
 require("../stylesheets/main.scss")
 require("@fortawesome/fontawesome-free/css/all.css")
