@@ -71,6 +71,10 @@ RSpec/DescribeClass:
     - 'spec/views/**'
     - 'spec/views/**/*'
 
+RSpec/InstanceVariable:
+  Exclude:
+    - 'spec/views/**/*.rb'
+
 RSpec/ExampleLength:
   Max: 10
 
@@ -87,7 +91,9 @@ RSpec/MessageSpies:
   EnforcedStyle: receive
 
 RSpec/MultipleExpectations:
-  Max: 2
+  Max: 3
+  Exclude:
+    - 'spec/views/**/*.rb'
 
 Style/Documentation:
   Enabled: false

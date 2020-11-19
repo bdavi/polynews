@@ -1,0 +1,7 @@
+---
+detectors:
+  UtilityFunction:
+    enabled: false
+
+  IrresponsibleModule:
+    enabled: false

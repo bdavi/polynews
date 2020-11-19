@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @channel.title %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @channel.url %>
+</p>
+
+<p>
+  <strong>Last build date:</strong>
+  <%= @channel.last_build_date %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @channel.description %>
+</p>
+
+<%= link_to 'Edit', edit_channel_path(@channel) %> |
+<%= link_to 'Back', channels_path %>
