@@ -16,6 +16,14 @@
   </div>
 </div>
 
+<% if @channels.empty? %>
+  <div class="row">
+    <div class="col-12">
+      <h2>No channels to display.</h2>
+    </div>
+  </div>
+<% end %>
+
 <div class="row">
   <div class="col-12">
     <%= paginate @channels %>
