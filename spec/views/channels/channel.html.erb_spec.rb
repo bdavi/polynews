@@ -23,7 +23,7 @@ RSpec.describe 'channels/_channel', type: :view do
 
       render partial: 'channels/channel', locals: { channel: channel }
 
-      expect(rendered).to match(/Never/)
+      expect(rendered).to have_text(/Never/)
     end
   end
 end

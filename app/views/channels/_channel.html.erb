@@ -18,20 +18,20 @@
       <% end %>
     </p>
 
-    <h5 class="card-title">
+    <h6 class="card-title">
       <%= link_to channel.url do %>
         <i class="fas fa-link"></i>
         <%= channel.url %>
       <% end %>
-    </h5>
+    </h6>
 
-    <%= link_to edit_channel_path(channel), class: 'btn btn-info btn-sm' do %>
+    <%= link_to edit_channel_path(channel), class: 'btn btn-outline-info btn-sm' do %>
       <i class="fas fa-pen mr-1"></i>
       Edit
     <% end %>
 
     <%= link_to channel, method: :delete, data: { confirm: 'Are you sure?' },
-        class: 'btn btn-danger btn-sm' do %>
+        class: 'btn btn-outline-danger btn-sm' do %>
 
       <i class="fas fa-trash mr-1"></i>
       Delete

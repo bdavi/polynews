@@ -1,0 +1,17 @@
+<div class="row mb-4">
+  <div class="col-12 col-md-6">
+    <%= render partial: 'articles/breadcrumbs', locals: { last_title: 'New' } %>
+  </div>
+
+  <div class="col-12 col-md-6 mt-2 mt-md-0">
+    <%= link_to articles_path, class: "btn btn-outline-success btn-sm float-md-right" do %>
+      <i class="fas fa-ban"></i> Cancel
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <%= render 'form', article: @article %>
+  </div>
+</div>

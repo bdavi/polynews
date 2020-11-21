@@ -16,6 +16,10 @@ AllCops:
     - 'db/**'
     - 'db/**/*'
 
+Layout/MultilineMethodCallIndentation:
+  Enabled: true
+  EnforcedStyle: indented_relative_to_receiver
+
 Layout/SpaceAroundMethodCallOperator:
   Enabled: true
 

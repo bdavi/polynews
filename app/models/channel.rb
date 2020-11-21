@@ -21,5 +21,7 @@ class Channel < ApplicationRecord
 
   validates :url, presence: true, url: true, uniqueness: true
 
+  has_many :articles, dependent: :destroy
+
   paginates_per 5
 end

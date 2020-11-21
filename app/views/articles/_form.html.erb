@@ -1,13 +1,14 @@
 <div class="card mb-3">
   <h5 class="card-header">
-    <%= @channel.persisted? ? 'Update' : 'Create' %> Channel
+    <%= @article.persisted? ? 'Update' : 'Create' %> Article
   </h5>
 
   <div class="card-body">
-    <%= simple_form_for @channel do |f| %>
+    <%= simple_form_for @article do |f| %>
       <%= f.input :title %>
       <%= f.input :description %>
-      <%= f.input :url, hint: 'This must be a valid web address' %>
+      <%= f.input :guid %>
+      <%= f.association :channel %>
       <%= f.button :submit, class: 'btn btn-outline-primary' %>
     <% end %>
   </div>
