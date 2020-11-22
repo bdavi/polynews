@@ -89,7 +89,7 @@ RSpec/InstanceVariable:
 RSpec/ExampleLength:
   Max: 10
   Exclude:
-    - 'spec/features/*'
+    - 'spec/**/*.rb'
 
 RSpec/FilePath:
   CustomTransform:

@@ -346,6 +346,7 @@ GEM
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     unicode-display_width (1.7.0)
+    vcr (6.0.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -411,6 +412,7 @@ DEPENDENCIES
   timecop
   turbolinks (~> 5)
   tzinfo-data
+  vcr
   web-console (>= 3.3.0)
   webmock
   webpacker (~> 4.0)

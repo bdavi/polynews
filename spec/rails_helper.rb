@@ -22,8 +22,9 @@ end
 
 RSpec.configure do |config|
   config.include Features, type: :feature
-  config.include FactoryBot::Syntax::Methods
+
   config.infer_spec_type_from_file_location!
+
   config.filter_rails_from_backtrace!
 
   # DatabaseCleaner
