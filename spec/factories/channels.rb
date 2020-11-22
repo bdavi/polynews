@@ -17,5 +17,15 @@ FactoryBot.define do
     trait :invalid do
       url { nil }
     end
+
+    trait :with_articles do
+      transient do
+        article_count { 2 }
+      end
+
+      after(:create) do |channel, evaluator|
+        create_list(:article, evaluator.article_count, channel: channel)
+      end
+    end
   end
 end

@@ -16,6 +16,13 @@ AllCops:
     - 'db/**'
     - 'db/**/*'
 
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*.rb'
+
+RSpec/Capybara/FeatureMethods:
+  Enabled: false
+
 Layout/MultilineMethodCallIndentation:
   Enabled: true
   EnforcedStyle: indented_relative_to_receiver
@@ -81,6 +88,8 @@ RSpec/InstanceVariable:
 
 RSpec/ExampleLength:
   Max: 10
+  Exclude:
+    - 'spec/features/*'
 
 RSpec/FilePath:
   CustomTransform:
@@ -98,6 +107,7 @@ RSpec/MultipleExpectations:
   Max: 3
   Exclude:
     - 'spec/views/**/*.rb'
+    - 'spec/features/**/*.rb'
 
 Style/Documentation:
   Enabled: false

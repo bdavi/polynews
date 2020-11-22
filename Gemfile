@@ -34,6 +34,8 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'database_cleaner-active_record'
+  gem 'formulaic'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
   gem 'timecop'

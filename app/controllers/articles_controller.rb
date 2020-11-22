@@ -14,7 +14,7 @@ class ArticlesController < ApplicationController
 
   def update
     if @article.update(article_params)
-      redirect_to article_path(@article), success: 'Successfully updated article'
+      redirect_to @article, success: 'Successfully updated article'
     else
       render :edit
     end
@@ -30,7 +30,7 @@ class ArticlesController < ApplicationController
     @article = Article.new(article_params)
 
     if @article.save
-      redirect_to article_path(@article), success: 'Successfully updated article'
+      redirect_to @article, success: 'Successfully created article'
     else
       render :new
     end
