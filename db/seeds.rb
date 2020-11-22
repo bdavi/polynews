@@ -1,7 +1,19 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+################################################################################
+# Create channels
+################################################################################
+feeds = [
+  {
+    title: 'Reuters | All Topics',
+    url: 'https://www.reutersagency.com/feed/?taxonomy=best-topics&post_type=best'
+  },
+  {
+    title: 'Christian Science Monitor | All',
+    url: 'https://rss.csmonitor.com/feeds/all'
+  },
+  {
+    title: 'NPR | News',
+    url: 'https://feeds.npr.org/1001/rss.xml'
+  }
+]
+
+feeds.each {|feed| Channel.find_or_create_by(feed) }
