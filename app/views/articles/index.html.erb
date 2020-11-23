@@ -12,17 +12,13 @@
 
 <div class="row">
   <div class="col-12">
-    <%= render @articles %>
+    <% if @articles.any? %>
+      <%= render @articles %>
+    <% else %>
+      <h2>No articles to display.</h2>
+    <% end %>
   </div>
 </div>
-
-<% if @articles.empty? %>
-  <div class="row">
-    <div class="col-12">
-      <h2>No articles to display.</h2>
-    </div>
-  </div>
-<% end %>
 
 <div class="row">
   <div class="col-12">

@@ -3,13 +3,19 @@
 require 'rails_helper'
 
 RSpec.describe 'channels/show', type: :view do
-  it 'renders attributes in <p>' do
-    @channel = build_stubbed(:channel)
+  it 'renders the associated articles' do
+    channel = build(
+      :channel,
+      id: 1,
+      articles: build_stubbed_list(:article, 2)
+    )
+    assign(:channel, channel)
 
     render
 
-    expect(rendered).to match(/#{@channel.title}/)
-    expect(rendered).to match(/#{@channel.url}/)
-    expect(rendered).to match(/#{@channel.description}/)
+    channel.articles.each do |article|
+      expect(rendered).to have_text article.title
+      expect(rendered).to have_text article.description
+    end
   end
 end

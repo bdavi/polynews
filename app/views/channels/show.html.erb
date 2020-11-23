@@ -9,3 +9,25 @@
     <%= render @channel %>
   </div>
 </div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-3">
+      <h5 class="card-header">
+        Articles
+      </h5>
+
+      <div class="card-body">
+        <div class="list-group">
+          <% if @channel.articles.any? %>
+            <% @channel.articles.each do |article| %>
+              <%= render partial: 'articles/list_item', locals: { article: article } %>
+            <% end %>
+          <% else %>
+            <em>No articles to display.</em>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

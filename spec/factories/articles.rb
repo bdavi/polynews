@@ -2,9 +2,13 @@
 
 FactoryBot.define do
   factory :article do
-    title { 'The title' }
+    sequence :title do |n|
+      "The title #{n}"
+    end
 
-    description { 'Some description goes here' }
+    sequence :description do |n|
+      "The description #{n}"
+    end
 
     sequence(:guid) do |n|
       "guild-#{n}"

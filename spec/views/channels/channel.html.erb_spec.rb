@@ -12,8 +12,8 @@ RSpec.describe 'channels/_channel', type: :view do
         render partial: 'channels/channel', locals: { channel: channel }
       end
 
-      expect(rendered).to match(/data-local="time-ago"/)
-      expect(rendered).to match(/February  3, 2001  3:05am/)
+      expect(rendered).to have_css '[data-local="time-ago"]'
+      expect(rendered).to have_text 'February  3, 2001  3:05am'
     end
   end
 

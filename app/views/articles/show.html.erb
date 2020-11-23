@@ -7,5 +7,17 @@
 <div class="row">
   <div class="col-12">
     <%= render @article %>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <p class="card-text">
+          <% if @article.content %>
+            <%= @article.content %>
+          <% else %>
+            <em>No content available</em>
+          <% end %>
+        </p>
+      </div>
+    </div>
   </div>
 </div>
