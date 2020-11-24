@@ -12,7 +12,7 @@
       <div class="card-body">
         <p class="card-text">
           <% if @article.content %>
-            <%= @article.content %>
+            <%= @article.content.html_safe %>
           <% else %>
             <em>No content available</em>
           <% end %>

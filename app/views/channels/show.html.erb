@@ -18,7 +18,7 @@
       </h5>
 
       <div class="card-body">
-        <div class="list-group">
+        <div>
           <% if @channel.articles.any? %>
             <% @channel.articles.each do |article| %>
               <%= render partial: 'articles/list_item', locals: { article: article } %>

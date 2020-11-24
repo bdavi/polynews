@@ -49,9 +49,9 @@ module Channels
         article.update(
           channel: channel,
           title: item.title,
-          description: strip_tags(item.description),
+          description: item.description,
           published_at: item.pubDate,
-          content: strip_tags(item.content_encoded)
+          content: item.content_encoded
         )
       end
     end
