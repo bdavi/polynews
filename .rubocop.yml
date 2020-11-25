@@ -16,6 +16,10 @@ AllCops:
     - 'db/**'
     - 'db/**/*'
 
+Lint/MissingSuper:
+  Exclude:
+    - 'app/services/**/*.rb'
+
 Style/BlockDelimiters:
   Exclude:
     - 'spec/**/*.rb'

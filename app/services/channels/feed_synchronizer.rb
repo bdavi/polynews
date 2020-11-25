@@ -13,21 +13,21 @@ module Channels
 
     delegate :last_build_date, to: :channel
 
-    def initialize(channel) # rubocop:disable Lint/MissingSuper
+    def initialize(channel)
       @channel = channel
     end
 
     def call
       download_feed
 
-      return service_success(:no_update_required) unless requires_update?
+      return success(:no_update_required) unless requires_update?
 
       update_channel
       create_or_update_articles
     rescue StandardError => e
-      service_failure(e)
+      failure(e)
     else
-      service_success(:update_completed)
+      success(:update_completed)
     end
 
     def download_feed

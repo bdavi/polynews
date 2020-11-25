@@ -5,11 +5,11 @@ class ApplicationService
     new(*args, &block).call
   end
 
-  def service_success(details = nil)
+  def success(details = nil)
     OpenStruct.new({ success?: true, details: details })
   end
 
-  def service_failure(error)
+  def failure(error)
     OpenStruct.new({ success?: false, error: error })
   end
 end
