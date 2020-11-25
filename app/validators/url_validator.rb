@@ -24,7 +24,7 @@ class UrlValidator < ActiveModel::EachValidator
   end
 
   def validate_each(record, attribute, value)
-    return if _allow_blank && value.nil?
+    return if _allow_blank && value.blank?
     return if _valid_url?(value)
 
     record.errors[attribute] << _message

@@ -6,6 +6,7 @@ class ArticlesController < ApplicationController
   def index
     @articles = Article
                   .includes(:channel)
+                  .select(:id, :title, :published_at, :description, :url, :channel_id)
                   .order(:created_at)
                   .page(params[:page])
   end
