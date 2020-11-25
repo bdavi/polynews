@@ -42,6 +42,7 @@ module Channels
       channel.update(last_build_date: feed.channel.lastBuildDate)
     end
 
+    # rubocop:disable Metrics/MethodLength
     def update_articles
       feed.items.each do |item|
         article = Article.find_or_initialize_by(guid: item.guid.content)
@@ -51,9 +52,11 @@ module Channels
           title: item.title,
           description: item.description,
           published_at: item.pubDate,
-          content: item.content_encoded
+          content: item.content_encoded,
+          url: item.link
         )
       end
     end
+    # rubocop:enable Metrics/MethodLength
   end
 end

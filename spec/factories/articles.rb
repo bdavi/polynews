@@ -14,6 +14,8 @@ FactoryBot.define do
       "guild-#{n}"
     end
 
+    url { 'http://www.example.com' }
+
     channel
 
     content { 'The full content is here' }

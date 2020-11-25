@@ -11,12 +11,42 @@
     <div class="card mb-3">
       <div class="card-body">
         <p class="card-text">
-          <% if @article.content %>
-            <%= @article.content.html_safe %>
-          <% else %>
-            <em>No content available</em>
-          <% end %>
+          <label class="font-weight-bolder">GUID</label>
+          <p class="card-text"><%= @article.guid %></p>
+
+          <label class="font-weight-bolder">Image URL</label>
+          <p>
+            <% if @article.image_url %>
+              <%= link_to @article.image_url, @article.image_url, target: '_blank' %>
+            <% else %>
+              <%= empty_text %>
+            <% end %>
+          </p>
+
+          <label class="font-weight-bolder">Image Alt</label>
+          <p><%= coalesce_to_empty(@article.image_alt) %></p>
         </p>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <label class="font-weight-bolder">Content</label>
+        <p><%= coalesce_to_empty(@article.content).html_safe %></p>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <label class="font-weight-bolder">Scraped Content</label>
+        <p><%= coalesce_to_empty(@article.scraped_content).html_safe %></p>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <label class="font-weight-bolder">Processing Cache</label>
+        <p><%= coalesce_to_empty(@article.processing_cache).html_safe %></p>
       </div>
     </div>
   </div>

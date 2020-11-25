@@ -4,15 +4,20 @@
 #
 # Table name: articles
 #
-#  id           :bigint           not null, primary key
-#  content      :text
-#  description  :text
-#  guid         :string           not null
-#  published_at :datetime
-#  title        :string           not null
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  channel_id   :bigint           not null
+#  id               :bigint           not null, primary key
+#  content          :text
+#  description      :text
+#  guid             :string           not null
+#  image_alt        :string
+#  image_url        :string
+#  processing_cache :jsonb
+#  published_at     :datetime
+#  scraped_content  :text
+#  title            :string           not null
+#  url              :string           not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#  channel_id       :bigint           not null
 #
 # Indexes
 #
@@ -26,9 +31,13 @@
 class Article < ApplicationRecord
   belongs_to :channel
 
+  validates :guid, presence: true, uniqueness: true
+
+  validates :image_url, url: { allow_blank: true }
+
   validates :title, presence: true
 
-  validates :guid, presence: true, uniqueness: true
+  validates :url, presence: true, url: true
 
   paginates_per 5
 end

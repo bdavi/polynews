@@ -6,11 +6,14 @@ RSpec.describe Article, type: :model do
   subject(:article) { described_class.new }
 
   it :aggregate_failures do
-    is_expected.to validate_presence_of :title
     is_expected.to validate_presence_of(:channel).with_message('must exist')
+    is_expected.to validate_url_format_of(:image_url).allow_blank
+    is_expected.to validate_presence_of :title
+    is_expected.to validate_presence_of :url
+    is_expected.to validate_url_format_of :url
   end
 
-  describe 'url uniqueness' do
+  describe 'guid uniqueness' do
     subject(:article) { build(:article) }
 
     it { is_expected.to validate_uniqueness_of :guid }

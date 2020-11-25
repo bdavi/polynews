@@ -7,7 +7,7 @@
 
   <div class="card-body">
     <% if channel.description %>
-      <p class="card-text"><%= channel.description %></p>
+      <p><%= coalesce_to_empty(channel.description) %></p>
     <% end %>
 
     <p class="font-italic">
@@ -21,7 +21,7 @@
     </p>
 
     <h6 class="card-title">
-      <%= link_to channel.url do %>
+      <%= link_to channel.url, target: '_blank' do %>
         <i class="fas fa-link"></i>
         <%= channel.url %>
       <% end %>

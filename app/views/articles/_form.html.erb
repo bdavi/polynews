@@ -6,9 +6,16 @@
   <div class="card-body">
     <%= simple_form_for @article do |f| %>
       <%= f.input :title %>
-      <%= f.input :description %>
+      <%= f.input :url %>
       <%= f.input :guid %>
+      <%= f.input :image_url %>
+      <%= f.input :image_alt %>
+      <%= f.input :published_at %>
       <%= f.association :channel %>
+      <%= f.input :description %>
+      <%= f.input :content %>
+      <%= f.input :scraped_content %>
+      <%= f.input :processing_cache %>
       <%= f.button :submit, class: 'btn btn-outline-primary' %>
     <% end %>
   </div>

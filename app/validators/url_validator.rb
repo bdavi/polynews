@@ -8,23 +8,23 @@
 # With custom message:
 # validates :attribute, url: { message: 'some message' }
 #
-# When allowing nil:
-# validates :attribute, url: { allow_nil: true }
+# When allowing blank:
+# validates :attribute, url: { allow_blank: true }
 class UrlValidator < ActiveModel::EachValidator
   DEFAULT_MESSAGE = 'is an invalid URL'
 
   VALID_URI_KINDS = [URI::HTTP, URI::HTTPS].freeze
 
-  attr_reader :_message, :_allow_nil
+  attr_reader :_message, :_allow_blank
 
   def initialize(options)
     @_message = options[:message] || DEFAULT_MESSAGE
-    @_allow_nil = options[:allow_nil] || false
+    @_allow_blank = options[:allow_blank] || false
     super
   end
 
   def validate_each(record, attribute, value)
-    return if _allow_nil && value.nil?
+    return if _allow_blank && value.nil?
     return if _valid_url?(value)
 
     record.errors[attribute] << _message

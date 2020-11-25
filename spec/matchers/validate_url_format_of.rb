@@ -6,8 +6,8 @@ module Matchers
   # Basic usage:
   # it { is_expected.to validate_url_format_of :url }
   #
-  # When allowing nil:
-  # it { is_expected.to validate_url_format_of(:url).allow_nil }
+  # When allowing blank:
+  # it { is_expected.to validate_url_format_of(:url).allow_blank }
   #
   # With a custom message
   # it { is_expected.to validate_url_format_of(:url).with_message('message') }
@@ -27,7 +27,7 @@ module Matchers
 
     DEFAULT_ATTRIBUTE_ERROR_MESSAGE = 'is an invalid URL'
 
-    attr_reader :attr, :_allow_nil, :_message, :_match_failure_messages
+    attr_reader :attr, :_allow_blank, :_message, :_match_failure_messages
 
     def initialize(attr)
       @attr = attr
@@ -37,16 +37,16 @@ module Matchers
 
     def matches?(subject)
       _run_invalid_url_match(subject)
-      _run_nil_match(subject)
-      _match_failure_messages.empty?
+      _run_blank_match(subject)
+      _match_failure_messages.blank?
     end
 
     def does_not_match?(subject)
       _causes_validation_error?(INVALID_URLS.first, subject)
     end
 
-    def allow_nil
-      @_allow_nil = true
+    def allow_blank
+      @_allow_blank = true
       self
     end
 
@@ -88,17 +88,17 @@ module Matchers
       end
     end
 
-    def _run_nil_match(subject)
-      return if _allow_nil ^ _causes_validation_error?(nil, subject)
+    def _run_blank_match(subject)
+      return if _allow_blank ^ _causes_validation_error?('', subject)
 
-      _match_failure_messages << _failure_message_nil_behavior
+      _match_failure_messages << _failure_message_blank_behavior
     end
 
-    def _failure_message_nil_behavior
-      if _allow_nil
-        "Set ##{attr} to nil and received validation error"
+    def _failure_message_blank_behavior
+      if _allow_blank
+        "Set ##{attr} to '' and received validation error"
       else
-        "Set ##{attr} to nil but did not receive validation error"
+        "Set ##{attr} to '' but did not receive validation error"
       end
     end
   end

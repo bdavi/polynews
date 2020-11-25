@@ -47,14 +47,21 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
+  # rubocop:disable Metrics/MethodLength
   def article_params
     params.require(:article).permit(
       :channel_id,
       :content,
       :description,
       :guid,
+      :image_alt,
+      :image_url,
+      :processing_cache,
       :published_at,
-      :title
+      :scraped_content,
+      :title,
+      :url
     )
   end
+  # rubocop:enable Metrics/MethodLength
 end

@@ -1,20 +1,19 @@
 <div class="card mb-3">
   <h5 class="card-header">
-    <%= link_to article_path(article), class: 'text-dark' do %>
-      <%= article.title %>
-    <% end %>
+    <%= link_to article.title, article_path(article), class: 'text-dark' %>
   </h5>
 
   <div class="card-body">
+    <label class="font-weight-bolder">URL</label>
+    <p><%= link_to article.url, article.url, target: '_blank' %></p>
+
+    <label class="font-weight-bolder">Publication Date</label>
+    <p><%= article.published_at %></p>
+
     <label class="font-weight-bolder">Description</label>
-    <p class="card-text"><%= article.description.html_safe %></p>
+    <p><%= coalesce_to_empty(article.description).html_safe %></p>
 
-    <label class="font-weight-bolder">GUID</label>
-    <p class="card-text"><%= article.guid %></p>
-
-    <p class="card-text">
-      <%= link_to article.channel.title, channel_path(article.channel) %>
-    </p>
+    <p><%= link_to article.channel.title, channel_path(article.channel) %></p>
 
     <%= link_to edit_article_path(article), class: 'btn btn-outline-info btn-sm' do %>
       <i class="fas fa-pen mr-1"></i>
