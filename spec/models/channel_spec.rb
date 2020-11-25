@@ -6,9 +6,11 @@ RSpec.describe Channel, type: :model do
   subject(:channel) { described_class.new }
 
   it :aggregate_failures do
+    is_expected.to validate_url_format_of(:image_url).allow_blank
     is_expected.to validate_presence_of :title
     is_expected.to validate_presence_of :url
     is_expected.to validate_url_format_of :url
+
     is_expected.to have_many(:articles).dependent(:destroy)
   end
 

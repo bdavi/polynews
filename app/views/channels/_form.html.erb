@@ -7,6 +7,8 @@
     <%= simple_form_for @channel do |f| %>
       <%= f.input :title %>
       <%= f.input :description %>
+      <%= f.input :image_url %>
+      <%= f.input :scraping_content_selector %>
       <%= f.input :url, hint: 'This must be a valid web address' %>
       <%= f.button :submit, class: 'btn btn-outline-primary' %>
     <% end %>

@@ -42,6 +42,8 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
       {
         last_build: DateTime.new(2020, 11, 20, 16, 55, 56),
         channel_title: 'Reuters News Agency',
+        channel_image_url: 'https://www.reutersagency.com/wp-content/uploads/' \
+          '2019/06/fav-150x150.png',
         item_count: 10,
         first_item: {
           title: 'Reuters ahead with Turkey interest rate hike; market reacts',
@@ -134,6 +136,7 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
 
         channel.reload
         expect(channel.last_build_date).to eq cassette_data[:last_build]
+        expect(channel.image_url).to eq cassette_data[:channel_image_url]
       end
     end
 

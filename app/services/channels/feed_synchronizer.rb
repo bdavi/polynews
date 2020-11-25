@@ -24,10 +24,10 @@ module Channels
 
       update_channel
       create_or_update_articles
-
-      service_success(:update_completed)
     rescue StandardError => e
       service_failure(e)
+    else
+      service_success(:update_completed)
     end
 
     def download_feed
@@ -43,7 +43,10 @@ module Channels
     end
 
     def update_channel
-      channel.update(last_build_date: feed.channel.lastBuildDate)
+      channel.update(
+        last_build_date: feed.channel.lastBuildDate,
+        image_url: feed.channel&.image&.url
+      )
     end
 
     def create_or_update_articles
