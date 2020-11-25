@@ -104,7 +104,7 @@ RSpec/MessageSpies:
   EnforcedStyle: receive
 
 RSpec/MultipleExpectations:
-  Max: 3
+  Max: 5
   Exclude:
     - 'spec/views/**/*.rb'
     - 'spec/features/**/*.rb'
@@ -134,7 +134,7 @@ Lint/UnmodifiedReduceAccumulator:
   Enabled: true
 
 Style/ArgumentsForwarding:
-  Enabled: true
+  Enabled: false
 
 Style/CollectionCompact:
   Enabled: true

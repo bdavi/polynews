@@ -173,9 +173,11 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
         channel = create_channel(synced_day_before_last_build)
         synchronizer = described_class.new(channel)
 
-        expect {
-          synchronizer.call
-        }.to change(Article, :count).by(cassette_data[:item_count])
+        expect do
+          result = synchronizer.call
+          expect(result).to be_success
+          expect(result.details).to eq :update_completed
+        end.to change(Article, :count).by(cassette_data[:item_count])
 
         expect(synchronizer.feed).not_to be_nil
         expect(channel.reload.last_build_date).to eq cassette_data[:last_build]
@@ -185,12 +187,24 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
         channel = create_channel(synced_on_last_build)
         synchronizer = described_class.new(channel)
 
-        expect {
-          synchronizer.call
-        }.not_to change(Article, :count)
+        expect do
+          result = synchronizer.call
+          expect(result).to be_success
+          expect(result.details).to eq :no_update_required
+        end.not_to change(Article, :count)
 
         expect(synchronizer.feed).not_to be_nil
         expect(channel.reload.last_build_date).to eq cassette_data[:last_build]
+      end
+
+      it 'handles errors with the correct result' do
+        channel = instance_double('Channel')
+        allow(channel).to receive(:url).and_raise(ArgumentError, 'abc123')
+
+        result = described_class.call(channel)
+        expect(result).not_to be_success
+        expect(result.error.message).to eq 'abc123'
+        expect(result.error.class).to eq ArgumentError
       end
     end
   end

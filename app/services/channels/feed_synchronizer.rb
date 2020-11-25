@@ -6,24 +6,28 @@ require 'action_view'
 
 # Channel related code
 module Channels
-  class FeedSynchronizer
+  class FeedSynchronizer < ApplicationService
     include ActionView::Helpers::SanitizeHelper
 
     attr_reader :channel, :feed
 
     delegate :last_build_date, to: :channel
 
-    def initialize(channel)
+    def initialize(channel) # rubocop:disable Lint/MissingSuper
       @channel = channel
     end
 
     def call
       download_feed
 
-      return unless requires_update?
+      return service_success(:no_update_required) unless requires_update?
 
       update_channel
       create_or_update_articles
+
+      service_success(:update_completed)
+    rescue StandardError => e
+      service_failure(e)
     end
 
     def download_feed
