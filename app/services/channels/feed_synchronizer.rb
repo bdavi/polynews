@@ -23,7 +23,7 @@ module Channels
       return unless requires_update?
 
       update_channel
-      update_articles
+      create_or_update_articles
     end
 
     def download_feed
@@ -42,21 +42,34 @@ module Channels
       channel.update(last_build_date: feed.channel.lastBuildDate)
     end
 
-    # rubocop:disable Metrics/MethodLength
-    def update_articles
+    def create_or_update_articles
       feed.items.each do |item|
         article = Article.find_or_initialize_by(guid: item.guid.content)
-
-        article.update(
-          channel: channel,
-          title: item.title,
-          description: item.description,
-          published_at: item.pubDate,
-          content: item.content_encoded,
-          url: item.link
-        )
+        update_article_from_item(article, item)
       end
     end
-    # rubocop:enable Metrics/MethodLength
+
+    private
+
+    def update_article_from_item(article, item)
+      article.update(
+        channel: channel,
+        title: item.title,
+        description: item.description,
+        published_at: item.pubDate,
+        content: item.content_encoded,
+        url: item.link,
+        image_url: first_image_attr(item.content_encoded, 'src'),
+        image_alt: first_image_attr(item.content_encoded, 'alt')
+      )
+    end
+
+    def first_image_attr(content, attribute_name)
+      first_image(content)&.attributes&.fetch(attribute_name, nil)&.value
+    end
+
+    def first_image(content)
+      Nokogiri::HTML(content).css('img').first
+    end
   end
 end

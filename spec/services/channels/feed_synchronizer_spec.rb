@@ -76,7 +76,11 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
             'market-reacts/">Reuters ahead with Turkey interest rate hike;' \
             ' market reacts</a> appeared first on <a rel="nofollow" href' \
             '="https://www.reutersagency.com/en/">Reuters News Agency' \
-            "</a>.</p>\n"
+            "</a>.</p>\n",
+          url: 'https://www.reutersagency.com/en/reuters-best/reuters-' \
+            'ahead-with-turkey-interest-rate-hike-market-reacts/',
+          image_url: 'https://www.reutersagency.com/wp-content/uploads/2020/11/Lira-1024x907.png',
+          image_alt: nil
         }
       }
     end
@@ -133,13 +137,13 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
       end
     end
 
-    describe '#update_articles' do
+    describe '#create_or_update_articles' do
       it 'creates articles from the feed' do
         channel = create_channel(synced_day_before_last_build)
         synchronizer = described_class.new(channel).tap(&:download_feed)
 
         expect {
-          synchronizer.update_articles
+          synchronizer.create_or_update_articles
         }.to change(Article, :count).by(cassette_data[:item_count])
 
         article = Article.find_by(guid: cassette_data[:first_item][:guid])
@@ -157,7 +161,7 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
           title: 'abc123'
         )
 
-        synchronizer.update_articles
+        synchronizer.create_or_update_articles
 
         article.reload
         expect(article.title).to eq cassette_data[:first_item][:title]
