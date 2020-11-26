@@ -6,6 +6,7 @@ ruby '2.6.6'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'jbuilder', '~> 2.7'
 gem 'kaminari'
+gem 'lemmatizer', require: false
 gem 'local_time'
 gem 'nilify_blanks'
 gem 'pg', '>= 0.18', '< 2.0'
