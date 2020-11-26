@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe NLP::TextOperations::Lemmatize do
+RSpec.describe NLP::Operations::Lemmatizer do
   it 'recursively lematizes strings' do
     input = ['dogs', 'hired', %w[hotter slow]]
 

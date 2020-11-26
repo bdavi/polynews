@@ -2,8 +2,8 @@
 
 # rubocop:disable all
 module NLP
-  module TextOperations
-    class RemoveStopWords
+  module Operations
+    class StopWordRemover
       def self.call(words)
         words - STOP_WORD_DICTIONARY
       end

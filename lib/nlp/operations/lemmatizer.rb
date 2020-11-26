@@ -3,12 +3,12 @@
 require 'lemmatizer'
 
 module NLP
-  module TextOperations
+  module Operations
     LEMMATIZER_INSTANCE = Lemmatizer.new
 
     LEMMATIZE_OPERATION = ->(str) { LEMMATIZER_INSTANCE.lemma(str) }
 
-    class Lemmatize < Pipeline::RecursiveOperation
+    class Lemmatizer < Pipeline::RecursiveOperation
       def self.operation
         LEMMATIZE_OPERATION
       end

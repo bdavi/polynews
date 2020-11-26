@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe NLP::TextOperations::Downcase do
+RSpec.describe NLP::Operations::Downcaser do
   it 'recursively downcases strings' do
     input = ['aBc', 'DEf', %w[Ghi 123]]
 

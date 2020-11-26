@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module NLP
-  module TextOperations
+  module Operations
     DOWNCASE_OPERATION = ->(str) { str.downcase }
 
-    class Downcase < Pipeline::RecursiveOperation
+    class Downcaser < Pipeline::RecursiveOperation
       def self.operation
         DOWNCASE_OPERATION
       end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe NLP::TextOperations::RemoveStopWords do
+RSpec.describe NLP::Operations::StopWordRemover do
   it 'recursively removes punctuation from strings' do
     input = %w[The cat in the hat]
 

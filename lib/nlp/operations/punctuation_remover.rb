@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module NLP
-  module TextOperations
+  module Operations
     REMOVE_PUNCTUATION_OPERATION = ->(str) { str.gsub(/[^\w\s]/, '') }
 
-    class RemovePunctuation < Pipeline::RecursiveOperation
+    class PunctuationRemover < Pipeline::RecursiveOperation
       def self.operation
         REMOVE_PUNCTUATION_OPERATION
       end

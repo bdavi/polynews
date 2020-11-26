@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module NLP
-  module TextOperations
+  module Operations
     TRANSLITERATE_OPERATION = ->(str) { ActiveSupport::Inflector.transliterate(str) }
 
-    class Transliterate < Pipeline::RecursiveOperation
+    class Transliterater < Pipeline::RecursiveOperation
       def self.operation
         TRANSLITERATE_OPERATION
       end

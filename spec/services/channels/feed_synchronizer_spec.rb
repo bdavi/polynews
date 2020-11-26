@@ -205,6 +205,7 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
         allow(channel).to receive(:url).and_raise(ArgumentError, 'abc123')
 
         result = described_class.call(channel)
+
         expect(result).not_to be_success
         expect(result.error.message).to eq 'abc123'
         expect(result.error.class).to eq ArgumentError

@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-require_relative 'text_operations/downcase'
-require_relative 'text_operations/lemmatize'
-require_relative 'text_operations/remove_punctuation'
-require_relative 'text_operations/remove_stop_words'
-require_relative 'text_operations/transliterate'
-require_relative 'text_operations/word_tokenize'
+require_relative 'text_operations/downcaser'
+require_relative 'text_operations/lemmatizer'
+require_relative 'text_operations/punctuation_remover'
+require_relative 'text_operations/stop_word_remover'
+require_relative 'text_operations/transliterater'
+require_relative 'text_operations/word_tokenizer'
 
-module TextOperations
+module Operations
 end

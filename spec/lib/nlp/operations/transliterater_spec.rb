@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe NLP::TextOperations::Transliterate do
+RSpec.describe NLP::Operations::Transliterater do
   it 'recursively transliterates strings' do
     input = ['abc', 'Qué', %w[baño 123]]
 
