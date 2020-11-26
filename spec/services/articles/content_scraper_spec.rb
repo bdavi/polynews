@@ -47,5 +47,16 @@ RSpec.describe Articles::ContentScraper, type: :service do
         expect(article.scraped_content).to eq 'abc123'
       end
     end
+
+    it 'handles errors with the correct result' do
+      article = build_stubbed(:article, scraped_content: nil)
+      allow(URI).to receive(:parse).and_raise(ArgumentError, 'abc123')
+
+      result = described_class.call(article)
+
+      expect(result).not_to be_success
+      expect(result.error.class).to eq ArgumentError
+      expect(result.error.message).to eq 'abc123'
+    end
   end
 end
