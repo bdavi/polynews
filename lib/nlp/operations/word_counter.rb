@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# require_relative 'word_tokenizer'
-
 module NLP
   module Operations
     class WordCounter
