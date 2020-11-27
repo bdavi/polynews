@@ -2,7 +2,7 @@
 
 RSpec.describe NLP::Operations::Normalizer do
   it 'normalizes the string' do
-    input = 'aBc baño the hotter.'
+    input = 'aBc baño the hotter. a bb'
 
     result = described_class.call(input)
 

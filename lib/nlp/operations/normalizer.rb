@@ -9,6 +9,7 @@ module NLP
       use PunctuationRemover
       use StopWordRemover
       use Lemmatizer
+      use WordSizeFilter.min_length(3)
     end
   end
 end
