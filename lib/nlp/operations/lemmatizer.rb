@@ -4,13 +4,15 @@ require 'lemmatizer'
 
 module NLP
   module Operations
-    LEMMATIZER_INSTANCE = Lemmatizer.new
-
-    LEMMATIZE_OPERATION = ->(str) { LEMMATIZER_INSTANCE.lemma(str) }
+    GEM_LEMMATIZER_INSTANCE = Lemmatizer.new
 
     class Lemmatizer < Pipeline::RecursiveOperation
+      def self.lemmatize(string)
+        GEM_LEMMATIZER_INSTANCE.lemma(string)
+      end
+
       def self.operation
-        LEMMATIZE_OPERATION
+        method(:lemmatize)
       end
     end
   end

@@ -2,11 +2,13 @@
 
 module NLP
   module Operations
-    DOWNCASE_OPERATION = ->(str) { str.downcase }
-
     class Downcaser < Pipeline::RecursiveOperation
+      def self.downcase(string)
+        string.downcase
+      end
+
       def self.operation
-        DOWNCASE_OPERATION
+        method(:downcase)
       end
     end
   end

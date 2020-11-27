@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'json'
+
 module ApplicationHelper
   def coalesce(*values)
     values.reject(&:blank?).first
@@ -11,5 +13,9 @@ module ApplicationHelper
 
   def coalesce_to_empty(*values)
     coalesce(*(values + [empty_text]))
+  end
+
+  def pretty_format_json(json)
+    JSON.pretty_generate(json)
   end
 end

@@ -2,11 +2,13 @@
 
 module NLP
   module Operations
-    TRANSLITERATE_OPERATION = ->(str) { ActiveSupport::Inflector.transliterate(str) }
-
     class Transliterater < Pipeline::RecursiveOperation
+      def self.tansliterate(string)
+        ActiveSupport::Inflector.transliterate(string)
+      end
+
       def self.operation
-        TRANSLITERATE_OPERATION
+        method(:tansliterate)
       end
     end
   end

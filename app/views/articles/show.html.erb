@@ -46,7 +46,11 @@
     <div class="card mb-3">
       <div class="card-body">
         <label class="font-weight-bolder">Processing Cache</label>
-        <p><%= coalesce_to_empty(@article.processing_cache) %></p>
+        <% if @article.processing_cache %>
+<pre><code><%= pretty_format_json(@article.processing_cache) %></code></pre>
+        <% else %>
+          <%= empty_text %>
+        <% end %>
       </div>
     </div>
   </div>

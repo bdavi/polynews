@@ -2,11 +2,13 @@
 
 module NLP
   module Operations
-    REMOVE_PUNCTUATION_OPERATION = ->(str) { str.gsub(/[^\w\s]/, '') }
-
     class PunctuationRemover < Pipeline::RecursiveOperation
+      def self.remove_punctuation(string)
+        string.gsub(/[^\w\s]/, '')
+      end
+
       def self.operation
-        REMOVE_PUNCTUATION_OPERATION
+        method(:remove_punctuation)
       end
     end
   end
