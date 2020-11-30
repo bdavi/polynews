@@ -2,13 +2,27 @@
 
 RSpec.describe NLP::Operations::WordSizeFilter do
   describe '#call' do
-    it 'removes sords shorter than min_length' do
-      input = %w[a bb ccc dddd eeeee]
+    it 'removes words shorter than min_length' do
+      input = [
+        %w[a bb ccc dddd eeeee],
+        [
+          'abc',
+          %w[333 4444 5555 1 22],
+          'z',
+          'yy'
+        ]
+      ]
       filter = described_class.new(3)
 
       result = filter.call(input)
 
-      expect(result).to eq %w[ccc dddd eeeee]
+      expect(result).to eq [
+        %w[ccc dddd eeeee],
+        [
+          'abc',
+          %w[333 4444 5555]
+        ]
+      ]
     end
   end
 

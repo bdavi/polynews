@@ -4,8 +4,13 @@
 module NLP
   module Operations
     class StopWordRemover
-      def self.call(words)
-        words - STOP_WORD_DICTIONARY
+      def self.call(arg)
+        if arg.is_a? Enumerable
+          arg.each {|value| self.call(value) }
+          arg.delete_if {|value| STOP_WORD_DICTIONARY.include?(value) || value.empty? }
+        else
+          arg
+        end
       end
     end
 

@@ -4,9 +4,7 @@ module NLP
   module Operations
     class WordCounter
       def self.word_count(value)
-        tokenize(value).each_with_object(Hash.new(0)) do |name, hash|
-          hash[name] += 1
-        end
+        Counter.call(tokenize(value))
       end
 
       def self.tokenize(value)
