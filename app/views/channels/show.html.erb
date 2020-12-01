@@ -22,6 +22,9 @@
         <% end %>
       </p>
 
+      <label class="font-weight-bolder">Use Scraper</label>
+      <p><%= yes_no(@channel.use_scraper) %></p>
+
       <label class="font-weight-bolder">Scraping Content Selector</label>
       <p><%= coalesce_to_empty(@channel.scraping_content_selector) %></p>
     </p>

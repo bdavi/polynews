@@ -29,6 +29,8 @@
 #  fk_rails_64fe6f9351  (channel_id => channels.id)
 #
 class Article < ApplicationRecord
+  delegate :use_scraper, to: :channel
+
   belongs_to :channel
 
   validates :guid, presence: true, uniqueness: true
@@ -42,6 +44,10 @@ class Article < ApplicationRecord
   paginates_per 5
 
   def processing_text
-    "#{title} #{scraped_content}"
+    if use_scraper
+      "#{title} #{scraped_content}"
+    else
+      "#{title} #{content}"
+    end
   end
 end

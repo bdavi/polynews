@@ -14,14 +14,14 @@ module Articles
     end
 
     def call
+      return success(:does_not_use_scraper) unless article.use_scraper
       return success(:already_scraped) if article.scraped_content
 
       download_html
       update_article
+      success(:scraping_completed)
     rescue StandardError => e
       failure(e)
-    else
-      success(:scraping_completed)
     end
 
     def download_html

@@ -52,7 +52,8 @@ class ChannelsController < ApplicationController
       :last_build_date,
       :scraping_content_selector,
       :title,
-      :url
+      :url,
+      :use_scraper
     )
   end
 end

@@ -13,10 +13,12 @@ RSpec.feature 'User updates channel', type: :feature do
     click_on 'Edit'
 
     fill_in 'Title', with: new_title
+    find(:css, '#channel_use_scraper').set(true)
     click_on 'Update Channel'
     channel.reload
 
     expect(channel.title).to eq new_title
+    expect(channel.use_scraper).to be true
     expect(page).to have_flash(:success, 'Successfully updated channel')
     expect(page).to have_text(new_title)
     expect(page).not_to have_text(original_title)

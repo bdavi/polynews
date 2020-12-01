@@ -18,4 +18,8 @@ module ApplicationHelper
   def pretty_format_json(json)
     JSON.pretty_generate(json)
   end
+
+  def yes_no(boolean)
+    boolean ? 'Yes' : 'No'
+  end
 end

@@ -11,6 +11,7 @@
 #  scraping_content_selector :string
 #  title                     :string           not null
 #  url                       :string           not null
+#  use_scraper               :boolean          default(FALSE), not null
 #  created_at                :datetime         not null
 #  updated_at                :datetime         not null
 #  category_id               :bigint

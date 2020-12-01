@@ -38,6 +38,6 @@ RSpec.feature 'User creates channel', type: :feature do
   end
 
   def new_channel_attributes
-    %i[title description url]
+    %i[title description use_scraper url]
   end
 end

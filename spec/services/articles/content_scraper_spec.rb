@@ -23,7 +23,7 @@ RSpec.describe Articles::ContentScraper, type: :service do
 
     context 'when not already scraped' do
       it 'saves the scraped and parsed content on the article' do
-        channel = create(:channel, scraping_content_selector: selector)
+        channel = create(:channel, scraping_content_selector: selector, use_scraper: true)
         article = create(:article, url: url, scraped_content: nil, channel: channel)
 
         VCR.use_cassette('download_reuters_article', re_record_interval: 7.days) do
@@ -38,7 +38,8 @@ RSpec.describe Articles::ContentScraper, type: :service do
 
     context 'when already scraped' do
       it 'returns success but does not download' do
-        article = build_stubbed(:article, scraped_content: 'abc123')
+        channel = create(:channel, use_scraper: true)
+        article = build_stubbed(:article, scraped_content: 'abc123', channel: channel)
 
         result = described_class.call(article)
 
@@ -49,7 +50,8 @@ RSpec.describe Articles::ContentScraper, type: :service do
     end
 
     it 'handles errors with the correct result' do
-      article = build_stubbed(:article, scraped_content: nil)
+      channel = create(:channel, use_scraper: true)
+      article = build_stubbed(:article, scraped_content: nil, channel: channel)
       allow(URI).to receive(:parse).and_raise(ArgumentError, 'abc123')
 
       result = described_class.call(article)
@@ -57,6 +59,19 @@ RSpec.describe Articles::ContentScraper, type: :service do
       expect(result).not_to be_success
       expect(result.error.class).to eq ArgumentError
       expect(result.error.message).to eq 'abc123'
+    end
+
+    context 'when the channel does not use the scraper' do
+      it 'returns success and does not download' do
+        channel = Channel.new(use_scraper: false)
+        article = build_stubbed(:article, channel: channel)
+
+        result = described_class.call(article)
+
+        expect(result).to be_success
+        expect(result.details).to eq :does_not_use_scraper
+        expect(article.scraped_content).to be_nil
+      end
     end
   end
 end

@@ -15,6 +15,12 @@ RSpec.describe Channel, type: :model do
     is_expected.to have_many(:articles).dependent(:destroy)
   end
 
+  it 'defaults use_scraper to false' do
+    channel = described_class.new
+
+    expect(channel.use_scraper).to be false
+  end
+
   describe 'url uniqueness' do
     subject(:channel) { build(:channel) }
 

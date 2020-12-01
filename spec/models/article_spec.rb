@@ -20,10 +20,22 @@ RSpec.describe Article, type: :model do
   end
 
   describe '#processing_text' do
-    it 'returns a string with the title and scraped_content' do
-      article = described_class.new(title: 'abc', scraped_content: '123')
+    context 'when the channel uses scraping' do
+      it 'returns a string with the title and scraped_content' do
+        channel = build_stubbed(:channel, use_scraper: true)
+        article = described_class.new(title: 'abc', scraped_content: '123', channel: channel)
 
-      expect(article.processing_text).to eq 'abc 123'
+        expect(article.processing_text).to eq 'abc 123'
+      end
+    end
+
+    context 'when the channel does not use scraping' do
+      it 'returns a string with the title and feed content' do
+        channel = build_stubbed(:channel, use_scraper: false)
+        article = described_class.new(title: 'abc', content: '123', channel: channel)
+
+        expect(article.processing_text).to eq 'abc 123'
+      end
     end
   end
 end
