@@ -1,0 +1,13 @@
+<div class="card mb-3">
+  <h5 class="card-header">
+    <%= @category.persisted? ? 'Update' : 'Create' %> Category
+  </h5>
+
+  <div class="card-body">
+    <%= simple_form_for @category do |f| %>
+      <%= f.input :title %>
+      <%= f.input :sort_order %>
+      <%= f.button :submit, class: 'btn btn-outline-primary' %>
+    <% end %>
+  </div>
+</div>

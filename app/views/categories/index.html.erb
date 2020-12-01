@@ -1,0 +1,27 @@
+<div class="row mb-4">
+  <div class="col-12 col-md-6">
+    <%= render partial: 'categories/breadcrumbs', locals: { last_title: 'All' } %>
+  </div>
+
+  <div class="col-12 col-md-6 mt-2 mt-md-0">
+    <%= link_to new_category_path, class: "btn btn-outline-success btn-sm float-md-right" do %>
+      <i class="fas fa-plus"></i> New Category
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <% if @categories.any? %>
+      <%= render @categories %>
+    <% else %>
+      <h2>No categories to display.</h2>
+    <% end %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <%= paginate @categories %>
+  </div>
+</div>

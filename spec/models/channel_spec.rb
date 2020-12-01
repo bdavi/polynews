@@ -11,6 +11,7 @@ RSpec.describe Channel, type: :model do
     is_expected.to validate_presence_of :url
     is_expected.to validate_url_format_of :url
 
+    is_expected.to belong_to(:category).optional(true)
     is_expected.to have_many(:articles).dependent(:destroy)
   end
 

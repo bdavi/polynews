@@ -1,0 +1,33 @@
+<div class="row mb-4">
+  <div class="col-12">
+    <%= render partial: 'categories/breadcrumbs', locals: { last_title: 'Detail' } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <%= render @category %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-3">
+      <h5 class="card-header">
+        Channels
+      </h5>
+
+      <div class="card-body">
+        <div>
+          <% if @category.channels.any? %>
+            <% @category.channels.each do |channel| %>
+              <%= render partial: 'channels/list_item', locals: { channel: channel } %>
+            <% end %>
+          <% else %>
+            <em>No channels to display.</em>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

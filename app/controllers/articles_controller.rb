@@ -45,7 +45,7 @@ class ArticlesController < ApplicationController
   private
 
   def set_article
-    @article = Article.find(params[:id])
+    @article = Article.includes(:channel).find(params[:id])
   end
 
   # rubocop:disable Metrics/MethodLength

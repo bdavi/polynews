@@ -1,4 +1,24 @@
 ################################################################################
+# Create Categories
+################################################################################
+categories = %w(
+  Headlines
+  U.S.
+  International
+  Business
+  Technology
+  Sports
+  Science
+  Culture
+  Long\ Reads
+)
+
+categories.each_with_index do |category, i|
+  Category.find_or_create_by(title: category, sort_order: i)
+end
+
+
+################################################################################
 # Create channels
 ################################################################################
 feeds = [

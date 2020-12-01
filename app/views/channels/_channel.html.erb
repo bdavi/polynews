@@ -26,7 +26,11 @@
         <%= channel.url %>
       <% end %>
     </h6>
-    
+
+    <% if channel.category %>
+      <p><%= link_to channel.category.title, channel.category %></p>
+    <% end %>
+
     <div class="mt-4">
       <%= link_to edit_channel_path(channel), class: 'btn btn-outline-info btn-sm' do %>
         <i class="fas fa-pen mr-1"></i>

@@ -4,7 +4,7 @@ class ChannelsController < ApplicationController
   before_action :set_channel, only: %i[show edit update destroy]
 
   def index
-    @channels = Channel.all.order(:title).page(params[:page])
+    @channels = Channel.all.includes(:category).order(:title).page(params[:page])
   end
 
   def show; end
@@ -41,11 +41,12 @@ class ChannelsController < ApplicationController
   private
 
   def set_channel
-    @channel = Channel.find(params[:id])
+    @channel = Channel.includes(:category, :articles).find(params[:id])
   end
 
   def channel_params
     params.require(:channel).permit(
+      :category_id,
       :description,
       :image_url,
       :last_build_date,

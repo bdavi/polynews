@@ -1,0 +1,22 @@
+<div class="card mb-3">
+  <h5 class="card-header">
+    <%= link_to category.title, category_path(category), class: 'text-dark' %>
+  </h5>
+
+  <div class="card-body">
+    <label class="font-weight-bolder">Sort Order</label>
+    <p><%= category.sort_order %></p>
+
+    <%= link_to edit_category_path(category), class: 'btn btn-outline-info btn-sm' do %>
+      <i class="fas fa-pen mr-1"></i>
+      Edit
+    <% end %>
+
+    <%= link_to category, method: :delete, data: { confirm: 'Are you sure?' },
+        class: 'btn btn-outline-danger btn-sm' do %>
+
+      <i class="fas fa-trash mr-1"></i>
+      Delete
+    <% end %>
+  </div>
+</div>

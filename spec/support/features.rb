@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
 module Features
+  include FlashHelper
+
   def have_flash(kind, text)
-    within(".flash.alert-#{kind}") do
+    alert_class = FlashHelper::FLASH_MAP[kind.to_s].alert_class
+
+    within(".flash.alert-#{alert_class}") do
       have_text(text)
     end
   end
