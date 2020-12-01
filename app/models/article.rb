@@ -40,4 +40,8 @@ class Article < ApplicationRecord
   validates :url, presence: true, url: true
 
   paginates_per 5
+
+  def processing_text
+    "#{title} #{scraped_content}"
+  end
 end

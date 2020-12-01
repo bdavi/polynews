@@ -18,4 +18,12 @@ RSpec.describe Article, type: :model do
 
     it { is_expected.to validate_uniqueness_of :guid }
   end
+
+  describe '#processing_text' do
+    it 'returns a string with the title and scraped_content' do
+      article = described_class.new(title: 'abc', scraped_content: '123')
+
+      expect(article.processing_text).to eq 'abc 123'
+    end
+  end
 end
