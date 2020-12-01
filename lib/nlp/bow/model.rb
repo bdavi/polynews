@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# require 'nlp/operations'
+require 'matrix'
 
 module NLP
   module BOW
@@ -8,21 +8,30 @@ module NLP
       include NLP::Operations
 
       attr_reader :vocabulary, :document_count, :aggregate_document_length,
-                  :tokenizer
+                  :tokenizer, :sorted_tokens, :algorithm
 
-      def initialize(tokenizer = WordTokenizer)
+      def initialize(tokenizer: Normalizer, algorithm: TfIdfAlgorithm)
         @tokenizer = tokenizer
+        @algorithm = algorithm
         @vocabulary = default_vocabulary
+        @sorted_tokens = nil
         @document_count = 0
         @aggregate_document_length = 0
       end
 
       def add_document(document)
-        tokens = tokenizer.call(document)
-        counts = Counter.call(tokens)
-
+        counts = generate_counts(document)
         update_vocabulary(counts)
         @document_count += 1
+      end
+
+      def vector_for(document)
+        algorithm.call(self, document)
+      end
+
+      def generate_counts(document)
+        tokens = tokenizer.call(document)
+        Counter.call(tokens)
       end
 
       private
@@ -33,6 +42,7 @@ module NLP
           vocabulary[word][:documents_containing] += 1
           @aggregate_document_length += count
         end
+        @sorted_tokens = vocabulary.keys.sort
       end
 
       def default_vocabulary
