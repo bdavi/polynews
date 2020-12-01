@@ -16,6 +16,21 @@ feeds = [
     title: 'NPR | News',
     scraping_content_selector: 'article.story p',
     url: 'https://feeds.npr.org/1001/rss.xml'
+  },
+  {
+    title: 'BBC | Top Stories',
+    scraping_content_selector: 'p',
+    url: 'http://feeds.bbci.co.uk/news/rss.xml'
+  },
+  {
+    title: 'USA Today | Top Stories',
+    scraping_content_selector: 'p',
+    url: 'http://rssfeeds.usatoday.com/usatoday-NewsTopStories'
+  },
+  {
+    title: 'The Guardian | US',
+    scraping_content_selector: 'p',
+    url: 'https://www.theguardian.com/us/rss'
   }
 ]
 
