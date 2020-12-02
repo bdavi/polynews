@@ -1,0 +1,4 @@
+<div class='mb-4 border-bottom'>
+  <h5><%= link_to article.title, article %></h5>
+  <p><%= coalesce_to_empty(article.description).html_safe %></p>
+</div>

@@ -22,5 +22,7 @@ class Category < ApplicationRecord
 
   has_many :channels, dependent: :restrict_with_error
 
+  has_many :groups, dependent: :restrict_with_error
+
   paginates_per 5
 end

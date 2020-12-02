@@ -1,0 +1,33 @@
+<div class="row mb-4">
+  <div class="col-12">
+    <%= render partial: 'groups/breadcrumbs', locals: { last_title: 'Detail' } %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <%= render @group %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12">
+    <div class="card mb-3">
+      <h5 class="card-header">
+        Articles
+      </h5>
+
+      <div class="card-body">
+        <div>
+          <% if @group.articles.any? %>
+            <% @group.articles.each do |article| %>
+              <%= render partial: 'articles/list_item', locals: { article: article } %>
+            <% end %>
+          <% else %>
+            <em>No articles to display.</em>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

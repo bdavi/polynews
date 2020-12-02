@@ -18,20 +18,25 @@
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  channel_id       :bigint           not null
+#  group_id         :bigint
 #
 # Indexes
 #
 #  index_articles_on_channel_id  (channel_id)
+#  index_articles_on_group_id    (group_id)
 #  index_articles_on_guid        (guid) UNIQUE
 #
 # Foreign Keys
 #
 #  fk_rails_64fe6f9351  (channel_id => channels.id)
+#  fk_rails_664112e3d7  (group_id => groups.id)
 #
 class Article < ApplicationRecord
   delegate :use_scraper, to: :channel
 
   belongs_to :channel
+
+  belongs_to :group, optional: true
 
   validates :guid, presence: true, uniqueness: true
 

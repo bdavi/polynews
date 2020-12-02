@@ -13,6 +13,14 @@
     <label class="font-weight-bolder">Description</label>
     <p><%= coalesce_to_empty(article.description).html_safe %></p>
 
+    <label class="font-weight-bolder">Group</label>
+    <p>
+      <% if article.group_id %>
+        <p><%= link_to article.group_id, article.group %></p>
+      <% else %>
+        <%= empty_text %>
+      <% end %>
+    </p>
     <p><%= link_to article.channel.title, channel_path(article.channel) %></p>
 
     <%= link_to edit_article_path(article), class: 'btn btn-outline-info btn-sm' do %>

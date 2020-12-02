@@ -8,6 +8,7 @@ RSpec.describe Category, type: :model do
     is_expected.to validate_presence_of :title
 
     is_expected.to have_many(:channels).dependent(:restrict_with_error)
+    is_expected.to have_many(:groups).dependent(:restrict_with_error)
   end
 
   describe 'uniqueness' do

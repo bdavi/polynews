@@ -1,0 +1,12 @@
+<div class="card mb-3">
+  <h5 class="card-header">
+    <%= @group.persisted? ? 'Update' : 'Create' %> Group
+  </h5>
+
+  <div class="card-body">
+    <%= simple_form_for @group do |f| %>
+      <%= f.association :category %>
+      <%= f.button :submit, class: 'btn btn-outline-primary' %>
+    <% end %>
+  </div>
+</div>

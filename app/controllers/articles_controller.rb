@@ -5,8 +5,8 @@ class ArticlesController < ApplicationController
 
   def index
     @articles = Article
-                  .includes(:channel)
-                  .select(:id, :title, :published_at, :description, :url, :channel_id)
+                  .includes(:channel, :group)
+                  .select(:id, :title, :published_at, :description, :url, :channel_id, :group_id)
                   .order(:created_at)
                   .page(params[:page])
   end
@@ -45,7 +45,7 @@ class ArticlesController < ApplicationController
   private
 
   def set_article
-    @article = Article.includes(:channel).find(params[:id])
+    @article = Article.includes(:channel, :group).find(params[:id])
   end
 
   # rubocop:disable Metrics/MethodLength

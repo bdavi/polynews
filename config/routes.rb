@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :articles
   resources :categories
   resources :channels
+  resources :groups
 end

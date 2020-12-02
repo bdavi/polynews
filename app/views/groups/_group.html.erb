@@ -1,0 +1,28 @@
+<div class="card mb-3">
+  <h5 class="card-header">
+    <%= link_to group.id, group_path(group), class: 'text-dark' %>
+  </h5>
+
+  <div class="card-body">
+    <label class="font-weight-bolder">Cateogry</label>
+    <p>
+      <% if group.category_id %>
+        <p><%= link_to group.category.title, group.category %></p>
+      <% else %>
+        <%= empty_text %>
+      <% end %>
+    </p>
+
+    <%= link_to edit_group_path(group), class: 'btn btn-outline-info btn-sm' do %>
+      <i class="fas fa-pen mr-1"></i>
+      Edit
+    <% end %>
+
+    <%= link_to group, method: :delete, data: { confirm: 'Are you sure?' },
+        class: 'btn btn-outline-danger btn-sm' do %>
+
+      <i class="fas fa-trash mr-1"></i>
+      Delete
+    <% end %>
+  </div>
+</div>

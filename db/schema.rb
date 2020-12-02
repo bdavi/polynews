@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_01_205026) do
+ActiveRecord::Schema.define(version: 2020_12_01_234041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,9 @@ ActiveRecord::Schema.define(version: 2020_12_01_205026) do
     t.string "image_alt"
     t.text "scraped_content"
     t.jsonb "processing_cache"
+    t.bigint "group_id"
     t.index ["channel_id"], name: "index_articles_on_channel_id"
+    t.index ["group_id"], name: "index_articles_on_group_id"
     t.index ["guid"], name: "index_articles_on_guid", unique: true
   end
 
@@ -57,6 +59,15 @@ ActiveRecord::Schema.define(version: 2020_12_01_205026) do
     t.index ["url"], name: "index_channels_on_url", unique: true
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.bigint "category_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_groups_on_category_id"
+  end
+
   add_foreign_key "articles", "channels"
+  add_foreign_key "articles", "groups"
   add_foreign_key "channels", "categories"
+  add_foreign_key "groups", "categories"
 end
