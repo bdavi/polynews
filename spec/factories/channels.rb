@@ -14,6 +14,10 @@ FactoryBot.define do
 
     description { 'This describes the channel' }
 
+    trait :uses_scraper do
+      use_scraper { true }
+    end
+
     trait :invalid do
       url { nil }
     end

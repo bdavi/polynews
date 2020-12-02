@@ -19,5 +19,9 @@ FactoryBot.define do
     channel
 
     content { 'The full content is here' }
+
+    trait :uses_scraper do
+      association :channel, :uses_scraper
+    end
   end
 end
