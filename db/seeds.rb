@@ -25,7 +25,7 @@ feeds = [
   {
     title: 'Axios | Top Stories',
     scraping_content_selector: nil,
-    url: 'https://api.axios.com/feed/health-care',
+    url: 'https://api.axios.com/feed/top',
     use_scraper: false,
     category: Category.find_by(title: 'Headlines')
   },

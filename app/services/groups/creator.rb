@@ -54,11 +54,16 @@ module Groups
 
         next unless angle <= max_angle_between_articles
 
-        article.update!(group: group)
+        add_article_to_group(article, group)
         break
       end
 
       build_group_for(article) unless article.group
+    end
+
+    def add_article_to_group(article, group)
+      article.update!(group: group)
+      group.update_cached_attributes
     end
 
     def _article_vector(article)
@@ -66,7 +71,17 @@ module Groups
     end
 
     def build_group_for(article)
-      Group.create!(category: article.channel.category, articles: [article])
+      # This persists the group twice which is obviously not ideal. The
+      # #update_cached_attributes method requires both the group
+      # and article to be persisted for accurate. So we can either
+      # duplicate the logic and set these values directly before saving or
+      # hit the db twice.
+      #
+      # It seems likely that more cached values will be added and rather than risk
+      # forgetting to update this code when #update_cached_attributes is
+      # changed we'll take the (hopefully minor) perfomance hit.
+      group = Group.create(category: article.channel.category, articles: [article])
+      group.update_cached_attributes
     end
   end
 end

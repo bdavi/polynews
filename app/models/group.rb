@@ -4,10 +4,12 @@
 #
 # Table name: groups
 #
-#  id          :bigint           not null, primary key
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  category_id :bigint
+#  id                               :bigint           not null, primary key
+#  cached_article_count             :integer          default(0), not null
+#  cached_article_last_published_at :datetime
+#  created_at                       :datetime         not null
+#  updated_at                       :datetime         not null
+#  category_id                      :bigint
 #
 # Indexes
 #
@@ -23,4 +25,11 @@ class Group < ApplicationRecord
   has_many :articles, dependent: :restrict_with_error
 
   paginates_per 10
+
+  def update_cached_attributes
+    update(
+      cached_article_count: articles.count,
+      cached_article_last_published_at: articles.pluck(:published_at).max
+    )
+  end
 end
