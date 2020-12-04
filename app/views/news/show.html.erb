@@ -1,0 +1,37 @@
+<div class="row mb-4 mt-6">
+  <div class="col-12">
+    <div class="h1 d-inline-block mr-1">
+      <%= @news.category.title %>
+    </div>
+    <div class="d-inline-block text-muted">
+      <%= page_n_of_m @news.groups %>
+    </div>
+    </h1>
+  </div>
+</div>
+
+<% if @news.groups.any? %>
+  <div class="row">
+    <div class="col-12">
+      <div class="card-columns news-groups-container">
+        <% @news.groups.decorate.each do |group| %>
+          <%= render partial: 'news/group', locals: { group: group } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-12">
+      <%= paginate @news.groups %>
+    </div>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="col-12">
+      <h4><em>No stories for this category right now. Check back!</em></h4>
+    </div>
+  </div>
+<% end %>

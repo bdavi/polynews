@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_02_081544) do
+ActiveRecord::Schema.define(version: 2020_12_03_202000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(version: 2020_12_02_081544) do
     t.integer "sort_order", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug", null: false
+    t.index ["slug"], name: "index_categories_on_slug", unique: true
     t.index ["sort_order"], name: "index_categories_on_sort_order", unique: true
     t.index ["title"], name: "index_categories_on_title", unique: true
   end

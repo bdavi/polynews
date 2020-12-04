@@ -50,6 +50,6 @@ class CategoriesController < ApplicationController
   end
 
   def category_params
-    params.require(:category).permit(:title, :sort_order)
+    params.require(:category).permit(:title, :slug, :sort_order)
   end
 end

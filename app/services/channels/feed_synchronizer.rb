@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-require 'rss'
 require 'open-uri'
 require 'action_view'
 
-# Channel related code
 module Channels
   class FeedSynchronizer < ApplicationService
     include ActionView::Helpers::SanitizeHelper
@@ -31,7 +29,7 @@ module Channels
     end
 
     def download_feed
-      @feed = RSS::Parser.parse(
+      @feed = Feedjira.parse(
         URI.parse(channel.url).read
       )
     end
@@ -39,19 +37,19 @@ module Channels
     def requires_update?
       return true unless last_build_date
 
-      last_build_date < feed.channel.lastBuildDate
+      last_build_date < feed.last_built
     end
 
     def update_channel
       channel.update(
-        last_build_date: feed.channel.lastBuildDate,
-        image_url: feed.channel&.image&.url
+        last_build_date: feed.last_built,
+        image_url: feed.image&.url
       )
     end
 
     def create_or_update_articles
-      feed.items.each do |item|
-        article = Article.find_or_initialize_by(guid: item.guid.content)
+      feed.entries.each do |item|
+        article = Article.find_or_initialize_by(guid: item.entry_id)
         update_article_from_item(article, item)
       end
     end
@@ -62,13 +60,32 @@ module Channels
       article.update(
         channel: channel,
         title: item.title,
-        description: item.description,
-        published_at: item.pubDate,
-        content: item.content_encoded,
-        url: item.link,
-        image_url: first_image_attr(item.content_encoded, 'src'),
-        image_alt: first_image_attr(item.content_encoded, 'alt')
+        description: item.summary,
+        published_at: item.published,
+        content: item.content,
+        url: item.url,
+        image_url: image_url(item),
+        image_alt: image_alt(item)
       )
+    end
+
+    def image_url(item)
+      url = item.image || first_image_url(item)
+
+      return nil unless url
+      return nil if url.include?('pixel')
+
+      url
+    end
+
+    def image_alt(item)
+      return nil if item.image
+
+      first_image_attr(item.content, 'alt')
+    end
+
+    def first_image_url(item)
+      first_image_attr(item.content, 'src')
     end
 
     def first_image_attr(content, attribute_name)

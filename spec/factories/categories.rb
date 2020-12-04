@@ -6,6 +6,10 @@ FactoryBot.define do
       "The title #{n}"
     end
 
+    sequence :slug do |n|
+      "the_slug_#{n}"
+    end
+
     sequence :sort_order do |n|
       n
     end

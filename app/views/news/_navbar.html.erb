@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <%= link_to 'News Aggregator', root_path, class: 'navbar-brand' %>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
+      data-target="#main-navbar" aria-controls="main-navbar"
+      aria-expanded="false" aria-label="Toggle navigation">
+
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="main-navbar">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%= link_to 'Headlines', news_path(category: 'headlines'), class: 'nav-link' %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to 'US', news_path(category: 'us'), class: 'nav-link' %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to 'International', news_path(category: 'international'), class: 'nav-link' %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to 'Science', news_path(category: 'science'), class: 'nav-link' %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to 'Business', news_path(category: 'business'), class: 'nav-link' %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to 'Technology', news_path(category: 'technology'), class: 'nav-link' %>
+      </li>
+
+      <li class="nav-item">
+        <%= link_to 'Sports', news_path(category: 'sports'), class: 'nav-link' %>
+      </li>
+    </ul>
+  </div>
+</nav>

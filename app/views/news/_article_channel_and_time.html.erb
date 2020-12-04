@@ -1,0 +1,11 @@
+<div>
+  <span class="badge badge-info mr-1">
+    <%= article.channel.decorate.display_title %>
+  </span>
+
+  <% if article.published_at %>
+    <small>
+      <em><%= local_time_ago(article.published_at) %></em>
+    </small>
+  <% end %>
+</div>

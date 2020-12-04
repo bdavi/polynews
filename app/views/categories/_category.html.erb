@@ -7,6 +7,9 @@
     <label class="font-weight-bolder">Sort Order</label>
     <p><%= category.sort_order %></p>
 
+    <label class="font-weight-bolder">Slug</label>
+    <p><%= category.slug %></p>
+
     <%= link_to edit_category_path(category), class: 'btn btn-outline-info btn-sm' do %>
       <i class="fas fa-pen mr-1"></i>
       Edit

@@ -12,7 +12,7 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
         VCR.use_cassette('download_invalid_feed', re_record_interval: 7.days) do
           expect {
             synchronizer.download_feed
-          }.to raise_error(RSS::NotWellFormedError)
+          }.to raise_error(Feedjira::NoParserAvailable)
         end
       end
     end
@@ -40,7 +40,7 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
 
     let(:cassette_data) do
       {
-        last_build: DateTime.new(2020, 11, 20, 16, 55, 56),
+        last_build: DateTime.new(2020, 11, 20, 16, 55, 56).utc,
         channel_title: 'Reuters News Agency',
         channel_image_url: 'https://www.reutersagency.com/wp-content/uploads/' \
           '2019/06/fav-150x150.png',
@@ -105,9 +105,9 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
         synchronizer.download_feed
         parsed_download = synchronizer.feed
 
-        expect(parsed_download.channel.title).to eq cassette_data[:channel_title]
-        expect(parsed_download.channel.lastBuildDate).to eq cassette_data[:last_build]
-        expect(parsed_download.items.first.title).to eq cassette_data[:first_item][:title]
+        expect(parsed_download.title).to eq cassette_data[:channel_title]
+        expect(Time.parse(parsed_download.last_built).utc).to eq cassette_data[:last_build]
+        expect(parsed_download.entries.first.title).to eq cassette_data[:first_item][:title]
       end
     end
 

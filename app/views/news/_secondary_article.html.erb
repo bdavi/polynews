@@ -1,0 +1,15 @@
+<p class="mb-1">
+  <%= link_to article.url, target: '_blank' do %>
+    <div class="font-weight-bolder">
+      <%= article.title %>
+    </div>
+  <% end %>
+  <div>
+    <small>
+      <%= article.channel.decorate.display_title %>
+      <% if article.published_at %>
+        <em><%= local_time_ago(article.published_at) %></em>
+      <% end %>
+    </small>
+  </div>
+</p>

@@ -33,10 +33,11 @@ RSpec.feature 'User creates category', type: :feature do
       click_on 'Create Category'
     }.not_to change(Category, :count)
 
-    expect(form_error_messages).to eq ['Title has already been taken', "Sort order can't be blank"]
+    expect(form_error_messages).to eq \
+      ['Title has already been taken', "Slug can't be blank", "Sort order can't be blank"]
   end
 
   def new_category_attributes
-    %i[title sort_order]
+    %i[title sort_order slug]
   end
 end

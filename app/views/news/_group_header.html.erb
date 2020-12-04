@@ -1,0 +1,8 @@
+<div class="card-header">
+  <%= link_to group.primary_article.url, target: '_blank' do %>
+    <h4>
+      <%= group.primary_article.title %>
+    </h4>
+    <%= render partial: 'news/article_channel_and_time', locals: { article: group.primary_article } %>
+  <% end %>
+</div>

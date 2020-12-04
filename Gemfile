@@ -4,6 +4,8 @@ source 'https://rubygems.org'
 ruby '2.6.6'
 
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'draper'
+gem 'feedjira'
 gem 'jbuilder', '~> 2.7'
 gem 'kaminari'
 gem 'lemmatizer', require: false
