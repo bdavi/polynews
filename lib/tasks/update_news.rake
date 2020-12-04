@@ -8,5 +8,5 @@ task update_news: :environment do
   Category.find_each do |category|
     Groups::Creator.new(articles: category.articles, groups: category.groups).call
   end
-  puts "Success"
+  puts 'Success'
 end
