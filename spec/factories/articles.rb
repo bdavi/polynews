@@ -23,5 +23,13 @@ FactoryBot.define do
     trait :uses_scraper do
       association :channel, :uses_scraper
     end
+
+    trait :with_category do
+      association :category
+    end
+
+    trait :with_group do
+      association :group
+    end
   end
 end

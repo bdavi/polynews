@@ -10,6 +10,10 @@
       <%= render partial: 'news/article_channel_and_time', locals: { article: group.primary_article } %>
     </div>
 
-    <img src="<%= group.image_url %>" class="object-fit-cover w-100">
+    <img
+      src="<%= group.image_url %>"
+      class="object-fit-cover w-100 news-groups-image"
+      onerror="handleNewsImageLoadError(this)"
+    >
   </div>
 </div>

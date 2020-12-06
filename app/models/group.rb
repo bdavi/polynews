@@ -29,7 +29,32 @@ class Group < ApplicationRecord
   def update_cached_attributes
     update(
       cached_article_count: articles.count,
-      cached_article_last_published_at: articles.pluck(:published_at).max
+      cached_article_last_published_at: articles.pluck(:published_at).compact.max
     )
+  end
+
+  def self.update_cached_attributes # rubocop:disable Metrics/MethodLength
+    sql = <<~SQL.squish
+      UPDATE
+        groups g
+      SET
+        cached_article_count = (
+          SELECT
+            COUNT(*)
+          FROM
+            articles a
+          WHERE
+            a.group_id = g.id
+        ),
+        cached_article_last_published_at = (
+          SELECT
+            MAX(published_at)
+          FROM
+            articles a
+          WHERE
+            a.group_id = g.id
+        )
+    SQL
+    Group.connection.execute(sql)
   end
 end

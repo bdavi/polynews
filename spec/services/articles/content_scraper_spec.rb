@@ -49,18 +49,6 @@ RSpec.describe Articles::ContentScraper, type: :service do
       end
     end
 
-    it 'handles errors with the correct result' do
-      channel = create(:channel, use_scraper: true)
-      article = build_stubbed(:article, scraped_content: nil, channel: channel)
-      allow(URI).to receive(:parse).and_raise(ArgumentError, 'abc123')
-
-      result = described_class.call(article)
-
-      expect(result).not_to be_success
-      expect(result.error.class).to eq ArgumentError
-      expect(result.error.message).to eq 'abc123'
-    end
-
     context 'when the channel does not use the scraper' do
       it 'returns success and does not download' do
         channel = Channel.new(use_scraper: false)

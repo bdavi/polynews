@@ -13,21 +13,21 @@ module Groups
     def call
       clean_articles
       clean_groups
+      Group.update_cached_attributes
 
       success(:cleaning_completed)
-    rescue StandardError => e
-      failure(e)
     end
 
     private
 
     def clean_articles
       Article.where('published_at < ?', clean_before).destroy_all
+      Article.where(group_id: nil).destroy_all
     end
 
     def clean_groups
       Group.where.not(
-        id: Article.select(:group_id)
+        id: Article.where.not(id: nil).select(:group_id)
       ).destroy_all
     end
   end

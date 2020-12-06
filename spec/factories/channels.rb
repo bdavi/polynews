@@ -22,6 +22,10 @@ FactoryBot.define do
       url { nil }
     end
 
+    trait :with_category do
+      association :category
+    end
+
     trait :with_articles do
       transient do
         article_count { 2 }

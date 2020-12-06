@@ -8,6 +8,10 @@
     text-decoration: underline;
   }
 
+  .news-groups-image {
+    border-radius: 4px;
+  }
+
   .news-groups-image-overlay {
     backdrop-filter: blur(8px);
     background: rgba(20, 20, 20, 0.7);
@@ -20,8 +24,8 @@
   }
 
   .hightlight {
-    border-radius: 7px;
-    border: 1.5px outset #ff981a;
+    border-radius: 5px;
+    border: 1.5px solid #ff981a;
     color: #f7f7f7;
 
     .text-orange {

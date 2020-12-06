@@ -20,8 +20,6 @@ module Articles
       download_html
       update_article
       success(:scraping_completed)
-    rescue StandardError => e
-      failure(e)
     end
 
     def download_html

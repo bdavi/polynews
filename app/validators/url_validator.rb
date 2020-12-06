@@ -23,22 +23,20 @@ class UrlValidator < ActiveModel::EachValidator
     super
   end
 
-  def validate_each(record, attribute, value)
-    return if _allow_blank && value.blank?
-    return if _valid_url?(value)
-
-    record.errors[attribute] << _message
-  end
-
-  private
-
-  def _valid_url?(value)
+  def self.valid_url?(value)
     uri = begin
       URI.parse(value)
     rescue URI::InvalidURIError
       false
     end
 
-    VALID_URI_KINDS.include?(uri.class)
+    VALID_URI_KINDS.include?(uri.class) && uri.hostname&.include?('.')
+  end
+
+  def validate_each(record, attribute, value)
+    return if _allow_blank && value.blank?
+    return if self.class.valid_url?(value)
+
+    record.errors[attribute] << _message
   end
 end

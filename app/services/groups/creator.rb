@@ -18,8 +18,6 @@ module Groups
       group_articles_by_vector_distance
 
       success(:groups_created)
-    rescue StandardError => e
-      failure(e)
     end
 
     private
@@ -48,7 +46,7 @@ module Groups
     def join_or_create_group_for(article)
       article_vector = _article_vector(article)
 
-      groups.includes(:articles).find_each do |group|
+      groups.find_each do |group|
         group_vector = _article_vector(group.articles.first)
         angle = article_vector.angle_with(group_vector)
 

@@ -71,18 +71,5 @@ RSpec.describe Groups::Creator, type: :service do
         expect(existing_group.cached_article_last_published_at).to eq latest_published_at
       end
     end
-
-    context 'when there is an error' do
-      it 'returns a failure object' do
-        allow(NLP::BOW::Model).to receive(:new).and_raise(StandardError, 'abc123')
-        creator = described_class.new(max_angle_between_articles: 1.6)
-
-        result = creator.call
-
-        expect(result).not_to be_success
-        expect(result.error).to be_a StandardError
-        expect(result.error.message).to eq 'abc123'
-      end
-    end
   end
 end

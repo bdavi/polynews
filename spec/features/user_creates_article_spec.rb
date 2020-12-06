@@ -42,7 +42,6 @@ RSpec.feature 'User creates article', type: :feature do
     expect(form_error_messages).to eq [
       "Title can't be blank",
       "Url can't be blank and Url is an invalid URL",
-      'Guid has already been taken',
       'Channel must exist'
     ]
   end

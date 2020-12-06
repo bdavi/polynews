@@ -3,10 +3,19 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[show edit update destroy]
 
-  def index
+  def index # rubocop:disable Metrics/MethodLength
     @articles = Article
                   .includes(:channel, :group)
-                  .select(:id, :title, :published_at, :description, :url, :channel_id, :group_id)
+                  .select(
+                    :id,
+                    :title,
+                    :published_at,
+                    :description,
+                    :url,
+                    :channel_id,
+                    :group_id,
+                    :image_url
+                  )
                   .order(:created_at)
                   .page(params[:page])
   end

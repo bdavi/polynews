@@ -29,6 +29,7 @@ RSpec.feature 'User updates article', type: :feature do
     visit edit_article_path(to_update)
 
     fill_in 'Guid', with: article.guid
+    select article.channel.title, from: 'article_channel_id'
     click_on 'Update Article'
 
     expect(form_error_messages).to eq ['Guid has already been taken']

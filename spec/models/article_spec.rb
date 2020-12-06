@@ -20,7 +20,22 @@ RSpec.describe Article, type: :model do
   describe 'guid uniqueness' do
     subject(:article) { build(:article) }
 
-    it { is_expected.to validate_uniqueness_of :guid }
+    it { is_expected.to validate_uniqueness_of(:guid).scoped_to(:channel_id) }
+  end
+
+  describe 'category validation' do
+    context 'when the group and channel category do not match' do
+      it 'is invalid' do
+        channel = build_stubbed(:channel, :with_category)
+        group = build_stubbed(:group, :with_category)
+        article = build_stubbed(:article, channel: channel, group: group)
+
+        article.valid?
+
+        expect(article.errors[:group]).to include \
+          'The channel category must match the group category'
+      end
+    end
   end
 
   describe '#processing_text' do

@@ -21,8 +21,12 @@ class GroupDecorator < Draper::Decorator
     articles.map(&:image_url).compact.first
   end
 
+  def image?
+    image_url.present?
+  end
+
   def highlight?
-    articles.count > 1 && image_url.nil?
+    articles.count > 1
   end
 
   def card_classes

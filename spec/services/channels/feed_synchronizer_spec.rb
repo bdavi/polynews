@@ -3,21 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Channels::FeedSynchronizer, type: :service do
-  context 'when the feed is invalid' do
-    describe '#download_feed' do
-      it 'raises an error' do
-        channel = build_stubbed(:channel, url: 'https://www.google.com')
-        synchronizer = described_class.new(channel)
-
-        VCR.use_cassette('download_invalid_feed', re_record_interval: 7.days) do
-          expect {
-            synchronizer.download_feed
-          }.to raise_error(Feedjira::NoParserAvailable)
-        end
-      end
-    end
-  end
-
   describe '#requires_update?' do
     it 'returns true when channel has no last_build_date' do
       channel = Channel.new(last_build_date: nil)
@@ -136,7 +121,6 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
 
         channel.reload
         expect(channel.last_build_date).to eq cassette_data[:last_build]
-        expect(channel.image_url).to eq cassette_data[:channel_image_url]
       end
     end
 
@@ -198,17 +182,6 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
 
         expect(synchronizer.feed).not_to be_nil
         expect(channel.reload.last_build_date).to eq cassette_data[:last_build]
-      end
-
-      it 'handles errors with the correct result' do
-        channel = instance_double('Channel')
-        allow(channel).to receive(:url).and_raise(ArgumentError, 'abc123')
-
-        result = described_class.call(channel)
-
-        expect(result).not_to be_success
-        expect(result.error.message).to eq 'abc123'
-        expect(result.error.class).to eq ArgumentError
       end
     end
   end

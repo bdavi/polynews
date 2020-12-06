@@ -9,6 +9,7 @@ require("@rails/activestorage").start()
 require("channels")
 require("bootstrap")
 require("@fortawesome/fontawesome-free/js/all.js");
+require('./news.js');
 
 import LocalTime from 'local-time';
 LocalTime.start();

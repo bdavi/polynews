@@ -22,9 +22,9 @@
 #
 # Indexes
 #
-#  index_articles_on_channel_id  (channel_id)
-#  index_articles_on_group_id    (group_id)
-#  index_articles_on_guid        (guid) UNIQUE
+#  index_articles_on_channel_id           (channel_id)
+#  index_articles_on_group_id             (group_id)
+#  index_articles_on_guid_and_channel_id  (guid,channel_id) UNIQUE
 #
 # Foreign Keys
 #
@@ -38,13 +38,15 @@ class Article < ApplicationRecord
 
   belongs_to :group, optional: true
 
-  validates :guid, presence: true, uniqueness: true
+  validates :guid, presence: true, uniqueness: { scope: :channel_id }
 
   validates :image_url, url: { allow_blank: true }
 
   validates :title, presence: true
 
   validates :url, presence: true, url: true
+
+  validate :validate_group_category_matches_channel_category
 
   paginates_per 5
 
@@ -54,5 +56,12 @@ class Article < ApplicationRecord
     else
       "#{title} #{content}"
     end
+  end
+
+  def validate_group_category_matches_channel_category
+    return unless group && channel
+    return if group.category == channel.category
+
+    errors.add(:group, 'The channel category must match the group category')
   end
 end
