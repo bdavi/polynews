@@ -10,37 +10,14 @@
 
   <div class="collapse navbar-collapse" id="main-navbar">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <%= link_to 'US', news_path(category: 'us'), class: 'nav-link' %>
-      </li>
-
-      <li class="nav-item">
-        <%= link_to 'World', news_path(category: 'world'), class: 'nav-link' %>
-      </li>
-
-      <li class="nav-item">
-        <%= link_to 'Economy', news_path(category: 'economy'), class: 'nav-link' %>
-      </li>
-
-      <li class="nav-item">
-        <%= link_to 'Science', news_path(category: 'science'), class: 'nav-link' %>
-      </li>
-
-      <li class="nav-item">
-        <%= link_to 'Tech', news_path(category: 'tech'), class: 'nav-link' %>
-      </li>
-
-      <li class="nav-item">
-        <%= link_to 'Politics', news_path(category: 'politics'), class: 'nav-link' %>
-      </li>
-
-      <li class="nav-item">
-        <%= link_to 'Sports', news_path(category: 'sports'), class: 'nav-link' %>
-      </li>
-
-      <li class="nav-item">
-        <%= link_to 'Long Form', news_path(category: 'long_form'), class: 'nav-link' %>
-      </li>
+      <%= render partial: 'news/navbar_item', locals: { text: 'US', slug: 'us' } %>
+      <%= render partial: 'news/navbar_item', locals: { text: 'World', slug: 'world' } %>
+      <%= render partial: 'news/navbar_item', locals: { text: 'Economy', slug: 'economy' } %>
+      <%= render partial: 'news/navbar_item', locals: { text: 'Science', slug: 'science' } %>
+      <%= render partial: 'news/navbar_item', locals: { text: 'Tech', slug: 'tech' } %>
+      <%= render partial: 'news/navbar_item', locals: { text: 'Politics', slug: 'politics' } %>
+      <%= render partial: 'news/navbar_item', locals: { text: 'Sports', slug: 'sports' } %>
+      <%= render partial: 'news/navbar_item', locals: { text: 'Long Form', slug: 'long_form' } %>
     </ul>
   </div>
 </nav>

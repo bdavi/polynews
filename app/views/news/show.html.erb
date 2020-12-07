@@ -1,7 +1,7 @@
 <div class="row mb-4 news-category-header" style="margin-top: 70px;">
   <div class="col-12">
     <div>
-      <div class="h3 mr-1">
+      <div class="h2">
         <%= @news.category.title %>
       </div>
 
@@ -31,7 +31,7 @@
 
   <hr>
 
-  <div class="row">
+  <div class="row mb-5">
     <div class="col-12">
       <div class="d-inline-block text-muted btn pl-0 ml-0">
         <%= page_n_of_m @news.groups %>
@@ -42,6 +42,7 @@
       </div>
     </div>
   </div>
+
 <% else %>
   <div class="row">
     <div class="col-12">
