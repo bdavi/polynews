@@ -24,8 +24,6 @@ module ApplicationHelper
   end
 
   def page_n_of_m(collection)
-    return '' if collection.total_pages < 2
-
     "Page #{collection.current_page} of #{collection.total_pages}"
   end
 end
