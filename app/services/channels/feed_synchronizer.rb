@@ -7,12 +7,14 @@ module Channels
   class FeedSynchronizer < ApplicationService
     include ActionView::Helpers::SanitizeHelper
 
-    attr_reader :channel, :feed
+    attr_reader :channel, :feed, :invalid_entry_count, :allowed_invalid_entry_percent
 
     delegate :last_build_date, to: :channel
 
-    def initialize(channel)
+    def initialize(channel, allowed_invalid_entry_percent: 0.1)
       @channel = channel
+      @invalid_entry_count = 0
+      @allowed_invalid_entry_percent = allowed_invalid_entry_percent
     end
 
     def call
@@ -46,7 +48,10 @@ module Channels
 
     def create_or_update_articles
       feed.entries.each do |item|
-        article = Article.find_or_initialize_by(guid: item.entry_id || item.url, channel: channel)
+        article = Article.find_or_initialize_by(
+          guid: item.entry_id || item.url,
+          channel: channel
+        )
         update_article_from_item(article, item)
       end
     end
@@ -62,6 +67,27 @@ module Channels
         url: item.url,
         image_url: Channels::ImageUrlParser.new(item).url
       )
+    rescue StandardError => e # rubocop:disable Lint/UselessAssignment
+      handle_article_creation_error
     end
+
+    def handle_article_creation_error
+      # These feeds sometimes have invalid data (like malformed urls for an
+      # entry) that prevent processing.
+      #
+      # For our purposes it's usually ok to drop a few articles so long as the
+      # balance of the feed is behaving itself.
+      #
+      # Continue processing the feed and ignore up to the specified threshold
+      @invalid_entry_count += 1
+
+      raise ExceededMaxInvalidEntryCount if invalid_entry_count > max_allowed_invalid_entries
+    end
+
+    def max_allowed_invalid_entries
+      allowed_invalid_entry_percent * feed.entries.count.to_f
+    end
+
+    class ExceededMaxInvalidEntryCount < StandardError; end
   end
 end
