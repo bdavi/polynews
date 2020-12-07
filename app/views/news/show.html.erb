@@ -1,12 +1,20 @@
-<div class="row mb-4 mt-6">
+<div class="row mb-4 news-category-header" style="margin-top: 70px;">
   <div class="col-12">
-    <div class="h1 d-inline-block mr-1">
-      <%= @news.category.title %>
+    <div>
+      <div class="h3 mr-1">
+        <%= @news.category.title %>
+      </div>
+
+      <div>
+        <div class="d-inline-block text-muted btn pl-0 ml-0">
+          <%= page_n_of_m @news.groups %>
+        </div>
+
+        <div class="d-inline-block float-right">
+          <%= render partial: 'news/page_buttons', locals: { groups: @news.groups } %>
+        </div>
+      </div>
     </div>
-    <div class="d-inline-block text-muted">
-      <%= page_n_of_m @news.groups %>
-    </div>
-    </h1>
   </div>
 </div>
 
@@ -25,7 +33,13 @@
 
   <div class="row">
     <div class="col-12">
-      <%= paginate @news.groups %>
+      <div class="d-inline-block text-muted btn pl-0 ml-0">
+        <%= page_n_of_m @news.groups %>
+      </div>
+
+      <div class="d-inline-block float-right">
+        <%= render partial: 'news/page_buttons', locals: { groups: @news.groups } %>
+      </div>
     </div>
   </div>
 <% else %>

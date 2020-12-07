@@ -1,0 +1,11 @@
+<% if path_to_previous_page groups %>
+  <%= link_to '<', path_to_previous_page(groups), class: 'btn btn-sm btn-outline-secondary' %>
+<% else %>
+  <div class="btn btn-outline-secondary disabled btn-sm">&lt;</div>
+<% end %>
+
+<% if path_to_next_page groups %>
+  <%= link_to '>', path_to_next_page(groups), class: 'btn btn-sm btn-outline-secondary' %>
+<% else %>
+  <div class="btn btn-outline-secondary disabled btn-sm">&gt;</div>
+<% end %>

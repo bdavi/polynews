@@ -21,6 +21,6 @@ class News
       .includes(articles: :channel)
       .order(cached_article_last_published_at: :desc)
       .page(params[:page])
-      .per(25)
+      .per(20)
   end
 end
