@@ -33,7 +33,7 @@ class Group < ApplicationRecord
     )
   end
 
-  def self.update_cached_attributes # rubocop:disable Metrics/MethodLength
+  def self.update_cached_attributes(groups = nil) # rubocop:disable Metrics/MethodLength
     sql = <<~SQL.squish
       UPDATE
         groups g
@@ -55,6 +55,14 @@ class Group < ApplicationRecord
             a.group_id = g.id
         )
     SQL
+
+    if groups
+      sql += <<~SQL.squish
+        WHERE
+          g.id IN (#{groups.pluck(:id).join(',')})
+      SQL
+    end
+
     Group.connection.execute(sql)
   end
 end

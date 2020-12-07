@@ -1,21 +1,23 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/MethodLength
+
 require 'open-uri'
 
 module Groups
   class Creator < ApplicationService
-    attr_reader :model, :articles, :max_angle_between_articles, :groups
+    attr_reader :model, :max_angle_between_articles, :category
 
-    def initialize(articles: Article.all, max_angle_between_articles: 1.3, groups: Group.all)
-      @articles = articles
-      @groups = groups
+    def initialize(category, max_angle_between_articles: 1.3)
+      @category = category
       @max_angle_between_articles = max_angle_between_articles
     end
 
     def call
       build_bow_model
       create_and_cache_article_vectors
-      group_articles_by_vector_distance
+      group_articles_by_vector_angle
+      Group.update_cached_attributes(groups)
 
       success(:groups_created)
     end
@@ -33,11 +35,11 @@ module Groups
     def create_and_cache_article_vectors
       articles.find_each do |article|
         vector = model.vector_for(article.processing_text)
-        article.update(processing_cache: { vector: vector })
+        article.update!(processing_cache: { vector: vector })
       end
     end
 
-    def group_articles_by_vector_distance
+    def group_articles_by_vector_angle
       articles.where(group_id: nil).find_each do |article|
         join_or_create_group_for(article)
       end
@@ -52,16 +54,11 @@ module Groups
 
         next unless angle <= max_angle_between_articles
 
-        add_article_to_group(article, group)
+        article.update!(group: group)
         break
       end
 
       build_group_for(article) unless article.group
-    end
-
-    def add_article_to_group(article, group)
-      article.update!(group: group)
-      group.update_cached_attributes
     end
 
     def _article_vector(article)
@@ -69,17 +66,40 @@ module Groups
     end
 
     def build_group_for(article)
-      # This persists the group twice which is obviously not ideal. The
-      # #update_cached_attributes method requires both the group
-      # and article to be persisted for accurate. So we can either
-      # duplicate the logic and set these values directly before saving or
-      # hit the db twice.
-      #
-      # It seems likely that more cached values will be added and rather than risk
-      # forgetting to update this code when #update_cached_attributes is
-      # changed we'll take the (hopefully minor) perfomance hit.
-      group = Group.create(category: article.channel.category, articles: [article])
-      group.update_cached_attributes
+      Group.create!(category_id: article.channel.category_id, articles: [article])
+    end
+
+    def groups
+      Group
+        .joins(articles: :channel)
+        .includes(articles: :channel)
+        .where(category: category)
+        .select(
+          :id,
+          :'articles.id',
+          :'articles.processing_cache',
+          :'articles.title',
+          :'articles.content',
+          :'articles.scraped_content',
+          :'channels.id',
+          :'channels.use_scraper'
+        )
+    end
+
+    def articles
+      Article
+        .joins(:channel)
+        .includes(:channel)
+        .where(channels: { category_id: category.id })
+        .select(
+          :id,
+          :title,
+          :content,
+          :scraped_content,
+          :'channels.id',
+          :'channels.use_scraper'
+        )
     end
   end
 end
+# rubocop:enable Metrics/MethodLength

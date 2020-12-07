@@ -68,6 +68,7 @@ Metrics/BlockLength:
   Exclude:
     - 'spec/**'
     - 'spec/**/*'
+    - 'lib/tasks/**/*'
 
 Layout/LineLength:
   Max: 100

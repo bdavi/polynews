@@ -464,13 +464,6 @@ feeds = [
     category: Category.find_by(slug: 'sports')
   },
   {
-    title: 'CBS Sports | Headlines',
-    scraping_content_selector: 'p',
-    url: 'https://www.cbssports.com/rss/headlines/',
-    use_scraper: false,
-    category: Category.find_by(slug: 'sports')
-  },
-  {
     title: 'Boston Globe | Politics',
     scraping_content_selector: nil,
     url: 'https://www.boston.com/tag/politics/?feed=rss',
@@ -544,13 +537,6 @@ feeds = [
     title: 'The Hill | Most Popular',
     scraping_content_selector: 'article p',
     url: 'http://thehill.com/rss/syndicator/19110',
-    use_scraper: false,
-    category: Category.find_by(slug: 'politics')
-  },
-  {
-    title: 'Politico | News',
-    scraping_content_selector: 'p',
-    url: 'https://rss.politico.com/politics-news.xml',
     use_scraper: false,
     category: Category.find_by(slug: 'politics')
   },

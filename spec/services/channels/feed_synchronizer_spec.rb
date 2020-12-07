@@ -151,7 +151,10 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
     describe '#create_or_update_articles' do
       it 'creates articles from the feed' do
         channel = create_channel(synced_day_before_last_build)
-        synchronizer = described_class.new(channel).tap(&:download_feed)
+        synchronizer = described_class.new(
+          channel,
+          discard_articles_before: cassette_data[:first_item][:published_at] - 1.month
+        ).tap(&:download_feed)
 
         expect {
           synchronizer.create_or_update_articles
@@ -161,28 +164,15 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
         expect(article).to have_attributes(cassette_data[:first_item])
         expect(article.channel).to eq channel
       end
-
-      it 'updates existing articles matching guid' do
-        channel = create_channel
-        synchronizer = described_class.new(channel).tap(&:download_feed)
-        article = create(
-          :article,
-          channel: channel,
-          guid: cassette_data[:first_item][:guid],
-          title: 'abc123'
-        )
-
-        synchronizer.create_or_update_articles
-
-        article.reload
-        expect(article.title).to eq cassette_data[:first_item][:title]
-      end
     end
 
     describe '#call' do
       it 'downloads the feed and updates' do
         channel = create_channel(synced_day_before_last_build)
-        synchronizer = described_class.new(channel)
+        synchronizer = described_class.new(
+          channel,
+          discard_articles_before: cassette_data[:first_item][:published_at] - 1.month
+        )
 
         expect do
           result = synchronizer.call
@@ -211,13 +201,16 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
   end
 
   def build_valid_feed_item
-    attrs = attributes_for(:article).slice(:guid, :title, :url, :published_at)
+    attrs = attributes_for(:article, published_at: DateTime.now)
+              .slice(:guid, :title, :url, :published_at)
     map = { url: 'link', published_at: 'pubDate', title: 'title' }
     attrs.transform_keys { |key| map[key] || key.to_s }
   end
 
   def build_invalid_feed_item
-    { title: 'invalid', link: 'invalid url' }
+    build_valid_feed_item.tap do |item|
+      item['link'] = 'invalid url'
+    end
   end
 
   def stub_rss_request_for_channel(channel, items)
