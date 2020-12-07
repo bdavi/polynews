@@ -35,5 +35,5 @@ namespace :news do
   end
 
   desc 'Clears, seeds, downloads and groups the news'
-  task full_refresh: %i[environment clear_all db:seed update_news]
+  task full_refresh: %i[environment news:clear_all db:seed news:update]
 end
