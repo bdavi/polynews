@@ -1,18 +1,12 @@
 <div class="row mb-4 news-category-header" style="margin-top: 70px;">
   <div class="col-12">
     <div>
-      <div class="h2">
+      <div class="h1 d-inline-block">
         <%= @news.category.title %>
       </div>
 
-      <div>
-        <div class="d-inline-block text-muted btn pl-0 ml-0">
-          <%= page_n_of_m @news.groups %>
-        </div>
-
-        <div class="d-inline-block float-right">
-          <%= render partial: 'news/page_buttons', locals: { groups: @news.groups } %>
-        </div>
+      <div class="lead d-md-inline-block mt-md-3 float-md-right">
+        <%= page_n_of_m @news.groups %>
       </div>
     </div>
   </div>
@@ -29,17 +23,11 @@
     </div>
   </div>
 
-  <hr>
-
   <div class="row mb-5">
     <div class="col-12">
-      <div class="d-inline-block text-muted btn pl-0 ml-0">
-        <%= page_n_of_m @news.groups %>
-      </div>
-
-      <div class="d-inline-block float-right">
-        <%= render partial: 'news/page_buttons', locals: { groups: @news.groups } %>
-      </div>
+      <hr>
+      <%= render partial: 'news/page_buttons', locals: { groups: @news.groups } %>
+      <hr>
     </div>
   </div>
 

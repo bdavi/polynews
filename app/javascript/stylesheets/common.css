@@ -1,3 +1,9 @@
 .nav-logo {
-  max-height: 30px;
+  max-height: 20px;
+}
+
+@include media-breakpoint-up(sm) {
+  .nav-logo {
+    max-height: 30px;
+  }
 }
