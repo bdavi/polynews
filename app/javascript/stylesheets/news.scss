@@ -44,4 +44,12 @@
   @include media-breakpoint-only(md) {
     column-count: 2;
   }
+
+  @include media-breakpoint-only(lg) {
+    column-count: 3;
+  }
+
+  @include media-breakpoint-only(xl) {
+    column-count: 4;
+  }
 }
