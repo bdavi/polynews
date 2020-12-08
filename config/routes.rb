@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   resources :groups
 
   get 'news/:category', to: 'news#show', as: :news
-  root 'news#show', { category: 'us' }
+  root to: redirect('news/headlines')
 end
