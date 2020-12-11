@@ -153,6 +153,11 @@ Style/NegatedIfElseCondition:
 Style/NilLambda:
   Enabled: true
 
+Style/Lambda:
+  Enabled: true
+  Exclude:
+    - 'app/models/**/*.rb'
+
 Style/SwapValues:
   Enabled: true
 
