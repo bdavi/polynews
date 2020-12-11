@@ -48,6 +48,7 @@ end
 
 group :development do
   gem 'annotate'
+  gem 'better_errors'
   gem 'guard'
   gem 'guard-livereload', '~> 2.5', require: false
   gem 'listen', '~> 3.2'
