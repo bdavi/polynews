@@ -3,8 +3,8 @@
 class SecureController < ApplicationController
   if Rails.env.production?
     http_basic_authenticate_with(
-      name: Rails.env['ADMIN_USERNAME'],
-      password: Rails.env['ADMIN_PASSWORD']
+      name: ENV['ADMIN_USERNAME'],
+      password: ENV['ADMIN_PASSWORD']
     )
   end
 end
