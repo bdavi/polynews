@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ChannelsController < ApplicationController
+class ChannelsController < SecureController
   before_action :set_channel, only: %i[show edit update destroy]
 
   def index

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ArticlesController < ApplicationController
+class ArticlesController < SecureController
   before_action :set_article, only: %i[show edit update destroy]
 
   def index # rubocop:disable Metrics/MethodLength

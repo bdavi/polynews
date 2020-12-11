@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class GroupsController < ApplicationController
+class GroupsController < SecureController
   before_action :set_group, only: %i[show edit update destroy]
 
   def index
