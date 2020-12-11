@@ -88,13 +88,12 @@ module Channels
       # For our purposes it's usually ok to drop a few articles so long as the
       # balance of the feed is behaving itself.
       #
-      # Continue processing the feed and ignore up to the specified threshold
+      # Continue processing the feed and ignore up to the specified threshold.
       @invalid_entry_count += 1
 
-      if invalid_entry_count > max_allowed_invalid_entries # rubocop:disable Style/GuardClause
-        raise ExceededMaxInvalidEntryCount, \
-              "Channel: #{channel.id} is invalid. Item: #{item.inspect}"
-      end
+      return unless invalid_entry_count > max_allowed_invalid_entries
+
+      raise ExceededMaxInvalidEntryCount, "Channel: #{channel.id} is invalid. Item: #{item.inspect}"
     end
 
     def max_allowed_invalid_entries

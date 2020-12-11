@@ -50,6 +50,8 @@ class Article < ApplicationRecord
 
   paginates_per 5
 
+  scope :uses_scraper, -> { joins(:channel).where(channels: { use_scraper: true }) }
+
   def processing_text
     if use_scraper
       "#{title} #{scraped_content}"
@@ -63,5 +65,11 @@ class Article < ApplicationRecord
     return if group.category == channel.category
 
     errors.add(:group, 'The channel category must match the group category')
+  end
+
+  class ActiveRecord_Relation # rubocop:disable Naming/ClassAndModuleCamelCase
+    def clear_processing_cache!
+      update_all(processing_cache: nil) # rubocop:disable Rails/SkipsModelValidations
+    end
   end
 end

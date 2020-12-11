@@ -44,7 +44,7 @@ RSpec.describe Groups::Creator, type: :service do
     end
 
     context 'when there is an article with a matching exiting group' do
-      it 'creates adds the article to the group' do
+      it 'adds the article to the group, updates group cache, and clears processing_cache' do
         channel = create(:channel, :with_category)
         category = channel.category
         latest_published_at = Time.new(2020, 1, 1).utc
@@ -77,6 +77,7 @@ RSpec.describe Groups::Creator, type: :service do
         expect(orphan_article.group).to eq existing_group
         expect(existing_group.cached_article_count).to eq 2
         expect(existing_group.cached_article_last_published_at).to eq latest_published_at
+        expect(orphan_article.processing_cache).to be_nil
       end
     end
   end

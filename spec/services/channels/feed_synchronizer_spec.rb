@@ -12,27 +12,51 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
     end
   end
 
-  context 'with too many invalid articles' do
-    it 'raises ExceededMaxMalformedArticleCount' do
-      channel = create(:channel, last_build_date: nil)
+  describe '#call' do
+    context 'with too many invalid articles' do
+      it 'raises ExceededMaxMalformedArticleCount' do
+        channel = create(:channel, last_build_date: nil)
 
-      created_items = Array.new(4).map { build_valid_feed_item }
-      invalid_items = Array.new(2).map { build_invalid_feed_item }
-      not_created_items = Array.new(4).map { build_valid_feed_item }
-      items = created_items + invalid_items + not_created_items
+        created_items = Array.new(4).map { build_valid_feed_item }
+        invalid_items = Array.new(2).map { build_invalid_feed_item }
+        not_created_items = Array.new(4).map { build_valid_feed_item }
+        items = created_items + invalid_items + not_created_items
 
-      stub_rss_request_for_channel(channel, items)
+        stub_rss_request_for_channel(channel, items)
 
-      synchronizer = described_class.new(channel, allowed_invalid_entry_percent: 0.1)
+        synchronizer = described_class.new(channel, allowed_invalid_entry_percent: 0.1)
 
-      expect {
+        expect {
+          synchronizer.call
+        }.to raise_error(Channels::FeedSynchronizer::ExceededMaxInvalidEntryCount)
+               .and change(Article, :count).by(4)
+
+        expected_titles = created_items.pluck('title')
+        created_titles = Article.all.pluck(:title)
+        expect(expected_titles).to eq created_titles
+      end
+    end
+
+    context 'with older articles' do
+      it 'does not create the articles from before discard_articles_before' do
+        discard_before = 1.week.ago
+        channel = create(:channel, last_build_date: nil)
+        current_items = Array.new(4).map do
+          build_valid_feed_item('pubDate' => discard_before + 1.day)
+        end
+        too_old_items = Array.new(2).map do
+          build_valid_feed_item('pubDate' => discard_before - 1.day)
+        end
+        items = current_items + too_old_items
+        stub_rss_request_for_channel(channel, items)
+        synchronizer = described_class.new(channel, discard_articles_before: discard_before)
+
         synchronizer.call
-      }.to raise_error(Channels::FeedSynchronizer::ExceededMaxInvalidEntryCount)
-             .and change(Article, :count).by(4)
 
-      expected_titles = created_items.pluck('title')
-      created_titles = Article.all.pluck(:title)
-      expect(expected_titles).to eq created_titles
+        expected_titles = current_items.pluck('title')
+        created_titles = Article.all.pluck(:title)
+        expect(expected_titles).to eq created_titles
+      end
     end
   end
 
@@ -200,11 +224,13 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
     end
   end
 
-  def build_valid_feed_item
-    attrs = attributes_for(:article, published_at: DateTime.now)
-              .slice(:guid, :title, :url, :published_at)
+  def build_valid_feed_item(opts = {})
     map = { url: 'link', published_at: 'pubDate', title: 'title' }
-    attrs.transform_keys { |key| map[key] || key.to_s }
+
+    attributes_for(:article, published_at: DateTime.now)
+      .slice(:guid, :title, :url, :published_at)
+      .transform_keys { |key| map[key] || key.to_s }
+      .merge(opts)
   end
 
   def build_invalid_feed_item

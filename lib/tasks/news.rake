@@ -16,7 +16,7 @@ namespace :news do
         ).call
       end
 
-      category.articles.find_each do |article|
+      category.articles.uses_scraper.find_each do |article|
         Articles::ContentScraper.new(article).call
       end
 

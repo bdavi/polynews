@@ -18,6 +18,10 @@ FactoryBot.define do
       use_scraper { true }
     end
 
+    trait :does_not_use_scraper do
+      use_scraper { false }
+    end
+
     trait :invalid do
       url { nil }
     end

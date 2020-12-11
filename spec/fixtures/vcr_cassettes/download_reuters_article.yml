@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Wed, 02 Dec 2020 08:44:46 GMT
+      - Wed, 09 Dec 2020 10:02:12 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Transfer-Encoding:
@@ -46,7 +46,7 @@ http_interactions:
       Cache-Control:
       - max-age=2419200, must-revalidate
       X-Cache:
-      - 'HIT: 12'
+      - MISS
       X-Cache-Group:
       - normal
     body:
@@ -237,10 +237,10 @@ http_interactions:
         sizes=\"192x192\" />\n<link rel=\"apple-touch-icon\" href=\"https://www.reutersagency.com/wp-content/uploads/2019/06/fav.png\"
         />\n<meta name=\"msapplication-TileImage\" content=\"https://www.reutersagency.com/wp-content/uploads/2019/06/fav.png\"
         />\n<link rel=\"stylesheet\" id=\"et-divi-customizer-global-cached-inline-styles\"
-        href=\"https://www.reutersagency.com/wp-content/et-cache/global/et-divi-customizer-global-160683282051.min.css\"
+        href=\"https://www.reutersagency.com/wp-content/et-cache/global/et-divi-customizer-global-160708060573.min.css\"
         onerror=\"et_core_page_resource_fallback(this, true)\" onload=\"et_core_page_resource_fallback(this)\"
         /><link rel=\"stylesheet\" id=\"et-core-unified-cpt-tb-205434-224039-cached-inline-styles\"
-        href=\"https://www.reutersagency.com/wp-content/et-cache/224039/et-core-unified-cpt-tb-205434-224039-160683460632.min.css\"
+        href=\"https://www.reutersagency.com/wp-content/et-cache/224039/et-core-unified-cpt-tb-205434-224039-160708742373.min.css\"
         onerror=\"et_core_page_resource_fallback(this, true)\" onload=\"et_core_page_resource_fallback(this)\"
         />\t\n</head>\n<body class=\"best-template-default single single-best postid-224039
         custom-background et-tb-has-template et-tb-has-body cookies-not-set et_pb_button_helper_class
@@ -483,29 +483,29 @@ http_interactions:
         et-last-child\">\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"rts-dynamic-row\"><div
         class=\"rts-dynamic-row__heading\"><h3 class=\"rts-dynamic-row__title\">More
         of Reuters Best</h3></div><div class=\"rts-dynamic-row__feed\"><div class=\"rts-dynamic-row__card\"><a
-        href=\"https://www.reutersagency.com/en/reuters-best/reuters-special-report-shots-in-the-dark/\"
+        href=\"https://www.reutersagency.com/en/reuters-best/global-tech-and-politics-collide-edition-2/\"
         class=\"rts-dynamic-row__image\" style=\"padding-bottom: 0; background-color:
-        transparent;\"><img src=\"https://www.reutersagency.com/wp-content/uploads/fly-images/223810/Shots-in-the-dark-260x145-lt.jpg\"
-        style=\"width: 100%;\" /></a><h4 class=\"rts-dynamic-row__text\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-special-report-shots-in-the-dark/\">Reuters
-        Special Report: Shots in the Dark</a></h4><div class=\"rts-dynamic-row__date\">November
-        17, 2020</div></div><div class=\"rts-dynamic-row__card\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-exclusively-reports-opec-sees-oil-cut-extension-curbing-2021-rise-in-oil-stocks/\"
+        transparent;\"><img src=\"https://www.reutersagency.com/wp-content/uploads/fly-images/224979/RTX2J32R-scaled-260x145-lt.jpg\"
+        style=\"width: 100%;\" /></a><h4 class=\"rts-dynamic-row__text\"><a href=\"https://www.reutersagency.com/en/reuters-best/global-tech-and-politics-collide-edition-2/\">Global
+        tech and politics collide  |  Edition 2</a></h4><div class=\"rts-dynamic-row__date\">December
+        08, 2020</div></div><div class=\"rts-dynamic-row__card\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-reveals-u-s-preparing-new-sanctions-on-chinese-officials-over-hong-kong-crackdown-market-reacts/\"
         class=\"rts-dynamic-row__image\" style=\"padding-bottom: 0; background-color:
-        transparent;\"><img src=\"https://www.reutersagency.com/wp-content/uploads/fly-images/223774/OPEC-meeting-260x145-lt.jpg\"
-        style=\"width: 100%;\" /></a><h4 class=\"rts-dynamic-row__text\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-exclusively-reports-opec-sees-oil-cut-extension-curbing-2021-rise-in-oil-stocks/\">Reuters
-        exclusively reports OPEC+ sees oil cut extension curbing 2021 rise in oil
-        stocks</a></h4><div class=\"rts-dynamic-row__date\">November 17, 2020</div></div><div
-        class=\"rts-dynamic-row__card\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-reveals-pe-firm-hillhouse-in-talks-to-take-developer-soho-china-private-market-reacts/\"
+        transparent;\"><img src=\"https://www.reutersagency.com/wp-content/uploads/fly-images/224766/RTX8ACYU-scaled-260x145-lt.jpg\"
+        style=\"width: 100%;\" /></a><h4 class=\"rts-dynamic-row__text\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-reveals-u-s-preparing-new-sanctions-on-chinese-officials-over-hong-kong-crackdown-market-reacts/\">Reuters
+        reveals U.S. preparing new sanctions on Chinese officials over Hong Kong crackdown;
+        market reacts</a></h4><div class=\"rts-dynamic-row__date\">December 07, 2020</div></div><div
+        class=\"rts-dynamic-row__card\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-ahead-in-reporting-opec-to-increase-output-from-january-market-reacts/\"
         class=\"rts-dynamic-row__image\" style=\"padding-bottom: 0; background-color:
-        transparent;\"><img src=\"https://www.reutersagency.com/wp-content/uploads/fly-images/223218/RTX896BP-260x145-lt.jpg\"
-        style=\"width: 100%;\" /></a><h4 class=\"rts-dynamic-row__text\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-reveals-pe-firm-hillhouse-in-talks-to-take-developer-soho-china-private-market-reacts/\">Reuters
-        reveals PE firm Hillhouse in talks to take developer SOHO China private; market
-        reacts</a></h4><div class=\"rts-dynamic-row__date\">November 13, 2020</div></div><div
-        class=\"rts-dynamic-row__card\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-exclusively-reports-group-of-165-google-critics-calls-for-swift-eu-antitrust-action/\"
+        transparent;\"><img src=\"https://www.reutersagency.com/wp-content/uploads/fly-images/224573/download-260x145-lt.jpg\"
+        style=\"width: 100%;\" /></a><h4 class=\"rts-dynamic-row__text\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-ahead-in-reporting-opec-to-increase-output-from-january-market-reacts/\">Reuters
+        ahead in reporting OPEC+ to increase output from January; market reacts</a></h4><div
+        class=\"rts-dynamic-row__date\">December 04, 2020</div></div><div class=\"rts-dynamic-row__card\"><a
+        href=\"https://www.reutersagency.com/en/reuters-best/reuters-reveals-lse-to-win-eu-approval-for-27-billion-refinitiv-deal-market-reacts/\"
         class=\"rts-dynamic-row__image\" style=\"padding-bottom: 0; background-color:
-        transparent;\"><img src=\"https://www.reutersagency.com/wp-content/uploads/fly-images/223714/Google-260x145-lt.jpg\"
-        style=\"width: 100%;\" /></a><h4 class=\"rts-dynamic-row__text\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-exclusively-reports-group-of-165-google-critics-calls-for-swift-eu-antitrust-action/\">Reuters
-        exclusively reports group of 165 Google critics calls for swift EU antitrust
-        action</a></h4><div class=\"rts-dynamic-row__date\">November 12, 2020</div></div></div></div>\n\t\t\t</div>
+        transparent;\"><img src=\"https://www.reutersagency.com/wp-content/uploads/fly-images/224529/download-1-260x145-lt.jpg\"
+        style=\"width: 100%;\" /></a><h4 class=\"rts-dynamic-row__text\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-reveals-lse-to-win-eu-approval-for-27-billion-refinitiv-deal-market-reacts/\">Reuters
+        reveals LSE to win EU approval for $27 billion Refinitiv deal; market reacts</a></h4><div
+        class=\"rts-dynamic-row__date\">December 03, 2020</div></div></div></div>\n\t\t\t</div>
         <!-- .et_pb_column -->\n\t\t\t\t\n\t\t\t\t\n\t\t\t</div> <!-- .et_pb_row -->\n\t\t\t\t\n\t\t\t\t\n\t\t\t</div>
         <!-- .et_pb_section -->\t\t</div><!-- .et_builder_inner_content -->\n\t</div><!--
         .et-l -->\n\t\n\t\t\t\n\t\t</div><!-- #et-boc -->\n\t\t    </div>\n    \n\n\t\t\t<footer
@@ -555,8 +555,8 @@ http_interactions:
         d, yy\",\"firstDay\":1,\"isRTL\":false});});\n</script>\n<script type='text/javascript'>\n/*
         <![CDATA[ */\nvar DIVI = {\"item_count\":\"%d Item\",\"items_count\":\"%d
         Items\"};\nvar et_shortcodes_strings = {\"previous\":\"Previous\",\"next\":\"Next\"};\nvar
-        et_pb_custom = {\"ajaxurl\":\"https:\\/\\/www.reutersagency.com\\/wp-admin\\/admin-ajax.php\",\"images_uri\":\"https:\\/\\/www.reutersagency.com\\/wp-content\\/themes\\/Divi\\/images\",\"builder_images_uri\":\"https:\\/\\/www.reutersagency.com\\/wp-content\\/themes\\/Divi\\/includes\\/builder\\/images\",\"et_frontend_nonce\":\"225cbfa062\",\"subscription_failed\":\"Please,
-        check the fields below to make sure you entered the correct information.\",\"et_ab_log_nonce\":\"980b8fb94a\",\"fill_message\":\"Please,
+        et_pb_custom = {\"ajaxurl\":\"https:\\/\\/www.reutersagency.com\\/wp-admin\\/admin-ajax.php\",\"images_uri\":\"https:\\/\\/www.reutersagency.com\\/wp-content\\/themes\\/Divi\\/images\",\"builder_images_uri\":\"https:\\/\\/www.reutersagency.com\\/wp-content\\/themes\\/Divi\\/includes\\/builder\\/images\",\"et_frontend_nonce\":\"5998a9be0d\",\"subscription_failed\":\"Please,
+        check the fields below to make sure you entered the correct information.\",\"et_ab_log_nonce\":\"4dbb77e538\",\"fill_message\":\"Please,
         fill in the following fields:\",\"contact_error_message\":\"Please, fix the
         following errors:\",\"invalid\":\"Invalid email\",\"captcha\":\"Captcha\",\"prev\":\"Prev\",\"previous\":\"Previous\",\"next\":\"Next\",\"wrong_captcha\":\"You
         entered the wrong number in captcha.\",\"wrong_checkbox\":\"Checkbox\",\"ignore_waypoints\":\"no\",\"is_divi_theme_used\":\"1\",\"widget_search_selector\":\".widget_search\",\"ab_tests\":[],\"is_ab_testing_active\":\"\",\"page_id\":\"224039\",\"unique_test_id\":\"\",\"ab_bounce_rate\":\"5\",\"is_cache_plugin_active\":\"no\",\"is_shortcode_tracking\":\"\",\"tinymce_uri\":\"\"};
@@ -615,5 +615,5 @@ http_interactions:
         -->\n<script>\n!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);\n},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',\na=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');\n//
         Insert Twitter Pixel ID and Standard Event data below\ntwq('init','nyeym');\ntwq('track','PageView');\n</script>\n<!--
         End Twitter universal website tag code -->\n</body>\n</html>"
-  recorded_at: Wed, 02 Dec 2020 08:44:46 GMT
+  recorded_at: Wed, 09 Dec 2020 10:02:12 GMT
 recorded_with: VCR 6.0.0

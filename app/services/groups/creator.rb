@@ -17,7 +17,8 @@ module Groups
       build_bow_model
       create_and_cache_article_vectors
       group_articles_by_vector_angle
-      Group.update_cached_attributes(groups)
+      groups.update_cached_attributes!
+      articles.clear_processing_cache!
 
       success(:groups_created)
     end

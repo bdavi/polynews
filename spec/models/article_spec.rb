@@ -57,4 +57,26 @@ RSpec.describe Article, type: :model do
       end
     end
   end
+
+  describe 'ActiveRecord_Relation#clear_processing_cache!' do
+    it 'sets the records processing_cache to nil' do
+      create_list(:article, 3, processing_cache: { abc: '123' })
+      articles = described_class.all
+
+      described_class.all.clear_processing_cache!
+
+      expect(articles.pluck(:processing_cache)).to eq [nil, nil, nil]
+    end
+  end
+
+  describe 'scopes' do
+    describe '.uses_scraper' do
+      it 'returns the articles for channels that use the web scraper' do
+        included = create(:article, :uses_scraper)
+        create(:article, :does_not_use_scraper)
+
+        expect(described_class.uses_scraper).to eq [included]
+      end
+    end
+  end
 end

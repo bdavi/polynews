@@ -13,7 +13,7 @@ module Groups
     def call
       clean_articles
       clean_groups
-      Group.update_cached_attributes
+      Group.all.update_cached_attributes!
 
       success(:cleaning_completed)
     end
@@ -21,14 +21,14 @@ module Groups
     private
 
     def clean_articles
-      Article.where('published_at < ?', clean_before).destroy_all
-      Article.where(group_id: nil).destroy_all
+      Article.where('published_at < ?', clean_before).delete_all
+      Article.where(group_id: nil).delete_all
     end
 
     def clean_groups
       Group.where.not(
         id: Article.where.not(id: nil).select(:group_id)
-      ).destroy_all
+      ).delete_all
     end
   end
 end

@@ -14,6 +14,8 @@ FactoryBot.define do
       "guild-#{n}"
     end
 
+    published_at { DateTime.now }
+
     url { 'http://www.example.com' }
 
     channel
@@ -22,6 +24,10 @@ FactoryBot.define do
 
     trait :uses_scraper do
       association :channel, :uses_scraper
+    end
+
+    trait :does_not_use_scraper do
+      association :channel, :does_not_use_scraper
     end
 
     trait :with_category do

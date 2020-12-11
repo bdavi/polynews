@@ -8,17 +8,36 @@ RSpec.describe Group, type: :model do
     is_expected.to have_many(:articles).dependent(:restrict_with_error)
   end
 
-  describe '#update_cached_attributes' do
-    it 'sets cached values' do
-      group = create(:group)
-      latest_published_at = Time.new(2020, 1, 1, 0, 0).utc
-      create(:article, group: group, published_at: latest_published_at)
-      create(:article, group: group, published_at: latest_published_at - 1.day)
+  describe 'ActiveRecord_Relation#update_cached_attributes!' do
+    it 'updates the cached attributes for all records' do
+      some_group = create(
+        :group,
+        :with_articles,
+        article_count: 2,
+        cached_article_count: 0,
+        cached_article_last_published_at: nil
+      )
 
-      group.update_cached_attributes
+      other_group = create(
+        :group,
+        :with_articles,
+        article_count: 4,
+        cached_article_count: 0,
+        cached_article_last_published_at: nil
+      )
 
-      expect(group.cached_article_count).to eq 2
-      expect(group.cached_article_last_published_at).to eq latest_published_at
+      described_class.all.update_cached_attributes!
+
+      some_group.reload
+      other_group.reload
+
+      expect(some_group.cached_article_count).to eq 2
+      expect(some_group.cached_article_last_published_at).to \
+        eq some_group.articles.pluck(:published_at).max
+
+      expect(other_group.cached_article_count).to eq 4
+      expect(other_group.cached_article_last_published_at).to \
+        eq other_group.articles.pluck(:published_at).max
     end
   end
 end
