@@ -12,7 +12,7 @@ model. The most important news of the day is inferred by how extensively a
 story is covered across multiple sources.
 
 
-## Requkrements
+## Requirements
 - Postgres 12
 - Ruby 2.6
 - Node 14
@@ -76,7 +76,7 @@ made via the db seeds.
 ## Configuring and updating the news sources
 The `news:update` rake task is provided for refreshing the current news articles.
 
-The `news:full_refresh` rake task will completly refresh the news by emptying 
+The `news:full_refresh` rake task will completely refresh the news by emptying 
 the db, reseeding and then downloading articles from scratch. This is particularly
 helpful when large scale changes are made to the channels.
 
