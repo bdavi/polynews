@@ -22,6 +22,7 @@ story is covered across multiple sources.
 
 ## Roadmap
 - Track article popularity and integrate that into the headline/most important logic.
+- Switch to a n-gram model to improve story grouping
 - Customized user recommendations using past viewing history to train the model.
 - Expand categories and sources to provide more granular and in depth coverage.
 - Switch to a magazine-like UI which emphasizes article importance
