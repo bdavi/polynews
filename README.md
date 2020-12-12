@@ -8,7 +8,7 @@ POLYNews provides an integrated approach to reading news from a variety of
 sources.
 
 Articles are retrieved via public RSS and grouped by story using a TF-IDF BOW
-model and the most important news of the day is inferred by how extensively a
+model. The most important news of the day is inferred by how extensively a
 story is covered across multiple sources.
 
 
@@ -82,4 +82,4 @@ helpful when large scale changes are made to the channels.
 
 
 ## Production
-POLYNews is available online at [polynews.co](polynews.co)
+POLYNews is available online at [polynews.co](http://polynews.co)

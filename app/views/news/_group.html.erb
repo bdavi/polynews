@@ -5,11 +5,13 @@
 
   <%= render partial: 'news/group_header', locals: { group: group, hidden: group.image? } %>
 
-  <% if group.primary_article.display_summary.present? || group.secondary_articles.any? %>
+  <% if group.show_card_body? %>
     <div class="card-body">
-      <div class="text-orange mb-3">
-        <em><%= group.primary_article.display_summary %></em>
-      </div>
+      <% if group.display_summary %>
+        <div class="text-orange mb-3">
+          <em><%= group.display_summary %></em>
+        </div>
+      <% end %>
 
       <% if group.secondary_articles.any? %>
         <% group.secondary_articles.each do |article| %>

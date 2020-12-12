@@ -3,22 +3,24 @@
 class GroupDecorator < Draper::Decorator
   delegate_all
 
-  delegate :title, :channel_title, to: :primary_article
+  delegate :title, :channel_title, :display_summary, :image_url, to: :primary_article
 
-  def articles
-    object.articles.decorate
+  attr_reader :_articles
+
+  def _articles # rubocop:disable Lint/DuplicateMethods
+    @_articles = articles.order(published_at: :desc).decorate.to_a
   end
 
   def primary_article
-    articles.first
+    first_article_with_image || _articles.first
+  end
+
+  def first_article_with_image
+    _articles.find(&:image_url)
   end
 
   def secondary_articles
-    articles.drop(1)
-  end
-
-  def image_url
-    articles.map(&:image_url).compact.first
+    _articles - [primary_article]
   end
 
   def image?
@@ -26,7 +28,11 @@ class GroupDecorator < Draper::Decorator
   end
 
   def highlight?
-    articles.count > 1
+    _articles.count > 1
+  end
+
+  def show_card_body?
+    display_summary.present? || secondary_articles.any?
   end
 
   def card_classes

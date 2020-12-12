@@ -22,13 +22,7 @@ class News
       .per(20)
   end
 
-  class NullCategory
-    attr_reader :slug
-
-    def initialize(slug)
-      @slug = slug
-    end
-
+  NullCategory = Struct.new(:slug) do
     def title
       slug.titleize
     end
