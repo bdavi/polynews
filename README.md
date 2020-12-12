@@ -12,7 +12,7 @@ model. The most important news of the day is inferred by how extensively a
 story is covered across multiple sources.
 
 
-## Requirements
+## Requkrements
 - Postgres 12
 - Ruby 2.6
 - Node 14
@@ -83,3 +83,5 @@ helpful when large scale changes are made to the channels.
 
 ## Production
 POLYNews is available online at [polynews.co](http://polynews.co)
+
+(Initial load may take a moment for the Heroku dyno to spin up)
