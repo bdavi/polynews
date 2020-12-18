@@ -10,7 +10,7 @@ module NLP
       attr_reader :vocabulary, :document_count, :aggregate_document_length,
                   :tokenizer, :sorted_tokens, :algorithm
 
-      def initialize(tokenizer: Normalizer, algorithm: TfIdfAlgorithm)
+      def initialize(tokenizer: NgramNormalizer, algorithm: TfIdfAlgorithm)
         @tokenizer = tokenizer
         @algorithm = algorithm
         @vocabulary = default_vocabulary
@@ -32,6 +32,10 @@ module NLP
       def generate_counts(document)
         tokens = tokenizer.call(document)
         Counter.call(tokens)
+      end
+
+      def zero_vector
+        Vector.zero(sorted_tokens.count)
       end
 
       private

@@ -24,19 +24,38 @@ module Pipeline
   #
   # CleanUp.call('   SoMe Text goes Here  ')
   # => "some text goes here"
+  #
+  # `.apply` is an alias for `.use` if you prefer.
+  #
+  # In cases where you have a scalar operation and want to map it over
+  # an array/enumerable value in a pipeline you may use `.map_by`.
+  #
+  # class CleanUp < Pipeline::Base
+  #   # The next two lines are equivalent:
+  #   map_by Strip
+  #   use ->(arr) { arr.map { |e| Strip.call(e) } }
+  # end
 
   # rubocop:disable ThreadSafety/InstanceVariableInClassMethod
   class Base
     attr_reader :operations
 
-    def self.use(operation)
-      @operations ||= []
-      @operations << operation
-    end
+    class << self
+      def use(operation)
+        @operations ||= []
+        @operations << operation
+      end
 
-    def self.call(arg)
-      @operations.inject(arg) do |result, operation|
-        operation.call(result)
+      alias apply use
+
+      def map_by(operation)
+        use ->(array) { array.map { |element| operation.call(element) } }
+      end
+
+      def call(arg)
+        @operations.inject(arg) do |result, operation|
+          operation.call(result)
+        end
       end
     end
   end

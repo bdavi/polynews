@@ -7,7 +7,7 @@ RSpec.describe NLP::BOW::TfIdfAlgorithm do
     context 'when the token is in the document' do
       it 'returns the token count vector for the document' do
         model = NLP::BOW::Model.new(
-          tokenizer: NLP::Operations::Normalizer,
+          tokenizer: NLP::WordNormalizer,
           algorithm: described_class
         )
         model.add_document 'one fish two fish.'

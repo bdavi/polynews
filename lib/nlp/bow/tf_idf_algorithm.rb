@@ -21,7 +21,7 @@ module NLP
       end
 
       def call
-        Vector.basis(size: vector_length, index: 1).tap do |vector|
+        model.zero_vector.tap do |vector|
           model.sorted_tokens.each_with_index do |token, i|
             vector[i] = token_tf_idf(token)
           end

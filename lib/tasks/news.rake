@@ -36,4 +36,53 @@ namespace :news do
 
   desc 'Clears, seeds, downloads and groups the news'
   task full_refresh: %i[environment news:clear_all db:seed news:update]
+
+  desc 'Destroys all groups and rebuilds them, but does not refresh from the rss feeds'
+  task regroup: :environment do
+    Article.update_all(group_id: nil, processing_cache: nil) # rubocop:disable Rails/SkipsModelValidations
+    Group.delete_all
+    Category.find_each { |category| Groups::Creator.new(category).call }
+  end
+
+  namespace :print do
+    desc 'Prints groups to console for debugging'
+    task groups: :environment do
+      puts '###################################################################'
+      puts "Total Groups: #{Group.count}"
+
+      article_counts = Group.distinct.pluck(:cached_article_count).sort.reverse
+      article_counts.each do |count|
+        puts "   With #{count} articles: #{Group.where('cached_article_count = ?', count).size}"
+      end
+
+      puts "Total Articles: #{Article.count}"
+      puts '###################################################################'
+
+      Category.all.each do |category|
+        groups = category.groups.includes(articles: :channel).order(cached_article_count: :desc)
+
+        puts
+        puts '###################################################################'
+        puts "Category: #{category.title}"
+        puts "Groups: #{groups.count}"
+
+        article_counts = groups.distinct.pluck(:cached_article_count).sort.reverse
+        article_counts.each do |count|
+          puts "   With #{count} articles: #{groups.where('cached_article_count = ?', count).size}"
+        end
+        puts "Articles: #{category.articles.count}"
+
+        puts '###################################################################'
+        puts
+
+        groups.each do |group|
+          group.articles.each do |article|
+            puts "#{article.id} / #{article.channel.id}   #{article.title} " \
+                   "(#{article.channel.decorate.display_title})"
+          end
+          puts '-------------------------------------------------------------------'
+        end
+      end
+    end
+  end
 end
