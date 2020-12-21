@@ -1,106 +1,130 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/MethodLength
-
-require 'open-uri'
-
 module Groups
-  class Creator < ApplicationService
-    attr_reader :model, :max_angle_between_articles, :category
+  class Creator # rubocop:disable Metrics/ClassLength
+    attr_reader :model, :max_angle_between_articles, :article_vectors,
+                :group_vectors, :article_data, :articles, :groups
 
-    def initialize(category, max_angle_between_articles: 1.3)
-      @category = category
-      @max_angle_between_articles = max_angle_between_articles
-    end
-
-    def call
+    def call(articles:, groups:, max_angle_between_articles: 1.35)
+      init(articles, groups, max_angle_between_articles)
+      load_article_data
       build_bow_model
-      create_and_cache_article_vectors
+      cache_article_vectors
       group_articles_by_vector_angle
-      groups.update_cached_attributes!
-      articles.clear_processing_cache!
-
-      success(:groups_created)
+      update_cached_attributes_on_groups
     end
 
     private
 
-    def build_bow_model
-      @model = NLP::BOW::Model.new
-
-      articles.find_each do |article|
-        model.add_document(article.processing_text)
-      end
+    def init(articles, groups, max_angle_between_articles)
+      @articles = article_relation(articles)
+      @groups = group_relation(groups).to_a
+      @max_angle_between_articles = max_angle_between_articles
+      @article_vectors = {}
+      @group_vectors = {}
     end
 
-    def create_and_cache_article_vectors
-      articles.find_each do |article|
-        vector = model.vector_for(article.processing_text)
-        article.update!(processing_cache: { vector: vector })
+    def load_article_data
+      @article_data = articles.pluck_processing_data
+    end
+
+    def build_bow_model
+      @model = NLP::BOW::Model.new
+      article_data.each { |_, text| model.add_document(text) }
+    end
+
+    def cache_article_vectors
+      article_data.each do |id, text|
+        article_vectors[id] = model.vector_for(text)
       end
     end
 
     def group_articles_by_vector_angle
-      articles.where(group_id: nil).find_each do |article|
+      articles.where(group_id: nil).each do |article|
         join_or_create_group_for(article)
       end
     end
 
-    def join_or_create_group_for(article)
-      article_vector = _article_vector(article)
-
-      groups.find_each do |group|
-        group_vector = _article_vector(group.articles.first)
-        angle = article_vector.angle_with(group_vector)
-
-        next unless angle <= max_angle_between_articles
-
-        article.update!(group: group)
-        break
-      end
-
-      build_group_for(article) unless article.group
+    def update_cached_attributes_on_groups
+      Group.where(id: group_vectors.keys).update_cached_attributes!
     end
 
-    def _article_vector(article)
-      Vector.elements(article.processing_cache['vector'], false)
+    def join_or_create_group_for(article)
+      group = find_matching_group(article)
+
+      if group
+        add_article_to_group(article, group)
+      else
+        build_group_for(article)
+      end
+    end
+
+    def find_matching_group(article)
+      return nil if article_vectors[article.id].zero?
+
+      groups.each do |group|
+        return group if article_matches_group(article, group)
+      end
+
+      nil
+    end
+
+    def article_matches_group(article, group)
+      angle_between(article, group) <= max_angle_between_articles
+    end
+
+    def angle_between(article, group)
+      article_vectors[article.id].angle_with(group_vector(group))
+    end
+
+    def add_article_to_group(article, group)
+      group.articles << article
+      refresh_group_vector(group)
+    end
+
+    def group_vector(group)
+      refresh_group_vector(group) unless group_vectors[group.id]
+      group_vectors[group.id]
     end
 
     def build_group_for(article)
-      Group.create!(category_id: article.channel.category_id, articles: [article])
+      group = Group.create!(category: article.channel.category, articles: [article])
+      groups << group
+      refresh_group_vector(group)
     end
 
-    def groups
-      Group
-        .joins(articles: :channel)
-        .includes(articles: :channel)
-        .where(category: category)
+    def refresh_group_vector(group)
+      group_vectors[group.id] = build_group_vector(group)
+    end
+
+    def build_group_vector(group)
+      vectors = group.articles.map { |article| article_vectors[article.id] }
+      NLP::FeatureMatrix[*vectors].average_vector
+    end
+
+    def group_relation(groups)
+      groups
+        .joins(articles: { channel: :category })
+        .includes(articles: { channel: :category })
         .select(
           :id,
           :'articles.id',
-          :'articles.processing_cache',
-          :'articles.title',
-          :'articles.content',
-          :'articles.scraped_content',
           :'channels.id',
-          :'channels.use_scraper'
+          :'channels.category_id',
+          :'categories.id'
         )
     end
 
-    def articles
-      Article
-        .joins(:channel)
-        .includes(:channel)
-        .where(channels: { category_id: category.id })
+    def article_relation(articles)
+      articles
+        .joins(channel: :category)
+        .includes(channel: :category)
         .select(
           :id,
-          :title,
-          :content,
-          :scraped_content,
           :'channels.id',
-          :'channels.use_scraper'
+          :'channels.category_id',
+          :'categories.id'
         )
     end
   end
 end
-# rubocop:enable Metrics/MethodLength

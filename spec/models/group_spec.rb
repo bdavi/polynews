@@ -8,7 +8,7 @@ RSpec.describe Group, type: :model do
     is_expected.to have_many(:articles).dependent(:restrict_with_error)
   end
 
-  describe 'ActiveRecord_Relation#update_cached_attributes!' do
+  describe '.update_cached_attributes!' do
     it 'updates the cached attributes for all records' do
       some_group = create(
         :group,

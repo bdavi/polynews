@@ -2,13 +2,13 @@
 
 require 'rails_helper'
 
-RSpec.describe Channels::FeedSynchronizer, type: :service do
+RSpec.describe Channels::FeedDownloader, type: :service do
   describe '#requires_update?' do
     it 'returns true when channel has no last_build_date' do
       channel = Channel.new(last_build_date: nil)
-      synchronizer = described_class.new(channel)
+      downloader = described_class.new(channel)
 
-      expect(synchronizer.requires_update?).to be true
+      expect(downloader.requires_update?).to be true
     end
   end
 
@@ -24,11 +24,11 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
 
         stub_rss_request_for_channel(channel, items)
 
-        synchronizer = described_class.new(channel, allowed_invalid_entry_percent: 0.1)
+        downloader = described_class.new(channel, allowed_invalid_entry_percent: 0.1)
 
         expect {
-          synchronizer.call
-        }.to raise_error(Channels::FeedSynchronizer::ExceededMaxInvalidEntryCount)
+          downloader.call
+        }.to raise_error(Channels::FeedDownloader::ExceededMaxInvalidEntryCount)
                .and change(Article, :count).by(4)
 
         expected_titles = created_items.pluck('title')
@@ -49,9 +49,9 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
         end
         items = current_items + too_old_items
         stub_rss_request_for_channel(channel, items)
-        synchronizer = described_class.new(channel, discard_articles_before: discard_before)
+        downloader = described_class.new(channel, discard_articles_before: discard_before)
 
-        synchronizer.call
+        downloader.call
 
         expected_titles = current_items.pluck('title')
         created_titles = Article.all.pluck(:title)
@@ -64,7 +64,7 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
     # NOTE: DO NOT UPDATE THE 'download_valid_feed' VCR CASSETTE WITHOUT
     # ALSO UPDATING THE FOLLOWING LET BLOCKS.
     #
-    # The 'with a valid feed' specs depend rigidly on the current values in
+    # The 'with a valid feed' specs depend on the current values in
     # that cassette (which does not expire). Coupling the specs to the fixture
     # in this way isn't ordinarily ideal, but because the RSS standard is
     # unlikey to change we are reasonably safe.
@@ -120,8 +120,8 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
       }
     end
     let(:url) { 'https://www.reutersagency.com/feed/?taxonomy=best-topics&post_type=best' }
-    let(:synced_day_before_last_build) { cassette_data[:last_build] - 1.day }
-    let(:synced_on_last_build) { cassette_data[:last_build] }
+    let(:downloaded_day_before_last_build) { cassette_data[:last_build] - 1.day }
+    let(:downloaded_on_last_build) { cassette_data[:last_build] }
 
     def new_channel(last_build_date = DateTime.now)
       Channel.new(url: url, last_build_date: last_build_date)
@@ -133,10 +133,10 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
 
     describe '#download_feed' do
       it 'downloads and parses the feed' do
-        synchronizer = described_class.new(new_channel)
+        downloader = described_class.new(new_channel)
 
-        synchronizer.download_feed
-        parsed_download = synchronizer.feed
+        downloader.download_feed
+        parsed_download = downloader.feed
 
         expect(parsed_download.title).to eq cassette_data[:channel_title]
         expect(Time.parse(parsed_download.last_built).utc).to eq cassette_data[:last_build]
@@ -145,27 +145,27 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
     end
 
     describe '#requires_update?' do
-      it 'returns true when the sync is stale' do
-        channel = new_channel(synced_day_before_last_build)
-        synchronizer = described_class.new(channel).tap(&:download_feed)
+      it 'returns true when the download is stale' do
+        channel = new_channel(downloaded_day_before_last_build)
+        downloader = described_class.new(channel).tap(&:download_feed)
 
-        expect(synchronizer.requires_update?).to be true
+        expect(downloader.requires_update?).to be true
       end
 
-      it 'returns false when sync is current' do
-        channel = new_channel(synced_on_last_build)
-        synchronizer = described_class.new(channel).tap(&:download_feed)
+      it 'returns false when download is current' do
+        channel = new_channel(downloaded_on_last_build)
+        downloader = described_class.new(channel).tap(&:download_feed)
 
-        expect(synchronizer.requires_update?).to be false
+        expect(downloader.requires_update?).to be false
       end
     end
 
     describe '#update_channel' do
       it 'updates the last_build_date from the feed' do
-        channel = create_channel(synced_day_before_last_build)
-        synchronizer = described_class.new(channel).tap(&:download_feed)
+        channel = create_channel(downloaded_day_before_last_build)
+        downloader = described_class.new(channel).tap(&:download_feed)
 
-        synchronizer.update_channel
+        downloader.update_channel
 
         channel.reload
         expect(channel.last_build_date).to eq cassette_data[:last_build]
@@ -174,14 +174,14 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
 
     describe '#create_or_update_articles' do
       it 'creates articles from the feed' do
-        channel = create_channel(synced_day_before_last_build)
-        synchronizer = described_class.new(
+        channel = create_channel(downloaded_day_before_last_build)
+        downloader = described_class.new(
           channel,
           discard_articles_before: cassette_data[:first_item][:published_at] - 1.month
         ).tap(&:download_feed)
 
         expect {
-          synchronizer.create_or_update_articles
+          downloader.create_or_update_articles
         }.to change(Article, :count).by(cassette_data[:item_count])
 
         article = Article.find_by(guid: cassette_data[:first_item][:guid])
@@ -192,33 +192,29 @@ RSpec.describe Channels::FeedSynchronizer, type: :service do
 
     describe '#call' do
       it 'downloads the feed and updates' do
-        channel = create_channel(synced_day_before_last_build)
-        synchronizer = described_class.new(
+        channel = create_channel(downloaded_day_before_last_build)
+        downloader = described_class.new(
           channel,
           discard_articles_before: cassette_data[:first_item][:published_at] - 1.month
         )
 
         expect do
-          result = synchronizer.call
-          expect(result).to be_success
-          expect(result.details).to eq :update_completed
+          downloader.call
         end.to change(Article, :count).by(cassette_data[:item_count])
 
-        expect(synchronizer.feed).not_to be_nil
+        expect(downloader.feed).not_to be_nil
         expect(channel.reload.last_build_date).to eq cassette_data[:last_build]
       end
 
       it 'downloads the feed but does not update when already current' do
-        channel = create_channel(synced_on_last_build)
-        synchronizer = described_class.new(channel)
+        channel = create_channel(downloaded_on_last_build)
+        downloader = described_class.new(channel)
 
         expect do
-          result = synchronizer.call
-          expect(result).to be_success
-          expect(result.details).to eq :no_update_required
+          downloader.call
         end.not_to change(Article, :count)
 
-        expect(synchronizer.feed).not_to be_nil
+        expect(downloader.feed).not_to be_nil
         expect(channel.reload.last_build_date).to eq cassette_data[:last_build]
       end
     end

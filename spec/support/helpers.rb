@@ -6,4 +6,10 @@ module SpecHelpers
       FactoryBot.build_stubbed(name, *traits, overrides)
     end
   end
+
+  def described_module
+    return described_class if described_class.is_a? Module
+
+    nil
+  end
 end

@@ -639,27 +639,6 @@ feeds = [
     category: Category.find_by(slug: 'science')
   },
   {
-    title: 'Ars Technica | Technology Lab',
-    scraping_content_selector: 'p',
-    url: 'http://feeds.arstechnica.com/arstechnica/technology-lab',
-    use_scraper: false,
-    category: Category.find_by(slug: 'tech')
-  },
-  {
-    title: 'Ars Technica | Science',
-    scraping_content_selector: 'p',
-    url: 'http://feeds.arstechnica.com/arstechnica/science',
-    use_scraper: false,
-    category: Category.find_by(slug: 'science')
-  },
-  {
-    title: 'Ars Technica | Tech Policy',
-    scraping_content_selector: 'p',
-    url: 'http://feeds.arstechnica.com/arstechnica/tech-policy',
-    use_scraper: false,
-    category: Category.find_by(slug: 'tech')
-  },
-  {
     title: 'The Atlantic | Long Reads',
     scraping_content_selector: nil,
     url: 'https://www.theatlantic.com/feed/category/longreads/',

@@ -2,11 +2,12 @@
 
 require 'rails_helper'
 
+# rubocop:disable Lint/UselessAssignment
 RSpec.describe Groups::Cleaner, type: :service do
   describe '#call' do
     it 'deletes articles older than clean_before' do
       clean_before = DateTime.now - 24.hours
-      should_delete = create(:article, :with_group, published_at: clean_before - 1.hour) # rubocop:disable Link/UselessAssignment
+      should_delete = create(:article, :with_group, published_at: clean_before - 1.hour)
       should_not_delete = create(:article, :with_group, published_at: clean_before + 1.hour)
       cleaner = described_class.new(clean_before)
 
@@ -27,7 +28,7 @@ RSpec.describe Groups::Cleaner, type: :service do
 
     it 'deletes empty groups' do
       clean_before = DateTime.now - 24.hours
-      should_delete = create(:group) # rubocop:disable Link/UselessAssignment
+      should_delete = create(:group)
       should_not_delete = create(:group).tap do |group|
         create(:article, group: group)
       end
@@ -40,7 +41,7 @@ RSpec.describe Groups::Cleaner, type: :service do
 
     it 'deletes groups that are empty because of the cleaning' do
       clean_before = DateTime.now - 24.hours
-      should_delete = create(:group).tap do |group| # rubocop:disable Link/UselessAssignment
+      should_delete = create(:group).tap do |group|
         create(:article, group: group, published_at: clean_before - 1.day)
       end
       should_not_delete = create(:group).tap do |group|
@@ -56,3 +57,4 @@ RSpec.describe Groups::Cleaner, type: :service do
     end
   end
 end
+# rubocop:enable Lint/UselessAssignment

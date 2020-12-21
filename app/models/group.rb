@@ -26,18 +26,16 @@ class Group < ApplicationRecord
 
   paginates_per 10
 
-  class ActiveRecord_Relation # rubocop:disable Naming/ClassAndModuleCamelCase
-    def update_cached_attributes!
-      update_all(  # rubocop:disable Rails/SkipsModelValidations
-        <<-SQL.squish
-          cached_article_count = (
-            SELECT COUNT(*) FROM articles a WHERE a.group_id = groups.id
-          ),
-          cached_article_last_published_at = (
-            SELECT MAX(published_at) FROM articles a WHERE a.group_id = groups.id
-          )
-        SQL
-      )
-    end
+  def self.update_cached_attributes!
+    update_all(  # rubocop:disable Rails/SkipsModelValidations
+      <<-SQL.squish
+        cached_article_count = (
+          SELECT COUNT(*) FROM articles a WHERE a.group_id = groups.id
+        ),
+        cached_article_last_published_at = (
+          SELECT MAX(published_at) FROM articles a WHERE a.group_id = groups.id
+        )
+      SQL
+    )
   end
 end

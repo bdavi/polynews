@@ -3,7 +3,7 @@
 require 'open-uri'
 
 module Articles
-  class ContentScraper < ApplicationService
+  class ContentScraper
     attr_reader :article, :html
 
     delegate :url, :channel, to: :article
@@ -14,12 +14,10 @@ module Articles
     end
 
     def call
-      return success(:does_not_use_scraper) unless article.use_scraper
-      return success(:already_scraped) if article.scraped_content
+      return if article.scraped_content || !article.use_scraper
 
       download_html
       update_article
-      success(:scraping_completed)
     end
 
     def download_html

@@ -26,9 +26,7 @@ module Channels
     private
 
     def init_raw_url
-      # The xml parser doesn't always define #image on the item
       item_image = item.respond_to?(:image) ? item.image : nil
-
       item_image || content_first_image_url
     end
 
@@ -42,7 +40,7 @@ module Channels
     end
 
     def image_url_is_blacklisted?(url)
-      BLACKLIST_PATTERNS.any? { |pattern| pattern.match? url }
+      BLACKLIST_PATTERNS.any? { |pattern| pattern.match?(url) }
     end
 
     def try_url_repair(url)

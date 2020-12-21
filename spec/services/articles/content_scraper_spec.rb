@@ -27,10 +27,7 @@ RSpec.describe Articles::ContentScraper, type: :service do
         article = create(:article, url: url, scraped_content: nil, channel: channel)
 
         VCR.use_cassette('download_reuters_article', re_record_interval: 7.days) do
-          result = described_class.call(article)
-
-          expect(result).to be_success
-          expect(result.details).to eq :scraping_completed
+          described_class.new(article).call
           expect(article.scraped_content).to eq parsed_html
         end
       end
@@ -41,10 +38,8 @@ RSpec.describe Articles::ContentScraper, type: :service do
         channel = create(:channel, use_scraper: true)
         article = build_stubbed(:article, scraped_content: 'abc123', channel: channel)
 
-        result = described_class.call(article)
+        described_class.new(article).call
 
-        expect(result).to be_success
-        expect(result.details).to eq :already_scraped
         expect(article.scraped_content).to eq 'abc123'
       end
     end
@@ -54,10 +49,8 @@ RSpec.describe Articles::ContentScraper, type: :service do
         channel = Channel.new(use_scraper: false)
         article = build_stubbed(:article, channel: channel)
 
-        result = described_class.call(article)
+        described_class.new(article).call
 
-        expect(result).to be_success
-        expect(result.details).to eq :does_not_use_scraper
         expect(article.scraped_content).to be_nil
       end
     end

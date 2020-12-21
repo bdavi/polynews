@@ -4,21 +4,20 @@
 #
 # Table name: articles
 #
-#  id               :bigint           not null, primary key
-#  content          :text
-#  description      :text
-#  guid             :string           not null
-#  image_alt        :string
-#  image_url        :string
-#  processing_cache :jsonb
-#  published_at     :datetime
-#  scraped_content  :text
-#  title            :string           not null
-#  url              :string           not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  channel_id       :bigint           not null
-#  group_id         :bigint
+#  id              :bigint           not null, primary key
+#  content         :text
+#  description     :text
+#  guid            :string           not null
+#  image_alt       :string
+#  image_url       :string
+#  published_at    :datetime
+#  scraped_content :text
+#  title           :string           not null
+#  url             :string           not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  channel_id      :bigint           not null
+#  group_id        :bigint
 #
 # Indexes
 #
@@ -46,30 +45,23 @@ class Article < ApplicationRecord
 
   validates :url, presence: true, url: true
 
-  validate :validate_group_category_matches_channel_category
-
   paginates_per 5
 
   scope :uses_scraper, -> { joins(:channel).where(channels: { use_scraper: true }) }
 
-  def processing_text
-    if use_scraper
-      "#{title} #{scraped_content}"
-    else
-      "#{title} #{content}"
-    end
-  end
-
-  def validate_group_category_matches_channel_category
-    return unless group && channel
-    return if group.category == channel.category
-
-    errors.add(:group, 'The channel category must match the group category')
-  end
-
-  class ActiveRecord_Relation # rubocop:disable Naming/ClassAndModuleCamelCase
-    def clear_processing_cache!
-      update_all(processing_cache: nil) # rubocop:disable Rails/SkipsModelValidations
-    end
+  def self.pluck_processing_data # rubocop:disable Metrics/MethodLength
+    pluck(
+      :id,
+      Arel.sql(
+        "concat_ws(
+            ' ',
+            articles.title,
+            articles.description,
+            articles.content,
+            articles.scraped_content
+        )"
+      ),
+      :group_id
+    )
   end
 end

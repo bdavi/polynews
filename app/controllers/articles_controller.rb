@@ -66,7 +66,6 @@ class ArticlesController < SecureController
       :guid,
       :image_alt,
       :image_url,
-      :processing_cache,
       :published_at,
       :scraped_content,
       :title,
