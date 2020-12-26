@@ -4,10 +4,6 @@
       <div class="display-4">
         <%= @news.category.title %>
       </div>
-
-      <div class="text-muted mt-2">
-        <%= page_n_of_m @news.groups %>
-      </div>
     </div>
   </div>
 </div>
@@ -15,19 +11,13 @@
 <% if @news.groups.any? %>
   <div class="row">
     <div class="col-12">
-      <div class="card-columns news-groups-container">
-        <% @news.groups.decorate.each do |group| %>
-          <%= render partial: 'news/group', locals: { group: group } %>
-        <% end %>
-      </div>
+      <%= render partial: 'news/story_grid', locals: { news: @news } %>
     </div>
   </div>
 
-  <div class="row mb-5">
+  <div class="row my-5">
     <div class="col-12">
-      <hr>
-      <%= render partial: 'news/page_buttons', locals: { groups: @news.groups } %>
-      <hr>
+      <%= render partial: 'news/page_buttons', locals: { groups: @news.minimized } %>
     </div>
   </div>
 <% else %>

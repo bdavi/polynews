@@ -1,0 +1,6 @@
+document
+  .querySelector(".news-grid-wrapper")
+  .insertAdjacentHTML(
+    "beforeend", 
+    "<%= j render partial: 'news/news_group', locals: { groups: @news.groups } %>"
+  );

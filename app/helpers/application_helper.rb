@@ -24,6 +24,8 @@ module ApplicationHelper
   end
 
   def page_n_of_m(collection)
+    return '' if collection.empty?
+
     "Page #{collection.current_page} of #{collection.total_pages}"
   end
 end

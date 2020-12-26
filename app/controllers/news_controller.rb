@@ -3,7 +3,12 @@
 class NewsController < ApplicationController
   layout 'news'
 
-  def show
+  def index
     @news = News.new(params)
+
+    respond_to do |format|
+      format.html { render :index }
+      format.js { render :index }
+    end
   end
 end
