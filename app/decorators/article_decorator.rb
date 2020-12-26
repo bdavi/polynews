@@ -7,6 +7,10 @@ class ArticleDecorator < Draper::Decorator
 
   delegate_all
 
+  def channel_title
+    channel.decorate.display_title
+  end
+
   def display_summary
     return nil unless description
 

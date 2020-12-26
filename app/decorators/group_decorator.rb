@@ -3,7 +3,9 @@
 class GroupDecorator < Draper::Decorator
   delegate_all
 
-  delegate :title, :channel_title, :display_summary, :image_url, to: :primary_article
+  delegate :title, :description, :channel_title, :published_at,
+           :display_summary, :primary_image_url,
+           to: :primary_article
 
   attr_reader :_articles
 
@@ -16,7 +18,7 @@ class GroupDecorator < Draper::Decorator
   end
 
   def first_article_with_image
-    _articles.find(&:image_url)
+    _articles.find(&:primary_image_url)
   end
 
   def secondary_articles
@@ -24,24 +26,10 @@ class GroupDecorator < Draper::Decorator
   end
 
   def image?
-    image_url.present?
-  end
-
-  def highlight?
-    _articles.count > 1
+    primary_image_url.present?
   end
 
   def show_card_body?
     display_summary.present? || secondary_articles.any?
-  end
-
-  def card_classes
-    classes = 'card mb-4'
-
-    if highlight?
-      "#{classes} bg-dark hightlight"
-    else
-      "#{classes} border-dark bg-light"
-    end
   end
 end
