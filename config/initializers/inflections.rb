@@ -16,4 +16,5 @@
 ActiveSupport::Inflector.inflections(:en) do |inflect|
   inflect.acronym 'NLP'
   inflect.acronym 'BOW'
+  inflect.acronym 'RSS'
 end

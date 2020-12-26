@@ -27,7 +27,7 @@ module Channels
     end
 
     def download_feed
-      @feed = Feedjira.parse(
+      @feed = RSS::Parser.parse(
         URI.parse(channel.url).read
       )
     end
@@ -58,14 +58,7 @@ module Channels
     private
 
     def create_article_from_entry(article, entry)
-      article.update!(
-        title: entry.title,
-        description: entry.summary,
-        published_at: entry.published,
-        content: entry.content,
-        url: entry.url,
-        image_url: Channels::ImageUrlParser.new(entry).url
-      )
+      article.update!(entry.article_attributes)
     rescue StandardError => e # rubocop:disable Lint/UselessAssignment
       handle_article_creation_error(entry)
     end
@@ -101,7 +94,7 @@ module Channels
 
     # Publication date must be present and before cutoff.
     def entry_creatable?(entry)
-      entry.published && discard_articles_before < entry.published
+      entry.published_at && discard_articles_before < entry.published_at
     end
 
     class ExceededMaxInvalidEntryCount < StandardError; end

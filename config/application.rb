@@ -37,6 +37,7 @@ module NewsAggregator
     config.autoload_paths += %W[
       #{config.root}/app/services
       #{config.root}/app/decorators
+      #{config.root}/app/queries
       #{config.root}/lib
     ]
   end

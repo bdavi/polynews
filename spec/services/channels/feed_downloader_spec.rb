@@ -113,9 +113,7 @@ RSpec.describe Channels::FeedDownloader, type: :service do
             '="https://www.reutersagency.com/en/">Reuters News Agency' \
             "</a>.</p>\n",
           url: 'https://www.reutersagency.com/en/reuters-best/reuters-' \
-            'ahead-with-turkey-interest-rate-hike-market-reacts/',
-          image_url: 'https://www.reutersagency.com/wp-content/uploads/2020/11/Lira-1024x907.png',
-          image_alt: nil
+            'ahead-with-turkey-interest-rate-hike-market-reacts/'
         }
       }
     end
