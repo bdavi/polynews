@@ -14,17 +14,23 @@
           <label class="font-weight-bolder">GUID</label>
           <p class="card-text"><%= @article.guid %></p>
 
-          <label class="font-weight-bolder">Image URL</label>
+          <label class="font-weight-bolder">Primary Image URL</label>
           <p>
-            <% if @article.image_url %>
-              <%= link_to @article.image_url, @article.image_url, target: '_blank' %>
+            <% if @article.primary_image_url %>
+              <%= link_to @article.primary_image_url, @article.primary_image_url, target: '_blank' %>
             <% else %>
               <%= empty_text %>
             <% end %>
           </p>
 
-          <label class="font-weight-bolder">Image Alt</label>
-          <p><%= coalesce_to_empty(@article.image_alt) %></p>
+          <label class="font-weight-bolder">Thumbnail Image URL</label>
+          <p>
+            <% if @article.thumbnail_image_url %>
+              <%= link_to @article.thumbnail_image_url, @article.primary_image_url, target: '_blank' %>
+            <% else %>
+              <%= empty_text %>
+            <% end %>
+          </p>
         </p>
       </div>
     </div>

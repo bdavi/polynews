@@ -14,7 +14,8 @@ class ArticlesController < SecureController
                     :url,
                     :channel_id,
                     :group_id,
-                    :image_url
+                    :primary_image_url,
+                    :thumbnail_image_url
                   )
                   .order(:created_at)
                   .page(params[:page])
@@ -64,8 +65,8 @@ class ArticlesController < SecureController
       :content,
       :description,
       :guid,
-      :image_alt,
-      :image_url,
+      :primary_image_url,
+      :thumbnail_image_url,
       :published_at,
       :scraped_content,
       :title,

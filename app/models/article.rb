@@ -4,20 +4,20 @@
 #
 # Table name: articles
 #
-#  id              :bigint           not null, primary key
-#  content         :text
-#  description     :text
-#  guid            :string           not null
-#  image_alt       :string
-#  image_url       :string
-#  published_at    :datetime
-#  scraped_content :text
-#  title           :string           not null
-#  url             :string           not null
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
-#  channel_id      :bigint           not null
-#  group_id        :bigint
+#  id                  :bigint           not null, primary key
+#  content             :text
+#  description         :text
+#  guid                :string           not null
+#  primary_image_url   :string
+#  published_at        :datetime
+#  scraped_content     :text
+#  thumbnail_image_url :string
+#  title               :string           not null
+#  url                 :string           not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  channel_id          :bigint           not null
+#  group_id            :bigint
 #
 # Indexes
 #
@@ -39,7 +39,9 @@ class Article < ApplicationRecord
 
   validates :guid, presence: true, uniqueness: { scope: :channel_id }
 
-  validates :image_url, url: { allow_blank: true }
+  validates :primary_image_url, url: { allow_blank: true }
+
+  validates :thumbnail_image_url, url: { allow_blank: true }
 
   validates :title, presence: true
 

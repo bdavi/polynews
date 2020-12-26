@@ -10,7 +10,8 @@ RSpec.describe Article, type: :model do
     is_expected.to validate_presence_of :title
     is_expected.to validate_presence_of :url
 
-    is_expected.to validate_url_format_of(:image_url).allow_blank
+    is_expected.to validate_url_format_of(:primary_image_url).allow_blank
+    is_expected.to validate_url_format_of(:thumbnail_image_url).allow_blank
     is_expected.to validate_url_format_of :url
 
     is_expected.to belong_to :channel
