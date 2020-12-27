@@ -1,0 +1,43 @@
+<div class="story-featured pb-3 border-bottom-dark">
+  <div class="d-md-flex">
+    <div class="pr-1 flex-1">
+      <%= article_meta(group) %>
+      <%= article_title_link(group) %>
+
+      <div class="story-grid-spacer w-25"></div>
+
+      <div class="story-summary">
+        <%= group.display_summary %>
+      </div>
+    </div>
+
+    <div class="my-3 my-md-0 flex-1">
+      <img class="w-100" src="<%= group.primary_image_url %>">
+    </div>
+  </div>
+
+  <div class="story-grid-spacer"></div>
+
+  <div class="secondary-articles mt-3 d-md-flex">
+    <% group.secondary_articles.in_groups(3).map(&:compact).each do |batch| %>
+      <% if batch.any? %>
+        <ul class="px-md-3 flex-1">
+          <% batch.each do |article| %>
+            <li>
+              <strong>
+                <%= link_to article.url, target: '_blank' do %>
+                  <%= article.title %>
+                <% end %>
+              </strong>
+
+              <br>
+
+              <%= article.channel_title %>
+              <small><em><%= local_time_ago(article.published_at) %></em></small>
+            </li>
+          <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+  </div>
+</div>

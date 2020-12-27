@@ -1,0 +1,18 @@
+<div class="story-emphasized border-bottom-dark py-4">
+  <div class="top">
+    <img class="w-100" src="<%= group.primary_image_url %>">
+
+    <div class="d-inline-flex flex-column justify-content-center gap-2 mt-3 mt-md-0">
+      <% group.articles.each do |article| %>
+        <div>
+          <%= article_meta(article) %>
+          <%= article_title_link(article) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="story-summary mt-3">
+    <%= group.display_summary %>
+  </div>
+</div>

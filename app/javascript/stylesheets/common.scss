@@ -1,0 +1,22 @@
+
+.border-bottom-dark {
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.border-top-dark {
+  border-top: 1px solid var(--border-dark);
+}
+
+.nav-logo {
+  max-height: 20px;
+}
+
+.text-accent-color {
+  color: var(--accent-color);
+}
+
+@include media-breakpoint-up(sm) {
+  .nav-logo {
+    max-height: 30px;
+  }
+}

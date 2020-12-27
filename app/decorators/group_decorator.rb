@@ -3,8 +3,8 @@
 class GroupDecorator < Draper::Decorator
   delegate_all
 
-  delegate :title, :description, :channel_title, :published_at,
-           :display_summary, :primary_image_url,
+  delegate :title, :channel_title, :published_at, :display_summary,
+           :primary_image_url, :url, :thumbnail_image_url,
            to: :primary_article
 
   attr_reader :_articles

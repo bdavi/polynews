@@ -1,28 +1,22 @@
-<div class="row mb-4 news-category-header" style="margin-top: 70px;">
-  <div class="col-12">
-    <div>
-      <div class="display-4">
-        <%= @news.category.title %>
-      </div>
-    </div>
+<div class="news-row news-category-header">
+  <div class="display-4">
+    <%= @news.category.title %>
   </div>
 </div>
 
-<% if @news.groups.any? %>
-  <div class="row">
-    <div class="col-12">
-      <%= render partial: 'news/story_grid', locals: { news: @news } %>
-    </div>
+<% if @news.any_groups? %>
+  <div class="news-row">
+    <%= render partial: 'news/story_grid', locals: { news: @news } %>
   </div>
 
-  <div class="row my-5">
-    <div class="col-12">
-      <%= render partial: 'news/page_buttons', locals: { groups: @news.minimized } %>
+  <div class="news-row">
+    <div class="display-4">
+      <%= render partial: 'news/page_buttons', locals: { groups: @news.paging_collection } %>
     </div>
   </div>
 <% else %>
-  <div class="row">
-    <div class="col-12">
+  <div class="news-row">
+    <div class="display-4">
       <h4><em>No stories for this category right now. Check back!</em></h4>
     </div>
   </div>

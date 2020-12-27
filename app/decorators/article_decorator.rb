@@ -3,7 +3,7 @@
 class ArticleDecorator < Draper::Decorator
   include ActionView::Helpers::SanitizeHelper
 
-  SUMMARY_LENGTH = 150
+  SUMMARY_LENGTH = 300
 
   delegate_all
 

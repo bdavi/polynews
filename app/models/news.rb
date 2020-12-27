@@ -1,19 +1,24 @@
 # frozen_string_literal: true
 
 class News
-  attr_reader :params, :category, :featured, :emphasized, :minimized, :groups
+  attr_reader :params, :category, :featured, :emphasized, :minimized,
+              :paging_collection
 
   def initialize(params)
     @params = params
     @category = init_category
-    @featured = group_relation(:featured, per: 2)
-    @emphasized = group_relation(:emphasized, per: 4)
-    @minimized = group_relation(:minimized, per: 8)
-    @groups = (minimized.to_a + emphasized.to_a + featured.to_a).map(&:decorate)
+    @paging_collection = group_relation(:minimized, per: 6)
+    @featured = group_relation(:featured, per: 1).first&.decorate
+    @emphasized = group_relation(:emphasized, per: 1).first&.decorate
+    @minimized = paging_collection.to_a.map(&:decorate)
   end
 
   def category_slug
     params[:category]
+  end
+
+  def any_groups?
+    featured || emphasized || minimized.any?
   end
 
   def group_relation(kind, per:)

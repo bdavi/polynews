@@ -1,0 +1,5 @@
+<div class="stories-minimized border-bottom-dark py-4 d-md-inline-flex overflow-hidden">
+  <% groups.each do |group| %>
+    <%= render partial: 'news/story_minimized', locals: { group: group } %>
+  <% end %>
+</div>
