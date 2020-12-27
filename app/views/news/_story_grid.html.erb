@@ -10,7 +10,7 @@
   <%= render partial: 'news/story_emphasized', locals: { group: news.emphasized } %>
 <% end %>
 
-<% if news.minimized[3..].any? %>
+<% if news.minimized[3..] %>
   <%= render partial: 'news/stories_minimized', locals: { groups: news.minimized[3..] } %>
 <% end %>
 
