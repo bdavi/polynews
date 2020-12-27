@@ -8,6 +8,7 @@ require("turbolinks").start()
 require("@rails/activestorage").start()
 require("channels")
 require("bootstrap")
+require("jquery")
 require("@fortawesome/fontawesome-free/js/all.js");
 require('./news.js');
 

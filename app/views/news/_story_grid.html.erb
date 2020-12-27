@@ -1,17 +1,19 @@
-<div id="story-grid" class="border-top-dark pt-4">
-  <% if news.featured %>
-    <%= render partial: 'news/story_featured', locals: { group: news.featured } %>
-  <% end %>
+<% if news.featured %>
+  <%= render partial: 'news/story_featured', locals: { group: news.featured } %>
+<% end %>
 
-  <% if news.minimized.first(3).any? %>
-    <%= render partial: 'news/stories_minimized', locals: { groups: news.minimized.first(3) } %>
-  <% end %>
+<% if news.minimized.first(3).any? %>
+  <%= render partial: 'news/stories_minimized', locals: { groups: news.minimized.first(3) } %>
+<% end %>
 
-  <% if news.emphasized %>
-    <%= render partial: 'news/story_emphasized', locals: { group: news.emphasized } %>
-  <% end %>
+<% if news.emphasized %>
+  <%= render partial: 'news/story_emphasized', locals: { group: news.emphasized } %>
+<% end %>
 
-  <% if news.minimized[3..].any? %>
-    <%= render partial: 'news/stories_minimized', locals: { groups: news.minimized[3..] } %>
-  <% end %>
-</div>
+<% if news.minimized[3..].any? %>
+  <%= render partial: 'news/stories_minimized', locals: { groups: news.minimized[3..] } %>
+<% end %>
+
+<div class="mb-4"></div>
+
+<%= page_data(news.paging_collection) %>

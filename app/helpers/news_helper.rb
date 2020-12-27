@@ -24,8 +24,19 @@ module NewsHelper
   end
 
   def article_title_link(article)
-    tag.div(class: 'article-title') do
+    tag.div(class: 'story-title') do
       link_to article.title, article.url, target: '_blank' # rubocop:disable Rails/LinkToBlank
     end
+  end
+
+  def page_data(collection)
+    tag.div(
+      class: 'd-none story-grid-page-data',
+      data: {
+        'current-page': collection.current_page,
+        'total-pages': collection.total_pages,
+        'next-page-url': path_to_next_page(collection)
+      }
+    )
   end
 end

@@ -6,12 +6,15 @@
 
 <% if @news.any_groups? %>
   <div class="news-row">
-    <%= render partial: 'news/story_grid', locals: { news: @news } %>
-  </div>
+    <div id="story-grid" class="border-top-dark pt-4">
+      <%= render partial: 'news/story_grid', locals: { news: @news } %>
+    </div>
 
-  <div class="news-row">
-    <div class="display-4">
-      <%= render partial: 'news/page_buttons', locals: { groups: @news.paging_collection } %>
+    <div id="story-grid-loading-indicator" class="d-none justify-content-center my-5">
+      <div class="spinner-grow spinner-grow-sm mr-1" role="status"></div>
+      <div class="spinner-grow spinner-grow-sm mr-1" role="status"></div>
+      <div class="spinner-grow spinner-grow-sm mr-1" role="status"></div>
+      <div class="spinner-grow spinner-grow-sm" role="status"></div>
     </div>
   </div>
 <% else %>
