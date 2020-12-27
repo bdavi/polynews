@@ -1,4 +1,4 @@
-<div class="news-row news-category-header">
+<div id="news-category-header" class="news-row">
   <div class="display-4">
     <%= @news.category.title %>
   </div>
@@ -10,12 +10,7 @@
       <%= render partial: 'news/story_grid', locals: { news: @news } %>
     </div>
 
-    <div id="story-grid-loading-indicator" class="justify-content-center my-5" style="display: none;">
-      <div class="spinner-grow spinner-grow-sm mr-1" role="status"></div>
-      <div class="spinner-grow spinner-grow-sm mr-1" role="status"></div>
-      <div class="spinner-grow spinner-grow-sm mr-1" role="status"></div>
-      <div class="spinner-grow spinner-grow-sm" role="status"></div>
-    </div>
+    <%= render partial: 'news/story_grid_loading_indicator' %>
   </div>
 <% else %>
   <div class="news-row">

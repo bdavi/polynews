@@ -1,0 +1,9 @@
+<div class="secondary-articles mt-3 d-md-flex">
+  <% articles.in_groups(3).map(&:compact).select(&:any?).each do |batch| %>
+    <ul class="px-md-3 flex-1">
+      <% batch.each do |article| %>
+        <%= render partial: 'news/stories_featured_secondary_article', locals: { article: article } %>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

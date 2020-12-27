@@ -9,23 +9,23 @@ module NewsHelper
     end
   end
 
-  def article_meta(article)
+  def story_meta(story, title_classes: 'text-uppercase text-accent-color')
     title = tag.span(
-      article.decorate.channel_title,
-      class: 'text-uppercase text-accent-color'
+      story.decorate.channel_title,
+      class: title_classes
     )
 
     published_at = tag.span(
-      local_time_ago(article.decorate.published_at),
+      local_time_ago(story.decorate.published_at),
       class: 'font-italic small'
     )
 
-    tag.div(title + ' '.html_safe + published_at)
+    tag.div(title + ' ' + published_at) # rubocop:disable Style/StringConcatenation
   end
 
-  def article_title_link(article)
-    tag.div(class: 'story-title') do
-      link_to article.title, article.url, target: '_blank' # rubocop:disable Rails/LinkToBlank
+  def story_title_link(story, div_classes: 'story-title')
+    tag.div(class: div_classes) do
+      link_to story.title, story.url, target: '_blank' # rubocop:disable Rails/LinkToBlank
     end
   end
 

@@ -1,17 +1,16 @@
 <div class="story-minimized mb-4 mb-md-0 flex-1">
-  <%= article_meta(group) %>
+  <%= story_meta(group) %>
 
   <% if group.thumbnail_image_url %>
     <div class="position-relative">
       <img src="<%= group.thumbnail_image_url %>" class="w-100">
-      <div class="image-overlay">
-        <%= link_to group.url, target: '_blank' do %>
-          <%= group.title %>
-        <% end %>
+
+      <div class="story-minimized-image-overlay">
+        <%= story_title_link(group, div_classes: '') %>
       </div>
     </div>
   <% else %>
-    <%= article_title_link(group) %>
+    <%= story_title_link(group) %>
   <% end %>
 
   <div class="story-summary mt-3">

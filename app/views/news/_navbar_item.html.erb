@@ -1,7 +1,3 @@
 <li class="nav-item">
-  <%=
-    link_to text,
-      news_path(category: slug),
-      class: navitem_class(slug, request)
-  %>
+  <%= link_to text, news_path(category: slug), class: navitem_class(slug, request) %>
 </li>
