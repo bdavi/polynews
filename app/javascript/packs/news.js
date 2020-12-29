@@ -1,3 +1,5 @@
+'use strict';
+
 const pageHasStoryGrid = () => {
   return !!document.querySelector('#story-grid');
 };
@@ -9,13 +11,17 @@ const lowEnoughToLoadNextPage = () => {
 };
 
 const nextPageUrl = () => {
-  const pageDataElement = Array.from(document.querySelectorAll('.story-grid-page-data')).pop();
+  const lastPageDataElement = Array.from(
+    document.querySelectorAll('.story-grid-page-data')
+  ).pop();
 
-  return pageDataElement && pageDataElement.getAttribute('data-next-page-url');
+  return lastPageDataElement
+         && lastPageDataElement.getAttribute('data-next-page-url');
 };
 
 const shouldLoadNextPage = () => {
-  return pageHasStoryGrid() && lowEnoughToLoadNextPage() && nextPageUrl() && !isLoading();
+  return pageHasStoryGrid() && lowEnoughToLoadNextPage()
+         && nextPageUrl() && !isLoading();
 };
 
 const loadingIndicatorElement = () => {
