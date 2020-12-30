@@ -1,50 +1,89 @@
 'use strict';
 
+// #############################################################################
+// DOM
+// #############################################################################
+const storyGridElement = () => {
+  return document.querySelector('#story-grid');
+};
+
 const pageHasStoryGrid = () => {
-  return !!document.querySelector('#story-grid');
+  return !!storyGridElement();
 };
 
-const lowEnoughToLoadNextPage = () => {
-  const { clientHeight, scrollHeight, scrollTop } = document.documentElement;
+const pageDateElements = () => {
+  return storyGridElement().querySelectorAll('.story-grid-page-data');
+}
 
-  return scrollTop + clientHeight > scrollHeight - 20
-};
-
-const nextPageUrl = () => {
-  const lastPageDataElement = Array.from(
-    document.querySelectorAll('.story-grid-page-data')
-  ).pop();
-
-  return lastPageDataElement
-         && lastPageDataElement.getAttribute('data-next-page-url');
-};
-
-const shouldLoadNextPage = () => {
-  return pageHasStoryGrid() && lowEnoughToLoadNextPage()
-         && nextPageUrl() && !isLoading();
-};
+const lastPageDateElement = () => {
+  return Array.from(pageDateElements()).pop();
+}
 
 const loadingIndicatorElement = () => {
   return document.querySelector('#story-grid-loading-indicator');
+};
+
+const nextPageUrl = () => {
+  return lastPageDateElement().getAttribute('data-next-page-url');
+};
+
+
+// #############################################################################
+// Predicates
+// #############################################################################
+const lowEnoughToLoadNextPage = () => {
+  const { clientHeight, scrollHeight, scrollTop } = document.documentElement;
+  return scrollTop + clientHeight > scrollHeight - 20
 };
 
 const isLoading = () => {
   return loadingIndicatorElement().style.display === 'flex';
 };
 
-const loadNextPage = async () => {
+const shouldLoadNextPage = () => {
+  return lowEnoughToLoadNextPage() && nextPageUrl() && !isLoading();
+};
+
+
+// #############################################################################
+// Helpers
+// #############################################################################
+const showLoadingIndicator = () => {
   loadingIndicatorElement().style.display = 'flex';
+};
+
+const hideLoadingIndicator = () => {
+  loadingIndicatorElement().style.display = 'none';
+};
+
+const loadNextPage = () => {
+  showLoadingIndicator();
   $.getScript(nextPageUrl());
 };
 
-// Sometimes a viewport will be too tall to properly activate the infinite
-// scroll. Automatically grab the second page to make sure.
-$(document).on('turbolinks:load', function() {
-  loadNextPage();
-});
+const loadInitialStories = () => {
+  if (nextPageUrl() && !isLoading()) {
+    loadNextPage();
+  }
+};
 
-window.addEventListener('scroll', () => {
+
+// #############################################################################
+// Event Handling
+// #############################################################################
+const handleStoryGridScrolling = () => {
   if (shouldLoadNextPage()) {
     loadNextPage();
   }
-});
+};
+
+const handleTurbolinksLoad = () => {
+  if (pageHasStoryGrid()) {
+    loadInitialStories();
+    document.addEventListener('scroll', handleStoryGridScrolling);
+  } else {
+    document.removeEventListener('scroll', handleStoryGridScrolling);
+  }
+};
+
+document.addEventListener('turbolinks:load', handleTurbolinksLoad);
