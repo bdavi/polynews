@@ -11,12 +11,12 @@ const pageHasStoryGrid = () => {
   return !!storyGridElement();
 };
 
-const pageDateElements = () => {
+const pageDataElements = () => {
   return storyGridElement().querySelectorAll('.story-grid-page-data');
 }
 
-const lastPageDateElement = () => {
-  return Array.from(pageDateElements()).pop();
+const lastPageDataElement = () => {
+  return Array.from(pageDataElements()).pop();
 }
 
 const loadingIndicatorElement = () => {
@@ -24,7 +24,7 @@ const loadingIndicatorElement = () => {
 };
 
 const nextPageUrl = () => {
-  return lastPageDateElement().getAttribute('data-next-page-url');
+  return lastPageDataElement().getAttribute('data-next-page-url');
 };
 
 
