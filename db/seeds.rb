@@ -541,48 +541,6 @@ feeds = [
     category: Category.find_by(slug: 'politics')
   },
   {
-    title: 'Axios | Politics & Policy',
-    scraping_content_selector: nil,
-    url: 'https://api.axios.com/feed/politics',
-    use_scraper: false,
-    category: Category.find_by(slug: 'us')
-  },
-  {
-    title: 'Axios | Technology',
-    scraping_content_selector: nil,
-    url: 'https://api.axios.com/feed/technology',
-    use_scraper: false,
-    category: Category.find_by(slug: 'tech')
-  },
-  {
-    title: 'Axios | World',
-    scraping_content_selector: nil,
-    url: 'https://api.axios.com/feed/world',
-    use_scraper: false,
-    category: Category.find_by(slug: 'international')
-  },
-  {
-    title: 'Axios | Business',
-    scraping_content_selector: nil,
-    url: 'https://api.axios.com/feed/business',
-    use_scraper: false,
-    category: Category.find_by(slug: 'economy')
-  },
-  {
-    title: 'Axios | Sports',
-    scraping_content_selector: nil,
-    url: 'https://api.axios.com/feed/sports',
-    use_scraper: false,
-    category: Category.find_by(slug: 'sports')
-  },
-  {
-    title: 'Axios | Science',
-    scraping_content_selector: nil,
-    url: 'https://api.axios.com/feed/science',
-    use_scraper: false,
-    category: Category.find_by(slug: 'science')
-  },
-  {
     title: 'Independent | Politics',
     scraping_content_selector: 'p',
     url: 'https://www.independent.co.uk/news/world/americas/us-politics/rss',
