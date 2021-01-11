@@ -10,7 +10,7 @@ FactoryBot.define do
       "The description #{n}"
     end
 
-    sequence(:guid) do |n|
+    sequence :guid do |n|
       "guild-#{n}"
     end
 

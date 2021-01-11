@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Groups
-  class Creator # rubocop:disable Metrics/ClassLength
+  class Creator
     attr_reader :model, :max_angle_between_articles, :article_vectors,
                 :group_vectors, :article_data, :articles, :groups
 
@@ -62,11 +62,7 @@ module Groups
     def find_matching_group(article)
       return nil if article_vectors[article.id].zero?
 
-      groups.each do |group|
-        return group if article_matches_group(article, group)
-      end
-
-      nil
+      groups.find { |group| article_matches_group(article, group) }
     end
 
     def article_matches_group(article, group)

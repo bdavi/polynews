@@ -21,7 +21,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 25 Dec 2020 01:49:36 GMT
+      - Mon, 11 Jan 2021 22:20:09 GMT
       Content-Type:
       - text/html; charset=UTF-8
       Transfer-Encoding:
@@ -54,13 +54,13 @@ http_interactions:
       string: "<!DOCTYPE html>\n<html lang=\"en-US\">\n<head>\n<!-- \t<meta name=\"baidu-site-verification\"
         content=\"Ve4dcgisfB\" />  -->\n\t<!-- Google Tag Manager -->\n\t\t<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':\n\t\tnew
         Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],\n\t\tj=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=\n\t\t'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);\n\t\t})(window,document,'script','dataLayer','GTM-T8JPVB');</script>\n\t<!--
-        End Google Tag Manager -->\n\t\n\t\n\t\t<!-- ELOQUA FORM -->\n\t\t<script
-        type=\"text/javascript\">\n\t\tvar _elqQ = _elqQ || [];\n\t\t_elqQ.push(['elqSetSiteId',
-        '2124157686']);\n\t\t_elqQ.push(['elqTrackPageView', window.location.href]);\n\t\t_elqQ.push(['elqSetSiteId',
-        '530566577']);\n\t\t_elqQ.push(['elqTrackPageView', window.location.href]);\n\n\t\t(function
-        () {\n\t\t\tfunction async_load() {\n\t\t\t\tvar s = document.createElement('script');
-        \n\t\t\t\ts.type = 'text/javascript';\n\t\t\t\ts.async = true;\n\t\t\t\ts.src
-        = '//img.en25.com/i/elqCfg.min.js';\n\t\t\t\tvar x = document.getElementsByTagName('script')[0];\n\t\t\t\tx.parentNode.insertBefore(s,
+        End Google Tag Manager -->\n\t\n\t\t<!-- ELOQUA FORM -->\n\t\t<script type=\"text/javascript\">\n\t\tvar
+        _elqQ = _elqQ || [];\n\t\t_elqQ.push(['elqSetSiteId', '2124157686']);\n\t\t_elqQ.push(['elqTrackPageView',
+        window.location.href]);\n\t\t_elqQ.push(['elqSetSiteId', '530566577']);\n\t\t_elqQ.push(['elqTrackPageView',
+        window.location.href]);\n\n\t\t(function () {\n\t\t\tfunction async_load()
+        {\n\t\t\t\tvar s = document.createElement('script'); \n\t\t\t\ts.type = 'text/javascript';\n\t\t\t\ts.async
+        = true;\n\t\t\t\ts.src = '//img.en25.com/i/elqCfg.min.js';\n\t\t\t\tvar x
+        = document.getElementsByTagName('script')[0];\n\t\t\t\tx.parentNode.insertBefore(s,
         x);\n\t\t\t}\n\t\t\tif (window.addEventListener) window.addEventListener('DOMContentLoaded',
         async_load, false);\n\t\t\telse if (window.attachEvent) window.attachEvent('onload',
         async_load);\n\t\t})();\n\n\t\tvar timerId = null, timeout = 5;\n\n\t\tfunction
@@ -237,10 +237,10 @@ http_interactions:
         sizes=\"192x192\" />\n<link rel=\"apple-touch-icon\" href=\"https://www.reutersagency.com/wp-content/uploads/2019/06/fav.png\"
         />\n<meta name=\"msapplication-TileImage\" content=\"https://www.reutersagency.com/wp-content/uploads/2019/06/fav.png\"
         />\n<link rel=\"stylesheet\" id=\"et-divi-customizer-global-cached-inline-styles\"
-        href=\"https://www.reutersagency.com/wp-content/et-cache/global/et-divi-customizer-global-160828290643.min.css\"
+        href=\"https://www.reutersagency.com/wp-content/et-cache/global/et-divi-customizer-global-161005313549.min.css\"
         onerror=\"et_core_page_resource_fallback(this, true)\" onload=\"et_core_page_resource_fallback(this)\"
         /><link rel=\"stylesheet\" id=\"et-core-unified-cpt-tb-205434-224039-cached-inline-styles\"
-        href=\"https://www.reutersagency.com/wp-content/et-cache/224039/et-core-unified-cpt-tb-205434-224039-16083059417.min.css\"
+        href=\"https://www.reutersagency.com/wp-content/et-cache/224039/et-core-unified-cpt-tb-205434-224039-161007355116.min.css\"
         onerror=\"et_core_page_resource_fallback(this, true)\" onload=\"et_core_page_resource_fallback(this)\"
         />\t\n</head>\n<body class=\"best-template-default single single-best postid-224039
         custom-background et-tb-has-template et-tb-has-body cookies-not-set et_pb_button_helper_class
@@ -485,28 +485,30 @@ http_interactions:
         et-last-child\">\n\t\t\t\t\n\t\t\t\t\n\t\t\t\t<div class=\"rts-dynamic-row\"><div
         class=\"rts-dynamic-row__heading\"><h3 class=\"rts-dynamic-row__title\">More
         of Reuters Best</h3></div><div class=\"rts-dynamic-row__feed\"><div class=\"rts-dynamic-row__card\"><a
+        href=\"https://www.reutersagency.com/en/reuters-best/reuters-reveals-u-s-plans-to-designate-yemens-houthi-movement-as-foreign-terrorist-group/\"
+        class=\"rts-dynamic-row__image\" style=\"padding-bottom: 0; background-color:
+        transparent;\"><img src=\"https://www.reutersagency.com/wp-content/uploads/fly-images/226091/download-260x145-lt.jpg\"
+        style=\"width: 100%;\" /></a><h4 class=\"rts-dynamic-row__text\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-reveals-u-s-plans-to-designate-yemens-houthi-movement-as-foreign-terrorist-group/\">Reuters
+        reveals U.S. plans to designate Yemen&#8217;s Houthi movement as foreign terrorist
+        group</a></h4><div class=\"rts-dynamic-row__date\">January 11, 2021</div></div><div
+        class=\"rts-dynamic-row__card\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-reveals-sofi-near-deal-to-go-public-with-spac-backed-by-venture-capital-investor-palihapitiya-market-reacts/\"
+        class=\"rts-dynamic-row__image\" style=\"padding-bottom: 0; background-color:
+        transparent;\"><img src=\"https://www.reutersagency.com/wp-content/uploads/fly-images/226079/SoFi-260x145-lt.jpg\"
+        style=\"width: 100%;\" /></a><h4 class=\"rts-dynamic-row__text\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-reveals-sofi-near-deal-to-go-public-with-spac-backed-by-venture-capital-investor-palihapitiya-market-reacts/\">Reuters
+        reveals SoFi near deal to go public with SPAC backed by venture capital investor
+        Palihapitiya; market reacts</a></h4><div class=\"rts-dynamic-row__date\">January
+        07, 2021</div></div><div class=\"rts-dynamic-row__card\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-reveals-french-it-firm-atos-made-10-bln-dxc-bid-approach-market-reacts/\"
+        class=\"rts-dynamic-row__image\" style=\"padding-bottom: 0; background-color:
+        transparent;\"><img src=\"https://www.reutersagency.com/wp-content/uploads/fly-images/226067/Atos-260x145-lt.jpg\"
+        style=\"width: 100%;\" /></a><h4 class=\"rts-dynamic-row__text\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-reveals-french-it-firm-atos-made-10-bln-dxc-bid-approach-market-reacts/\">Reuters
+        reveals French IT firm Atos made $10 bln DXC bid approach; market reacts</a></h4><div
+        class=\"rts-dynamic-row__date\">January 07, 2021</div></div><div class=\"rts-dynamic-row__card\"><a
         href=\"https://www.reutersagency.com/en/reuters-best/reuters-ahead-with-key-news-on-boom-in-spacs/\"
         class=\"rts-dynamic-row__image\" style=\"padding-bottom: 0; background-color:
         transparent;\"><img src=\"https://www.reutersagency.com/wp-content/uploads/fly-images/225224/download-23-scaled-260x145-lt.jpg\"
         style=\"width: 100%;\" /></a><h4 class=\"rts-dynamic-row__text\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-ahead-with-key-news-on-boom-in-spacs/\">Reuters
         ahead with key news on boom in SPACs</a></h4><div class=\"rts-dynamic-row__date\">December
-        16, 2020</div></div><div class=\"rts-dynamic-row__card\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-ahead-with-key-volkswagen-news/\"
-        class=\"rts-dynamic-row__image\" style=\"padding-bottom: 0; background-color:
-        transparent;\"><img src=\"https://www.reutersagency.com/wp-content/uploads/fly-images/225198/RTS3IQXS-260x145-lt.jpg\"
-        style=\"width: 100%;\" /></a><h4 class=\"rts-dynamic-row__text\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-ahead-with-key-volkswagen-news/\">Reuters
-        ahead with key Volkswagen news</a></h4><div class=\"rts-dynamic-row__date\">December
-        15, 2020</div></div><div class=\"rts-dynamic-row__card\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-reveals-u-s-ready-to-sanction-turkey-over-russia-defense-system-market-reacts/\"
-        class=\"rts-dynamic-row__image\" style=\"padding-bottom: 0; background-color:
-        transparent;\"><img src=\"https://www.reutersagency.com/wp-content/uploads/fly-images/225171/download-21-260x145-lt.jpg\"
-        style=\"width: 100%;\" /></a><h4 class=\"rts-dynamic-row__text\"><a href=\"https://www.reutersagency.com/en/reuters-best/reuters-reveals-u-s-ready-to-sanction-turkey-over-russia-defense-system-market-reacts/\">Reuters
-        reveals U.S. ready to sanction Turkey over Russia defense system; market reacts</a></h4><div
-        class=\"rts-dynamic-row__date\">December 10, 2020</div></div><div class=\"rts-dynamic-row__card\"><a
-        href=\"https://www.reutersagency.com/en/reuters-best/global-tech-and-politics-collide-edition-2/\"
-        class=\"rts-dynamic-row__image\" style=\"padding-bottom: 0; background-color:
-        transparent;\"><img src=\"https://www.reutersagency.com/wp-content/uploads/fly-images/224979/RTX2J32R-scaled-260x145-lt.jpg\"
-        style=\"width: 100%;\" /></a><h4 class=\"rts-dynamic-row__text\"><a href=\"https://www.reutersagency.com/en/reuters-best/global-tech-and-politics-collide-edition-2/\">The
-        Big Picture: Global tech and politics collide  |  Edition 2</a></h4><div class=\"rts-dynamic-row__date\">December
-        08, 2020</div></div></div></div>\n\t\t\t</div> <!-- .et_pb_column -->\n\t\t\t\t\n\t\t\t\t\n\t\t\t</div>
+        16, 2020</div></div></div></div>\n\t\t\t</div> <!-- .et_pb_column -->\n\t\t\t\t\n\t\t\t\t\n\t\t\t</div>
         <!-- .et_pb_row -->\n\t\t\t\t\n\t\t\t\t\n\t\t\t</div> <!-- .et_pb_section
         -->\t\t</div><!-- .et_builder_inner_content -->\n\t</div><!-- .et-l -->\n\t\n\t\t\t\n\t\t</div><!--
         #et-boc -->\n\t\t    </div>\n    \n\n\t\t\t<footer id=\"main-footer\">\n\n\t\t\t\n\t\t\t\t<div
@@ -556,8 +558,8 @@ http_interactions:
         d, yy\",\"firstDay\":1,\"isRTL\":false});});\n</script>\n<script type='text/javascript'>\n/*
         <![CDATA[ */\nvar DIVI = {\"item_count\":\"%d Item\",\"items_count\":\"%d
         Items\"};\nvar et_shortcodes_strings = {\"previous\":\"Previous\",\"next\":\"Next\"};\nvar
-        et_pb_custom = {\"ajaxurl\":\"https:\\/\\/www.reutersagency.com\\/wp-admin\\/admin-ajax.php\",\"images_uri\":\"https:\\/\\/www.reutersagency.com\\/wp-content\\/themes\\/Divi\\/images\",\"builder_images_uri\":\"https:\\/\\/www.reutersagency.com\\/wp-content\\/themes\\/Divi\\/includes\\/builder\\/images\",\"et_frontend_nonce\":\"8cfb8ff9e2\",\"subscription_failed\":\"Please,
-        check the fields below to make sure you entered the correct information.\",\"et_ab_log_nonce\":\"aa7f2b1815\",\"fill_message\":\"Please,
+        et_pb_custom = {\"ajaxurl\":\"https:\\/\\/www.reutersagency.com\\/wp-admin\\/admin-ajax.php\",\"images_uri\":\"https:\\/\\/www.reutersagency.com\\/wp-content\\/themes\\/Divi\\/images\",\"builder_images_uri\":\"https:\\/\\/www.reutersagency.com\\/wp-content\\/themes\\/Divi\\/includes\\/builder\\/images\",\"et_frontend_nonce\":\"225e626a69\",\"subscription_failed\":\"Please,
+        check the fields below to make sure you entered the correct information.\",\"et_ab_log_nonce\":\"250a5fb151\",\"fill_message\":\"Please,
         fill in the following fields:\",\"contact_error_message\":\"Please, fix the
         following errors:\",\"invalid\":\"Invalid email\",\"captcha\":\"Captcha\",\"prev\":\"Prev\",\"previous\":\"Previous\",\"next\":\"Next\",\"wrong_captcha\":\"You
         entered the wrong number in captcha.\",\"wrong_checkbox\":\"Checkbox\",\"ignore_waypoints\":\"no\",\"is_divi_theme_used\":\"1\",\"widget_search_selector\":\".widget_search\",\"ab_tests\":[],\"is_ab_testing_active\":\"\",\"page_id\":\"224039\",\"unique_test_id\":\"\",\"ab_bounce_rate\":\"5\",\"is_cache_plugin_active\":\"no\",\"is_shortcode_tracking\":\"\",\"tinymce_uri\":\"\"};
@@ -624,5 +626,5 @@ http_interactions:
         -->\n<script>\n!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);\n},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',\na=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');\n//
         Insert Twitter Pixel ID and Standard Event data below\ntwq('init','nyeym');\ntwq('track','PageView');\n</script>\n<!--
         End Twitter universal website tag code -->\n</body>\n</html>"
-  recorded_at: Fri, 25 Dec 2020 01:49:36 GMT
+  recorded_at: Mon, 11 Jan 2021 22:20:09 GMT
 recorded_with: VCR 6.0.0
