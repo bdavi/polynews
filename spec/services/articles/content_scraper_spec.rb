@@ -18,7 +18,7 @@ RSpec.describe Articles::ContentScraper, type: :service do
         'goods and technology. The list, if published, could further ' \
         'escalate trade tensions with Beijing and hurt U.S. companies that ' \
         'sell civil aviation parts and components to China, among other ' \
-        "industries.\nThe news pushed the yuan lower against the dollar on Monday. "
+        "industries.\nThe news pushed the yuan lower against the dollar on Monday."
     end
 
     context 'when not already scraped' do
@@ -28,7 +28,7 @@ RSpec.describe Articles::ContentScraper, type: :service do
 
         VCR.use_cassette('download_reuters_article', re_record_interval: 7.days) do
           described_class.new(article).call
-          expect(article.scraped_content).to eq parsed_html
+          expect(article.scraped_content.strip).to eq parsed_html
         end
       end
     end
