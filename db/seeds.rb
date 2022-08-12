@@ -623,7 +623,7 @@ feeds = [
     url: 'https://longform.org/feed.rss',
     use_scraper: true,
     category: Category.find_by(slug: 'long_form')
-  },
+  }
 ]
 
 feeds.each do |feed|
