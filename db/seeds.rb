@@ -534,13 +534,6 @@ feeds = [
     category: Category.find_by(slug: 'politics')
   },
   {
-    title: 'The Hill | Most Popular',
-    scraping_content_selector: 'article p',
-    url: 'http://thehill.com/rss/syndicator/19110',
-    use_scraper: false,
-    category: Category.find_by(slug: 'politics')
-  },
-  {
     title: 'Independent | Politics',
     scraping_content_selector: 'p',
     url: 'https://www.independent.co.uk/news/world/americas/us-politics/rss',
